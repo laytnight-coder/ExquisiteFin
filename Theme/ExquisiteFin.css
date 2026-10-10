@@ -1,5 +1,5 @@
 /*
- * ExquisiteFin v0.2.2
+ * ExquisiteFin v0.2.3
  *
  * A maintainable Jellyfin 12 Modern compatibility theme based on ElegantFin.
  */
@@ -12,8 +12,8 @@
    EXQUISITEFIN SETTINGS
    ================================================================ */
 :root {
-    /* 4 / 1 = 25% height-to-width. */
-    --exquisite-library-card-ratio: 4 / 1;
+    /* 25% height-to-width = 4:1 library cards. */
+    --exquisite-library-card-padding: 25%;
 }
 
 /* ================================================================
@@ -23,21 +23,14 @@
 /*
  * Library / My Media cards.
  *
- * Jellyfin's card padder normally establishes the card height with
- * padding-bottom. For the Modern layout we explicitly own the geometry
- * at .cardScalable instead, and remove the padder's competing ratio.
+ * Jellyfin establishes the card height through the card padder's
+ * percentage padding. ElegantFin changes this to 50% for CollectionFolder
+ * and UserView cards. ExquisiteFin owns that geometry directly.
+ *
+ * The data attributes live on Jellyfin 12 Modern's .card wrapper, so the
+ * selector intentionally starts at .card[data-type=...].
  */
-.card[data-type="CollectionFolder"] .cardScalable,
-.card[data-type="UserView"] .cardScalable,
-.overflowBackdropCard[data-type="CollectionFolder"] .cardScalable,
-.overflowBackdropCard[data-type="UserView"] .cardScalable {
-    aspect-ratio: var(--exquisite-library-card-ratio) !important;
-    height: auto !important;
-}
-
-.card[data-type="CollectionFolder"] .cardPadder-overflowBackdrop,
-.card[data-type="UserView"] .cardPadder-overflowBackdrop,
-.overflowBackdropCard[data-type="CollectionFolder"] .cardPadder-overflowBackdrop,
-.overflowBackdropCard[data-type="UserView"] .cardPadder-overflowBackdrop {
-    padding-bottom: 0 !important;
+.card[data-isfolder="true"][data-type="CollectionFolder"] .cardPadder-overflowBackdrop,
+.card[data-isfolder="true"][data-type="UserView"] .cardPadder-overflowBackdrop {
+    padding-bottom: var(--exquisite-library-card-padding) !important;
 }
