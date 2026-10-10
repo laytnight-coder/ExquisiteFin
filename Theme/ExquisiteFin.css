@@ -32,7 +32,7 @@
     /* Library / My Media card height.
        ElegantFin's CollectionFolder/UserView cards use padding-bottom
        on .cardPadder-overflowBackdrop to establish their aspect ratio. */
-    --exquisite-library-card-height: 50%;
+    --exquisite-library-card-height: 25%;
 }
 
 /* ================================================================
