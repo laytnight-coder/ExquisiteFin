@@ -2,6 +2,18 @@
 
 All notable ExquisiteFin changes are documented here.
 
+## [0.2.2] - 2026-10-11
+
+### Changed
+
+- Moved the library-card geometry override from `.cardPadder-overflowBackdrop` to `.cardScalable`.
+- Added an explicit `--exquisite-library-card-ratio` setting.
+- Removed the padder's percentage height for the targeted library cards so it cannot compete with the ExquisiteFin ratio.
+
+### Design decision
+
+The screenshot showed the cards remaining at exactly the ElegantFin 2:1 geometry despite the previous override. Jellyfin's card source establishes the padder ratio, but the Modern layout can also participate in the card geometry. v0.2.2 therefore makes `.cardScalable` the explicit source of truth for the ExquisiteFin test.
+
 ## [0.2.1] - 2026-10-11
 
 ### Fixed
