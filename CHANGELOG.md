@@ -2,6 +2,19 @@
 
 All notable ExquisiteFin changes are documented here.
 
+## [0.3.1] - 2026-10-11
+
+### Added
+
+- Added a controlled interactive-control pass for card action buttons and other raised/icon controls.
+- Added teal accent borders and restrained hover/focus glow to card action buttons.
+- Added a consistent teal play-button accent.
+- Added a visible keyboard focus outline without changing control layout.
+
+### Design decision
+
+v0.3.1 keeps the existing layout and sizing intact. The goal is to make interaction states feel native to ExquisiteFin without repeating the larger visual changes from the old custom CSS. Interactive styling is centralized through ExquisiteFin variables so it can be tuned without scattering color values through selectors.
+
 ## [0.3.0] - 2026-10-11
 
 ### Added
