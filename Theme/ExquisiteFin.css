@@ -1,5 +1,5 @@
 /*
- * ExquisiteFin v0.3.0
+ * ExquisiteFin v0.3.1
  *
  * A maintainable Jellyfin 12 Modern compatibility theme based on ElegantFin.
  */
@@ -25,6 +25,10 @@
     --exquisite-surface-header: hsla(210, 12%, 10%, 0.8);
     --exquisite-surface-drawer: hsla(210, 12%, 12%, 0.95);
     --exquisite-selector: hsla(210, 22%, 18%, 1);
+
+    /* Interactive controls */
+    --exquisite-control-border-width: 1px;
+    --exquisite-control-glow: 0 0 5px color-mix(in srgb, var(--exquisite-accent) 75%, transparent);
 }
 
 /* ================================================================
@@ -83,4 +87,44 @@
 
 .playstatebutton-icon-played {
     color: var(--exquisite-accent) !important;
+}
+
+/* ================================================================
+   INTERACTIVE CONTROLS
+   ================================================================ */
+
+/*
+ * Keep card action buttons visually tied to the accent without changing
+ * their size or placement. The hover state supplies the stronger glow.
+ */
+.cardOverlayButton.cardOverlayButton-hover.itemAction.paper-icon-button-light {
+    border: var(--exquisite-control-border-width) solid var(--exquisite-accent-border) !important;
+    box-shadow: none !important;
+}
+
+.cardOverlayButton.cardOverlayButton-hover.itemAction.paper-icon-button-light:hover,
+.cardOverlayButton.cardOverlayButton-hover.itemAction.paper-icon-button-light:focus-visible {
+    border-color: var(--exquisite-accent) !important;
+    box-shadow: var(--exquisite-control-glow) !important;
+}
+
+/* Mini play controls use the same accent as the rest of the UI. */
+.cardOverlayButtonIcon-hover.play_arrow {
+    color: var(--exquisite-accent) !important;
+}
+
+/* Generic raised buttons get a restrained accent on interaction only. */
+.raised:hover,
+.raised:focus-visible,
+.paper-icon-button-light:hover,
+.paper-icon-button-light:focus-visible {
+    border-color: var(--exquisite-accent-border) !important;
+}
+
+/* Preserve a clear keyboard focus state without altering layout. */
+button:focus-visible,
+a:focus-visible,
+.paper-icon-button-light:focus-visible {
+    outline: var(--exquisite-control-border-width) solid var(--exquisite-accent) !important;
+    outline-offset: 2px;
 }
