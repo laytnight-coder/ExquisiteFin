@@ -1,5 +1,5 @@
 /*
- * ExquisiteFin v0.2.0
+ * ExquisiteFin v0.2.1
  *
  * A maintainable Jellyfin 12 Modern compatibility theme based on ElegantFin.
  *
@@ -30,8 +30,8 @@
    ================================================================ */
 :root {
     /* Library / My Media card height.
-       ElegantFin's CollectionFolder/UserView cards use padding-bottom
-       on .cardPadder-overflowBackdrop to establish their aspect ratio. */
+       The card's .cardPadder-overflowBackdrop establishes its aspect ratio
+       through padding-bottom, so this value controls the visible card height. */
     --exquisite-library-card-height: 25%;
 }
 
@@ -42,9 +42,13 @@
 /*
  * Library cards
  *
- * This targets the element that actually controls the card geometry in
- * ElegantFin. It intentionally does not modify .cardScalable.
+ * Jellyfin 12's card wrapper carries the item data-type attribute on
+ * .card. ElegantFin's older selector expects .overflowBackdropCard,
+ * which is not guaranteed in the Modern layout. Target the actual
+ * Jellyfin 12 structure while retaining the old selector as a fallback.
  */
+.card[data-type="CollectionFolder"] .cardPadder-overflowBackdrop,
+.card[data-type="UserView"] .cardPadder-overflowBackdrop,
 .overflowBackdropCard[data-type="CollectionFolder"] .cardPadder-overflowBackdrop,
 .overflowBackdropCard[data-type="UserView"] .cardPadder-overflowBackdrop {
     padding-bottom: var(--exquisite-library-card-height) !important;
