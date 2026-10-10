@@ -1,5 +1,5 @@
 /*
- * ExquisiteFin v0.2.3
+ * ExquisiteFin v0.3.0
  *
  * A maintainable Jellyfin 12 Modern compatibility theme based on ElegantFin.
  */
@@ -12,8 +12,19 @@
    EXQUISITEFIN SETTINGS
    ================================================================ */
 :root {
-    /* 25% height-to-width = 4:1 library cards. */
+    /* Library geometry */
     --exquisite-library-card-padding: 25%;
+
+    /* ExquisiteFin accent */
+    --exquisite-accent: #00c79f;
+    --exquisite-accent-border: #00c79f;
+
+    /* ExquisiteFin surface palette */
+    --exquisite-surface-dark: hsla(210, 12%, 10%, 1);
+    --exquisite-surface-light: hsla(210, 12%, 16%, 1);
+    --exquisite-surface-header: hsla(210, 12%, 10%, 0.8);
+    --exquisite-surface-drawer: hsla(210, 12%, 12%, 0.95);
+    --exquisite-selector: hsla(210, 22%, 18%, 1);
 }
 
 /* ================================================================
@@ -33,4 +44,43 @@
 .card[data-isfolder="true"][data-type="CollectionFolder"] .cardPadder-overflowBackdrop,
 .card[data-isfolder="true"][data-type="UserView"] .cardPadder-overflowBackdrop {
     padding-bottom: var(--exquisite-library-card-padding) !important;
+}
+
+/*
+ * Accent system.
+ *
+ * ElegantFin exposes its primary visual colors through CSS variables.
+ * ExquisiteFin owns the accent values here so the theme has a single
+ * controllable visual identity without rewriting the upstream theme.
+ */
+:root {
+    --activeColor: var(--exquisite-accent);
+    --activeColorAlpha: color-mix(in srgb, var(--exquisite-accent) 90%, transparent);
+    --uiAccentColor: var(--exquisite-accent);
+    --btnMiniPlayColor: var(--exquisite-accent);
+    --btnMiniPlayBorderColor: var(--exquisite-accent-border);
+    --checkboxCheckedBgColor: var(--exquisite-accent);
+
+    --darkerGradientPoint: var(--exquisite-surface-dark);
+    --darkerGradientPointAlpha: hsla(210, 12%, 10%, 0.85);
+    --lighterGradientPoint: var(--exquisite-surface-light);
+    --lighterGradientPointAlpha: hsla(210, 12%, 16%, 0.85);
+    --headerColor: var(--exquisite-surface-header);
+    --drawerColor: var(--exquisite-surface-drawer);
+    --selectorBackgroundColor: var(--exquisite-selector);
+    --selectorBackgroundColorAlpha: hsla(210, 22%, 18%, 0.5);
+}
+
+/*
+ * Status indicators use explicit selectors so the accent remains visible
+ * even where a component does not consume ElegantFin's accent variables.
+ */
+.countIndicator,
+.playedIndicator,
+.mediaSourceIndicator {
+    background: var(--exquisite-accent) !important;
+}
+
+.playstatebutton-icon-played {
+    color: var(--exquisite-accent) !important;
 }
