@@ -2,6 +2,19 @@
 
 All notable ExquisiteFin changes are documented here.
 
+## [0.3.0] - 2026-10-11
+
+### Added
+
+- Introduced the first ExquisiteFin-owned accent system.
+- Added a teal/emerald accent palette centered on `#00c79f`.
+- Added ExquisiteFin surface and selector variables so the visual identity can be tuned from one settings block.
+- Applied the accent to active UI elements, mini-play buttons, checked controls, status indicators, and played-state icons.
+
+### Design decision
+
+The first visual pass keeps ElegantFin's dark blue-gray surfaces while giving ExquisiteFin its own restrained teal accent. The colors are exposed as ExquisiteFin variables rather than scattered through individual selectors, making future palette changes a single-point edit.
+
 ## [0.2.3] - 2026-10-11
 
 ### Fixed
