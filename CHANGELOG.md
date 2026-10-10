@@ -2,6 +2,23 @@
 
 All notable ExquisiteFin changes are documented here.
 
+## [0.2.3] - 2026-10-11
+
+### Fixed
+
+- Corrected the library-card geometry override to target the actual `.cardPadder-overflowBackdrop` element used by Jellyfin 12 Modern.
+- Matched the working Branding CSS test with a 25% `padding-bottom`, producing the intended 4:1 library-card ratio.
+- Removed the previous `.cardScalable` geometry experiment from ExquisiteFin.
+
+### Changed
+
+- Replaced the `--exquisite-library-card-ratio` setting with `--exquisite-library-card-padding`, which directly represents the CSS value controlling the card height.
+- Restricted the override to folder cards carrying `CollectionFolder` or `UserView` data on the `.card` wrapper.
+
+### Design decision
+
+The working Branding CSS test confirmed that Jellyfin's card height is controlled by `.cardPadder-overflowBackdrop` padding in this layout. ExquisiteFin now uses that same mechanism instead of trying to impose an independent height or aspect ratio on `.cardScalable`.
+
 ## [0.2.2] - 2026-10-11
 
 ### Changed
