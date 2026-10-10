@@ -2,6 +2,17 @@
 
 All notable ExquisiteFin changes are documented here.
 
+## [0.2.1] - 2026-10-11
+
+### Fixed
+
+- Updated the library-card selector for Jellyfin 12 Modern, where the item `data-type` is carried by the `.card` wrapper.
+- Kept the original `.overflowBackdropCard` selector as a compatibility fallback.
+
+### Design decision
+
+The Jellyfin 12 `Card/useCard.ts` source builds the wrapper class from the card shape, while the item data attributes are attached to the wrapper. ExquisiteFin therefore targets `.card[data-type="CollectionFolder"]` / `.card[data-type="UserView"]` directly instead of assuming the legacy shape class is present.
+
 ## [0.2.0] - 2026-10-11
 
 ### Added
