@@ -1,0 +1,47 @@
+/*
+ * ExquisiteFin v0.1.0
+ *
+ * A maintainable Jellyfin 12 Modern compatibility theme based on ElegantFin.
+ *
+ * Baseline strategy:
+ *   1. Load the upstream ElegantFin theme.
+ *   2. Load the optional ElegantFin Media Bar support layer.
+ *   3. Load the Jellyfin 12 Modern companion last.
+ *   4. Keep ExquisiteFin-owned overrides below every upstream import.
+ *
+ * This first release intentionally makes no visual changes of its own.
+ * The goal is to establish a known-good compatibility baseline before we
+ * replace or redesign individual ElegantFin components.
+ */
+
+/* ================================================================
+   UPSTREAM: ElegantFin
+   Pinned to the release used for the v0.1 baseline.
+   ================================================================ */
+@import url("https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@v26.09.05/Theme/ElegantFin-jellyfin-theme-build-latest-minified.css");
+
+/* ================================================================
+   UPSTREAM ADD-ON: ElegantFin Media Bar support
+   Safe to load even when the plugin is not installed.
+   ================================================================ */
+@import url("https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@v26.09.05/Theme/assets/add-ons/media-bar-plugin-support-latest-min.css");
+
+/* ================================================================
+   COMPATIBILITY: ElegantFin for Jellyfin 12 Modern
+   This must remain after ElegantFin.
+   ================================================================ */
+@import url("https://cdn.jsdelivr.net/gh/mihaif7/elegantfin-jf12@v26.10.07/Theme/ElegantFin-jf12-modern-latest.css");
+
+/* ================================================================
+   EXQUISITEFIN SETTINGS
+   Keep user-facing theme controls in this section.
+   Do not change upstream code above when making normal customizations.
+   ================================================================ */
+:root {
+    /* Reserved for ExquisiteFin-owned variables in v0.2+. */
+}
+
+/* ================================================================
+   EXQUISITEFIN OVERRIDES
+   v0.1 intentionally contains no visual overrides.
+   ================================================================ */
