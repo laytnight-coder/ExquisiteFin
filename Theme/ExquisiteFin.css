@@ -109,7 +109,7 @@
     border-radius: 50% !important;
 
     /* CENTER FILL */
-    background: rgba(128, 128, 128, 0.40) !important;
+    background: rgba(128, 128, 128, 0.60) !important;
 
     /* BLUR */
     backdrop-filter: blur(0px) !important;
