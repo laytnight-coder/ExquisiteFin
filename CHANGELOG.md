@@ -2,6 +2,21 @@
 
 All notable ExquisiteFin changes are documented here.
 
+## [0.4.2] - 2026-10-11
+
+### Changed
+
+- Redesigned the secondary card actions into a compact bottom-right control group.
+- Reduced the secondary buttons to a smaller, consistent circular size so they no longer compete visually with the primary play control.
+- Added a dark translucent glass-style background with subtle blur for better icon contrast across poster artwork.
+- Added consistent spacing and inset positioning for the action group.
+- Removed idle glow from secondary actions and reserved the teal glow for hover/interaction states.
+- Added teal active-state icon styling for supported pressed/active controls.
+
+### Design decision
+
+The large centered play button remains the hero interaction. Secondary actions now use a quieter glass-and-outline treatment so the card has a clearer visual hierarchy while retaining ExquisiteFin's teal identity.
+
 ## [0.3.7] - 2026-10-11
 
 ### Changed
