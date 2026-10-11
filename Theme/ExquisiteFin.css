@@ -1,5 +1,5 @@
 /*
- * ExquisiteFin v0.4.2
+ * ExquisiteFin v0.4.3
  *
  * A maintainable Jellyfin 12 Modern compatibility theme based on ElegantFin.
  */
@@ -155,7 +155,8 @@
 
 /* ---------------------------------------------------------------
    PLAY SYMBOL
-   --------------------------------------------------------------- */
+   ---------------------------------------------------------------
+*/
 
 /* Play symbol size */
 .cardOverlayContainer > .cardOverlayFab-primary .cardOverlayButtonIcon-hover.play_arrow,
@@ -170,58 +171,78 @@
 
 /* ---------------------------------------------------------------
    SECONDARY CARD ACTION BUTTONS
-   --------------------------------------------------------------- */
+   ---------------------------------------------------------------
+*/
 
-/* Compact glass-style action group in the bottom-right of cards */
+/*
+ * Keep secondary actions clean and unobtrusive, matching the simple
+ * icon treatment of the reference design rather than making each
+ * action look like a miniature play button.
+ */
 .cardOverlayButton-br {
     display: flex !important;
     align-items: center !important;
     justify-content: flex-end !important;
-    gap: 0.35em !important;
-    right: 0.6em !important;
-    bottom: 0.6em !important;
+    gap: 0.65em !important;
+    right: 0.7em !important;
+    bottom: 0.65em !important;
 }
 
-/* Small, consistent circular action buttons */
-.cardOverlayButton-br > .cardOverlayButton {
-    width: 2.45em !important;
-    height: 2.45em !important;
-    min-width: 2.45em !important;
-    min-height: 2.45em !important;
+/* Hide the three-dot/menu action explicitly. */
+.cardOverlayButton-br > .cardOverlayButton[data-action="menu"],
+.cardOverlayButton-br button[data-action="menu"],
+.cardOverlayButton-br a[data-action="menu"] {
+    display: none !important;
+}
+
+/* Simple icon-only actions: no circles, borders, glass, or glow. */
+.cardOverlayButton-br > .cardOverlayButton:not([data-action="menu"]) {
+    width: 2.2em !important;
+    height: 2.2em !important;
+    min-width: 2.2em !important;
+    min-height: 2.2em !important;
     margin: 0 !important;
     padding: 0 !important;
     box-sizing: border-box !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    border: 1px solid var(--exquisite-accent-border) !important;
-    border-radius: 50% !important;
-    background: rgba(20, 25, 25, 0.72) !important;
-    backdrop-filter: blur(4px) !important;
-    -webkit-backdrop-filter: blur(4px) !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
     box-shadow: none !important;
     color: #fff !important;
-    transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease !important;
+    transform: none !important;
+    transition: color 0.15s ease, transform 0.15s ease, opacity 0.15s ease !important;
 }
 
-/* Keep secondary action icons crisp and centered */
-.cardOverlayButton-br > .cardOverlayButton .cardOverlayButtonIcon,
-.cardOverlayButton-br > .cardOverlayButton .material-icons,
-.cardOverlayButton-br > .cardOverlayButton .material-symbols-rounded {
+/* Clean white secondary icons. */
+.cardOverlayButton-br > .cardOverlayButton:not([data-action="menu"]) .cardOverlayButtonIcon,
+.cardOverlayButton-br > .cardOverlayButton:not([data-action="menu"]) .material-icons,
+.cardOverlayButton-br > .cardOverlayButton:not([data-action="menu"]) .material-symbols-rounded {
+    background: transparent !important;
     color: #fff !important;
-    font-size: 1.05em !important;
+    font-size: 1.35em !important;
     line-height: 1 !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.75) !important;
 }
 
-/* Subtle teal hover state */
-.cardOverlayButton-br > .cardOverlayButton:hover {
-    background: rgba(20, 25, 25, 0.88) !important;
-    border-color: var(--exquisite-accent) !important;
-    box-shadow: 0 0 7px color-mix(in srgb, var(--exquisite-accent) 60%, transparent) !important;
+/* Subtle hover feedback without turning the buttons into glowing discs. */
+.cardOverlayButton-br > .cardOverlayButton:not([data-action="menu"]):hover {
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: var(--exquisite-accent) !important;
     transform: scale(1.08) !important;
 }
 
-/* Teal icon for active/selected secondary actions */
+.cardOverlayButton-br > .cardOverlayButton:not([data-action="menu"]):hover .cardOverlayButtonIcon,
+.cardOverlayButton-br > .cardOverlayButton:not([data-action="menu"]):hover .material-icons,
+.cardOverlayButton-br > .cardOverlayButton:not([data-action="menu"]):hover .material-symbols-rounded {
+    color: var(--exquisite-accent) !important;
+}
+
+/* Teal icon for active/selected secondary actions. */
 .cardOverlayButton-br > .cardOverlayButton[aria-pressed="true"] .cardOverlayButtonIcon,
 .cardOverlayButton-br > .cardOverlayButton[aria-pressed="true"] .material-icons,
 .cardOverlayButton-br > .cardOverlayButton[aria-pressed="true"] .material-symbols-rounded,
