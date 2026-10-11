@@ -2,6 +2,17 @@
 
 All notable ExquisiteFin changes are documented here.
 
+## [0.4.5] - 2026-10-11
+
+### Fixed
+
+- Corrected selected secondary card-action colours so Jellyfin 12 Modern's generic icon rules cannot override them.
+- Selected bookmark icons are blue.
+- Selected Mark Played check icons are green.
+- Selected Favorite heart icons are red.
+- Kept the semantic colours stable while hovering selected actions.
+- Used Jellyfin's existing `playstatebutton-icon-played` and `ratingbutton-icon-withrating` state classes, with Modern-layout-specific selectors for the enlarged icon controls.
+
 ## [0.4.4] - 2026-10-11
 
 ### Changed
@@ -55,7 +66,7 @@ The large centered play button remains the hero interaction. Secondary actions n
 ### Changed
 
 - Increased the centered primary card play ring from `5em` to `5.5em`.
-- Increased the play symbol substantially to `2.2em` so it is much more prominent inside the larger ring.
+- Increased the play symbol substantially to `2.2em` so it is much more prominent inside the larger control.
 - Added a subtle frosted-glass blur and radial gradient to the transparent center of the play control.
 - Added a slightly stronger teal glow while keeping the center translucent rather than solid.
 
