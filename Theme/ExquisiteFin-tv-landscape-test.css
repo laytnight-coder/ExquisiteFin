@@ -1,5 +1,5 @@
 /*
- * ExquisiteFin TV Landscape Test v4
+ * ExquisiteFin TV Landscape Test v5
  *
  * Temporary test layer for changing TV Series library covers from portrait
  * artwork to 16:9 landscape thumbnails while keeping homepage cards portrait.
@@ -17,9 +17,12 @@
     padding-bottom: 56.25% !important;
 }
 
-/* Enlarge the landscape TV cards in the Shows library. */
+/*
+ * Size the landscape TV cards so six columns can fit cleanly instead of
+ * leaving a large unused area on the right.
+ */
 #tvshowsPage .portraitCard,
 #tvshowsPage .overflowPortraitCard,
 #tvshowsPage .mixedPortraitCard {
-    width: 16.666666666666667% !important;
+    width: calc(16.666666666666667% - 0.6em) !important;
 }
