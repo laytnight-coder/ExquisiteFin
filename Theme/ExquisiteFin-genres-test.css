@@ -1,5 +1,5 @@
 /*
- * ExquisiteFin Genres Layout Test v6
+ * ExquisiteFin Genres Layout Test v7
  *
  * Moves the dynamic Genres row from the lower metadata table into the
  * movie hero, directly below the main action buttons, and styles it as
@@ -11,7 +11,7 @@
 @media (min-width: 901px) {
     #itemDetailPage .itemDetailsGroup > div:last-child {
         position: absolute !important;
-        top: 1.3rem !important;
+        top: 1.1rem !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
         z-index: 8 !important;
@@ -22,7 +22,7 @@
         max-width: min(90vw, 60rem) !important;
         margin: 0 !important;
         padding: 0.38rem 1.2rem !important;
-        padding-right: 2rem !important;
+        padding-right: 2.2rem !important;
         box-sizing: border-box !important;
         overflow: visible !important;
 
