@@ -1,21 +1,28 @@
 /*
- * ExquisiteFin v0.5.2
+ * ExquisiteFin v0.5.3
  *
- * A maintainable Jellyfin 12 Modern compatibility theme based on ElegantFin.
+ * Custom styling for Jellyfin 12 Modern, built on ElegantFin and its
+ * Jellyfin Modern compatibility layer.
+ *
+ * Sections:
+ *  1. Settings and upstream theme variables
+ *  2. Home and library presentation
+ *  3. Card play and secondary actions
+ *  4. Movie details
+ *  5. General interactive states
  */
 
 /* ================================================================
-   UPSTREAM THEME IMPORTS
+   1. SETTINGS AND UPSTREAM THEME VARIABLES
    ================================================================ */
+
+/* Upstream theme layers — keep these before all ExquisiteFin overrides. */
 @import url("https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@v26.09.05/Theme/ElegantFin-jellyfin-theme-build-latest-minified.css");
 @import url("https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@v26.09.05/Theme/assets/add-ons/media-bar-plugin-support-latest-min.css");
 @import url("https://cdn.jsdelivr.net/gh/mihaif7/elegantfin-jf12@v26.10.07/Theme/ElegantFin-jf12-modern-latest.css");
 
-/* ================================================================
-   EXQUISITEFIN SETTINGS
-   ================================================================ */
 :root {
-    /* Library geometry */
+    /* Library card geometry */
     --exquisite-library-card-padding: 25%;
 
     /* ExquisiteFin accent */
@@ -29,31 +36,11 @@
     --exquisite-surface-drawer: hsla(210, 12%, 12%, 0.95);
     --exquisite-selector: hsla(210, 22%, 18%, 1);
 
-    /* Interactive controls */
+    /* Focus and interaction */
     --exquisite-control-border-width: 1px;
     --exquisite-control-glow: 0 0 5px color-mix(in srgb, var(--exquisite-accent) 75%, transparent);
 
-    /* Movie backdrop test: disable ElegantFin's default top trim. */
-    --backdropTrimFromTop: 0%;
-}
-
-/* ================================================================
-   EXQUISITEFIN OVERRIDES
-   ================================================================ */
-
-/* Library card geometry */
-.card[data-isfolder="true"][data-type="CollectionFolder"] .cardPadder-overflowBackdrop,
-.card[data-isfolder="true"][data-type="UserView"] .cardPadder-overflowBackdrop {
-    padding-bottom: var(--exquisite-library-card-padding) !important;
-}
-
-/* Homepage: hide the "My Media" section title */
-.section0 .sectionTitle {
-    display: none !important;
-}
-
-/* Jellyfin / ElegantFin theme variables */
-:root {
+    /* Jellyfin / ElegantFin accent variables */
     --activeColor: var(--exquisite-accent);
     --activeColorAlpha: color-mix(in srgb, var(--exquisite-accent) 90%, transparent);
     --uiAccentColor: var(--exquisite-accent);
@@ -61,13 +48,14 @@
     --btnMiniPlayBorderColor: var(--exquisite-accent-border);
     --checkboxCheckedBgColor: var(--exquisite-accent);
 
-    /* Continue Watching: make the resume cards a little more prominent */
+    /* Continue Watching cards */
     --resumeCardScale: 1.20;
 
-    /* Card overlay actions: show Mark Played / Favorite buttons and hide the menu */
+    /* Card action visibility */
     --extraCardButtonsVisibility: block;
     --menuButtonVisibility: none;
 
+    /* Jellyfin / ElegantFin background surfaces */
     --darkerGradientPoint: var(--exquisite-surface-dark);
     --darkerGradientPointAlpha: hsla(210, 12%, 10%, 0.85);
     --lighterGradientPoint: var(--exquisite-surface-light);
@@ -76,31 +64,49 @@
     --drawerColor: var(--exquisite-surface-drawer);
     --selectorBackgroundColor: var(--exquisite-selector);
     --selectorBackgroundColorAlpha: hsla(210, 22%, 18%, 0.5);
+
+    /* Keep movie detail backdrops anchored to the top of the image. */
+    --backdropTrimFromTop: 0%;
 }
 
-/* Library status indicators */
+/* ================================================================
+   2. HOME AND LIBRARY PRESENTATION
+   ================================================================ */
+
+/* Use a wide 4:1 padder for library folder/collection cards. */
+.card[data-isfolder="true"][data-type="CollectionFolder"] .cardPadder-overflowBackdrop,
+.card[data-isfolder="true"][data-type="UserView"] .cardPadder-overflowBackdrop {
+    padding-bottom: var(--exquisite-library-card-padding) !important;
+}
+
+/* Hide the "My Media" heading above the home library shortcuts. */
+.section0 .sectionTitle {
+    display: none !important;
+}
+
+/* Accent library and media-status indicators. */
 .countIndicator,
 .playedIndicator,
 .mediaSourceIndicator {
     background: var(--exquisite-accent) !important;
 }
 
-/* Episode count indicators: move from the top-right to the top-left of cards */
+/* Place episode/count indicators at the top-left of cards. */
 .cardIndicators {
     left: 0.225em !important;
     right: auto !important;
 }
 
-/* Played-state icon */
+/* Keep played-state icons consistent with the ExquisiteFin accent. */
 .playstatebutton-icon-played {
     color: var(--exquisite-accent) !important;
 }
 
 /* ================================================================
-   CARD PLAY / ACTION BUTTONS
-   ================================================================
-*/
+   3. CARD PLAY AND SECONDARY ACTIONS
+   ================================================================ */
 
+/* Large centered primary play control. */
 .cardOverlayContainer > .cardOverlayFab-primary {
     position: absolute !important;
     top: 50% !important;
@@ -150,22 +156,25 @@
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.35) !important;
 }
 
+/* Position the lightweight secondary action group at the card's lower-right. */
 .cardOverlayButton-br {
     display: flex !important;
     align-items: center !important;
     justify-content: flex-end !important;
     gap: 0.8em !important;
-   /* Update the below to update the positon of he 3 icons on the card */
+    /* Adjust this value to move the three secondary icons vertically. */
     bottom: 0.25em !important;
     right: 0.7em !important;
 }
 
+/* Hide the three-dot card menu. */
 .cardOverlayButton-br > .cardOverlayButton[data-action="menu"],
 .cardOverlayButton-br button[data-action="menu"],
 .cardOverlayButton-br a[data-action="menu"] {
     display: none !important;
 }
 
+/* Icon-only secondary controls: no button disc, border, or idle glow. */
 .cardOverlayButton-br > .cardOverlayButton:not([data-action="menu"]) {
     width: 3.6em !important;
     height: 3.6em !important;
@@ -210,6 +219,7 @@
     color: var(--exquisite-accent) !important;
 }
 
+/* General selected/pressed fallback for secondary card actions. */
 .cardOverlayButton-br > .cardOverlayButton[aria-pressed="true"] .cardOverlayButtonIcon,
 .cardOverlayButton-br > .cardOverlayButton[aria-pressed="true"] .material-icons,
 .cardOverlayButton-br > .cardOverlayButton[aria-pressed="true"] .material-symbols-rounded,
@@ -219,6 +229,7 @@
     color: var(--exquisite-accent) !important;
 }
 
+/* Selected bookmark: blue. Repeat classes to win against generic icon rules. */
 .cardOverlayButton-br > .cardOverlayButton:has(.material-icons.bookmark),
 .cardOverlayButton-br > .cardOverlayButton:has(.material-symbols-rounded.bookmark) {
     color: #3b82f6 !important;
@@ -231,14 +242,17 @@
     color: #3b82f6 !important;
 }
 
+/* Selected Mark Played: green. */
 .cardOverlayButton-br > .cardOverlayButton .playstatebutton-icon-played.playstatebutton-icon-played {
     color: #39d98a !important;
 }
 
+/* Selected Favorite: red. */
 .cardOverlayButton-br > .cardOverlayButton .ratingbutton-icon-withrating.ratingbutton-icon-withrating {
     color: #ff3b5c !important;
 }
 
+/* Preserve each selected action's semantic colour while hovered. */
 .cardOverlayButton-br > .cardOverlayButton:has(.material-icons.bookmark):hover,
 .cardOverlayButton-br > .cardOverlayButton:has(.material-symbols-rounded.bookmark):hover {
     color: #3b82f6 !important;
@@ -260,25 +274,22 @@
     color: #ff3b5c !important;
 }
 
+/* Lift the playback progress strip slightly within each card. */
 .card .itemProgressBar {
     transform: translateY(-0.80em) !important;
 }
 
 /* ================================================================
-   MOVIE DETAILS
-   ================================================================
-*/
+   4. MOVIE DETAILS
+   ================================================================ */
+
+/* Keep the tagline, synopsis, and external rating links centred. */
 .tagline {
     text-align: center !important;
     transform: translateY(-1.00em) !important;
 }
 
-/* Modern Jellyfin uses .overview for the main description. */
-#itemDetailPage .overview {
-    text-align: center !important;
-}
-
-/* Keep compatibility with legacy detail markup as well. */
+#itemDetailPage .overview,
 #itemDetailPage .itemOverview {
     text-align: center !important;
 }
@@ -291,15 +302,95 @@
     text-align: center !important;
 }
 
+/* Keep movie detail backdrop artwork anchored at the top. */
 #itemDetailPage .backdropImage {
     background-position: center top !important;
     background-position-y: 0% !important;
 }
 
+/*
+ * Desktop movie hero: visually relocate the Genres row from the lower
+ * metadata table to a compact pill beneath the main action buttons.
+ * The absolute positioning removes the original row from table flow.
+ * The mobile and TV layouts are intentionally left untouched.
+ */
+@media (min-width: 901px) {
+    #itemDetailPage .itemDetailsGroup > div:last-child {
+        position: absolute !important;
+        top: 0.9rem !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        z-index: 8 !important;
+
+        height: auto !important;
+        min-height: 0 !important;
+        width: max-content !important;
+        max-width: min(90vw, 60rem) !important;
+        margin: 0 !important;
+        padding: 0.38rem 1.2rem !important;
+        padding-right: 2.4rem !important;
+        box-sizing: border-box !important;
+        overflow: visible !important;
+
+        display: inline-flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0.5em !important;
+
+        border: 0 !important;
+        border-radius: 999px !important;
+        background: rgba(45, 45, 45, 0.92) !important;
+        box-shadow: none !important;
+        color: #fff !important;
+        text-align: center !important;
+        white-space: nowrap !important;
+    }
+
+    #itemDetailPage .itemDetailsGroup > div:last-child h5 {
+        display: block !important;
+        flex: 0 0 auto !important;
+        width: auto !important;
+        margin: 0 !important;
+        color: #fff !important;
+        font-size: 0.9rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 0 !important;
+        text-transform: none !important;
+        white-space: nowrap !important;
+    }
+
+    #itemDetailPage .itemDetailsGroup > div:last-child > :last-child {
+        flex: 0 0 auto !important;
+        width: auto !important;
+        margin: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-wrap: nowrap !important;
+        gap: 0.35em !important;
+        white-space: nowrap !important;
+    }
+
+    #itemDetailPage .itemDetailsGroup > div:last-child .button-link {
+        color: #fff !important;
+        text-decoration: none !important;
+        font-weight: 700 !important;
+        padding: 0 !important;
+        background: transparent !important;
+        border: 0 !important;
+    }
+
+    #itemDetailPage .itemDetailsGroup > div:last-child .button-link:hover {
+        color: var(--exquisite-accent) !important;
+    }
+}
+
 /* ================================================================
-   GENERAL INTERACTIVE STATES
-   ================================================================
-*/
+   5. GENERAL INTERACTIVE STATES
+   ================================================================ */
+
+/* Teal hover/focus border for raised controls. */
 .raised:hover,
 .raised:focus-visible,
 .paper-icon-button-light:hover,
@@ -307,6 +398,7 @@
     border-color: var(--exquisite-accent-border) !important;
 }
 
+/* Visible keyboard focus that matches the ExquisiteFin accent. */
 button:focus-visible,
 a:focus-visible,
 .paper-icon-button-light:focus-visible {
