@@ -272,7 +272,7 @@
    ---------------------------------------------------------------
 */
 .card .itemProgressBar {
-    transform: translateY(-0.25em) !important;
+    transform: translateY(-0.50em) !important;
 }
 
 /* ---------------------------------------------------------------
