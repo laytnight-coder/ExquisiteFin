@@ -1,5 +1,5 @@
 /*
- * ExquisiteFin v0.4.4
+ * ExquisiteFin v0.4.5
  *
  * A maintainable Jellyfin 12 Modern compatibility theme based on ElegantFin.
  */
@@ -242,7 +242,7 @@
     color: var(--exquisite-accent) !important;
 }
 
-/* Teal icon for active/selected secondary actions. */
+/* Default active/selected fallback */
 .cardOverlayButton-br > .cardOverlayButton[aria-pressed="true"] .cardOverlayButtonIcon,
 .cardOverlayButton-br > .cardOverlayButton[aria-pressed="true"] .material-icons,
 .cardOverlayButton-br > .cardOverlayButton[aria-pressed="true"] .material-symbols-rounded,
@@ -250,6 +250,58 @@
 .cardOverlayButton-br > .cardOverlayButton.active .material-icons,
 .cardOverlayButton-br > .cardOverlayButton.active .material-symbols-rounded {
     color: var(--exquisite-accent) !important;
+}
+
+/*
+ * Selected actions use their own semantic colours.
+ * These selectors deliberately come after the generic white/teal rules
+ * above so the Modern layout cannot wash the selected colours back out.
+ */
+
+/* Bookmark selected -> blue */
+.cardOverlayButton-br > .cardOverlayButton:has(.material-icons.bookmark),
+.cardOverlayButton-br > .cardOverlayButton:has(.material-symbols-rounded.bookmark) {
+    color: #3b82f6 !important;
+}
+
+.cardOverlayButton-br > .cardOverlayButton:has(.material-icons.bookmark) .material-icons,
+.cardOverlayButton-br > .cardOverlayButton:has(.material-symbols-rounded.bookmark) .material-symbols-rounded,
+.cardOverlayButton-br > .cardOverlayButton:has(.material-icons.bookmark) .cardOverlayButtonIcon,
+.cardOverlayButton-br > .cardOverlayButton:has(.material-symbols-rounded.bookmark) .cardOverlayButtonIcon {
+    color: #3b82f6 !important;
+}
+
+/* Mark Played selected -> green */
+.cardOverlayButton-br > .cardOverlayButton .playstatebutton-icon-played {
+    color: #39d98a !important;
+}
+
+/* Favorite / heart selected -> red */
+.cardOverlayButton-br > .cardOverlayButton .ratingbutton-icon-withrating {
+    color: #ff3b5c !important;
+}
+
+/* Keep selected semantic colours stable while hovering. */
+.cardOverlayButton-br > .cardOverlayButton:has(.material-icons.bookmark):hover,
+.cardOverlayButton-br > .cardOverlayButton:has(.material-symbols-rounded.bookmark):hover {
+    color: #3b82f6 !important;
+}
+
+.cardOverlayButton-br > .cardOverlayButton:has(.material-icons.bookmark):hover .material-icons,
+.cardOverlayButton-br > .cardOverlayButton:has(.material-symbols-rounded.bookmark):hover .material-symbols-rounded,
+.cardOverlayButton-br > .cardOverlayButton:has(.material-icons.bookmark):hover .cardOverlayButtonIcon,
+.cardOverlayButton-br > .cardOverlayButton:has(.material-symbols-rounded.bookmark):hover .cardOverlayButtonIcon {
+    color: #3b82f6 !important;
+}
+
+.cardOverlayButton-br > .cardOverlayButton:has(.playstatebutton-icon-played):hover,
+.cardOverlayButton-br > .cardOverlayButton:has(.playstatebutton-icon-played):hover .playstatebutton-icon-played {
+    color: #39d98a !important;
+}
+
+.cardOverlayButton-br > .cardOverlayButton:has(.ratingbutton-icon-withrating):hover,
+.cardOverlayButton-br > .cardOverlayButton:has(.ratingbutton-icon-withrating):hover .ratingbutton-icon-withrating {
+    color: #ff3b5c !important;
 }
 
 /* ---------------------------------------------------------------
