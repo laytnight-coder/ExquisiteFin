@@ -1,5 +1,5 @@
 /*
- * ExquisiteFin Hero Refinement Test v1
+ * ExquisiteFin Hero Refinement Test v2
  *
  * Visual refinement test for the movie detail hero. Builds on the current
  * Genres layout test; desktop-first and intentionally isolated from the
@@ -13,13 +13,15 @@
     #itemDetailPage .itemMiscInfo-primary {
         font-size: 1.05em !important;
         gap: 0.55em !important;
-        transform: translateY(-0.35rem) !important;
+        position: relative !important;
+        top: -0.35rem !important;
     }
 
     /* 2. Action section: increase the whole control row by 5%. */
     #itemDetailPage .mainDetailButtons {
         font-size: 1.05em !important;
-        transform: translateY(-0.35rem) !important;
+        position: relative !important;
+        top: -0.35rem !important;
     }
 
     /* Keep the existing Genres styling, but lift it with the rest of the hero. */
@@ -27,17 +29,19 @@
         top: 0.7rem !important;
     }
 
-    /* 4. Tagline: slightly larger, more italic, and lifted for more separation. */
+    /* 4. Tagline: larger, more italic, and lifted with extra space above it. */
     #itemDetailPage .tagline {
-        font-size: 1.08em !important;
+        font-size: 1.15em !important;
         font-style: italic !important;
         font-weight: 500 !important;
-        margin-top: 0.35rem !important;
-        transform: translateY(-1.35em) !important;
+        margin-top: 0.75rem !important;
+        position: relative !important;
+        top: -0.45rem !important;
     }
 
-    /* Lift the film logo slightly so the enlarged stack has room below it. */
+    /* Lift the film logo slightly without replacing its existing transform. */
     .layout-desktop #itemDetailPage .detailLogo {
-        transform: translateY(-0.45rem) !important;
+        position: relative !important;
+        top: -0.35rem !important;
     }
 }
