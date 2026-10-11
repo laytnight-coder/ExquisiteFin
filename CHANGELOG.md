@@ -2,6 +2,13 @@
 
 All notable ExquisiteFin changes are documented here.
 
+## [0.3.4] - 2026-10-11
+
+### Changed
+
+- Increased the centered primary card play button from `3em` to `4em` for a more prominent control on poster cards.
+- Slightly increased the play icon size and restrained the hover scale so the larger control remains balanced.
+
 ## [0.3.3] - 2026-10-11
 
 ### Fixed
