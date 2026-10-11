@@ -1,5 +1,5 @@
 /*
- * ExquisiteFin Hero Refinement Test v2
+ * ExquisiteFin Hero Refinement Test v3
  *
  * Visual refinement test for the movie detail hero. Builds on the current
  * Genres layout test; desktop-first and intentionally isolated from the
@@ -29,9 +29,9 @@
         top: 0.7rem !important;
     }
 
-    /* 4. Tagline: larger, more italic, and lifted with extra space above it. */
+    /* 4. Tagline: noticeably larger, more italic, and lifted with extra space above it. */
     #itemDetailPage .tagline {
-        font-size: 1.15em !important;
+        font-size: 1.20em !important;
         font-style: italic !important;
         font-weight: 500 !important;
         margin-top: 0.75rem !important;
@@ -39,9 +39,5 @@
         top: -0.45rem !important;
     }
 
-    /* Lift the film logo slightly without replacing its existing transform. */
-    .layout-desktop #itemDetailPage .detailLogo {
-        position: relative !important;
-        top: -0.35rem !important;
-    }
+    /* Leave the film logo's native positioning completely untouched. */
 }
