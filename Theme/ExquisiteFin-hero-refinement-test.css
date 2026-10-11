@@ -1,0 +1,43 @@
+/*
+ * ExquisiteFin Hero Refinement Test v1
+ *
+ * Visual refinement test for the movie detail hero. Builds on the current
+ * Genres layout test; desktop-first and intentionally isolated from the
+ * main ExquisiteFin stylesheet.
+ */
+
+@import url("https://cdn.jsdelivr.net/gh/laytnight-coder/ExquisiteFin@d4d6037751954a8c6448c9929010ddd048368dc4/Theme/ExquisiteFin-genres-test.css");
+
+@media (min-width: 901px) {
+    /* 1. Metadata: 5% larger with more breathing room between values. */
+    #itemDetailPage .itemMiscInfo-primary {
+        font-size: 1.05em !important;
+        gap: 0.55em !important;
+        transform: translateY(-0.35rem) !important;
+    }
+
+    /* 2. Action section: increase the whole control row by 5%. */
+    #itemDetailPage .mainDetailButtons {
+        font-size: 1.05em !important;
+        transform: translateY(-0.35rem) !important;
+    }
+
+    /* Keep the existing Genres styling, but lift it with the rest of the hero. */
+    #itemDetailPage .itemDetailsGroup > div:last-child {
+        top: 0.7rem !important;
+    }
+
+    /* 4. Tagline: slightly larger, more italic, and lifted for more separation. */
+    #itemDetailPage .tagline {
+        font-size: 1.08em !important;
+        font-style: italic !important;
+        font-weight: 500 !important;
+        margin-top: 0.35rem !important;
+        transform: translateY(-1.35em) !important;
+    }
+
+    /* Lift the film logo slightly so the enlarged stack has room below it. */
+    .layout-desktop #itemDetailPage .detailLogo {
+        transform: translateY(-0.45rem) !important;
+    }
+}
