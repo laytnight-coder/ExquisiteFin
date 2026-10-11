@@ -2,6 +2,15 @@
 
 All notable ExquisiteFin changes are documented here.
 
+## [0.3.6] - 2026-10-11
+
+### Changed
+
+- Increased the centered primary card play ring from `5em` to `5.5em`.
+- Increased the play symbol substantially to `2.2em` so it is much more prominent inside the larger ring.
+- Added a subtle frosted-glass blur and radial gradient to the transparent center of the play control.
+- Added a slightly stronger teal glow while keeping the center translucent rather than solid.
+
 ## [0.3.5] - 2026-10-11
 
 ### Changed
