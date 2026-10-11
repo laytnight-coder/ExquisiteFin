@@ -1,5 +1,5 @@
 /*
- * ExquisiteFin v0.3.5
+ * ExquisiteFin v0.3.6
  *
  * A maintainable Jellyfin 12 Modern compatibility theme based on ElegantFin.
  */
@@ -72,45 +72,48 @@
    CARD PLAY / ACTION BUTTONS
    ================================================================ */
 
-/* Large centered primary play control. */
+/* Larger centered primary play control with a subtle frosted-glass center. */
 .cardOverlayContainer > .cardOverlayFab-primary {
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
     right: auto !important;
     bottom: auto !important;
-    width: 5em !important;
-    height: 5em !important;
-    margin-top: -2.5em !important;
-    margin-left: -2.5em !important;
+    width: 5.5em !important;
+    height: 5.5em !important;
+    margin-top: -2.75em !important;
+    margin-left: -2.75em !important;
     margin-right: 0 !important;
     margin-bottom: 0 !important;
     padding: 0 !important;
     box-sizing: border-box !important;
     border: 3px solid var(--exquisite-accent) !important;
     border-radius: 50% !important;
-    background: transparent !important;
+    background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.13), rgba(0, 199, 159, 0.08) 48%, rgba(0, 0, 0, 0.18) 100%) !important;
+    backdrop-filter: blur(4px) saturate(115%) !important;
+    -webkit-backdrop-filter: blur(4px) saturate(115%) !important;
     color: #fff !important;
     transform: none !important;
     transform-origin: center center !important;
-    box-shadow: 0 0 9px color-mix(in srgb, var(--exquisite-accent) 65%, transparent) !important;
+    box-shadow: 0 0 10px color-mix(in srgb, var(--exquisite-accent) 65%, transparent) !important;
     z-index: 3 !important;
 }
 
 .cardOverlayContainer > .cardOverlayFab-primary:hover {
-    background: color-mix(in srgb, var(--exquisite-accent) 12%, transparent) !important;
+    background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.17), rgba(0, 199, 159, 0.13) 48%, rgba(0, 0, 0, 0.20) 100%) !important;
     border-color: var(--exquisite-accent) !important;
-    box-shadow: 0 0 12px color-mix(in srgb, var(--exquisite-accent) 80%, transparent) !important;
-    transform: scale(1.06) !important;
+    box-shadow: 0 0 14px color-mix(in srgb, var(--exquisite-accent) 82%, transparent) !important;
+    transform: scale(1.05) !important;
 }
 
 .cardOverlayContainer > .cardOverlayFab-primary .cardOverlayButtonIcon-hover.play_arrow,
 .cardOverlayContainer > .cardOverlayFab-primary .material-icons.play_arrow {
     color: #fff !important;
-    font-size: 1.5em !important;
-    width: 2.1em !important;
-    height: 2.1em !important;
-    line-height: 1.2em !important;
+    font-size: 2.2em !important;
+    width: 2.4em !important;
+    height: 2.4em !important;
+    line-height: 1.05em !important;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.35) !important;
 }
 
 .cardOverlayButton.cardOverlayButton-hover.itemAction.paper-icon-button-light:not(.cardOverlayFab-primary) {
