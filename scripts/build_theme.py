@@ -114,14 +114,14 @@ def trim_base(css: str) -> tuple[str, str]:
 
     # Remove the optional KefinTweaks selector without disturbing the shared
     # collection/program-guide layout rule next to it.
-    group_start = css.find("    .collectionItems,")
-    next_collection_rule = css.find("    .collectionItems {", group_start + 1)
+    group_start = css.find(".collectionItems,\n.programGuideSection,")
+    next_collection_rule = css.find(".collectionItems {", group_start + 1)
     if group_start >= 0 and next_collection_rule > group_start:
         replacement = (
-            "    .collectionItems,\n"
-            "    .programGuideSection {\n"
-            "        grid-column: 1 / -1;\n"
-            "    }\n\n"
+            ".collectionItems,\n"
+            ".programGuideSection {\n"
+            "    grid-column: 1 / -1;\n"
+            "}\n\n"
         )
         css = css[:group_start] + replacement + css[next_collection_rule:]
     css = re.sub(r"\.series-episodes-section\s*\{\s*order:\s*4;\s*\}\s*", "", css)
