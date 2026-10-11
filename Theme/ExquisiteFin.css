@@ -1,5 +1,5 @@
 /*
- * ExquisiteFin v0.3.4
+ * ExquisiteFin v0.3.5
  *
  * A maintainable Jellyfin 12 Modern compatibility theme based on ElegantFin.
  */
@@ -35,25 +35,11 @@
    EXQUISITEFIN OVERRIDES
    ================================================================ */
 
-/*
- * Library / My Media cards.
- *
- * Jellyfin establishes the card height through the card padder's
- * percentage padding. ElegantFin changes this to 50% for CollectionFolder
- * and UserView cards. ExquisiteFin owns that geometry directly.
- */
 .card[data-isfolder="true"][data-type="CollectionFolder"] .cardPadder-overflowBackdrop,
 .card[data-isfolder="true"][data-type="UserView"] .cardPadder-overflowBackdrop {
     padding-bottom: var(--exquisite-library-card-padding) !important;
 }
 
-/*
- * Accent system.
- *
- * ElegantFin exposes its primary visual colors through CSS variables.
- * ExquisiteFin owns the accent values here so the theme has a single
- * controllable visual identity without rewriting the upstream theme.
- */
 :root {
     --activeColor: var(--exquisite-accent);
     --activeColorAlpha: color-mix(in srgb, var(--exquisite-accent) 90%, transparent);
@@ -72,7 +58,6 @@
     --selectorBackgroundColorAlpha: hsla(210, 22%, 18%, 0.5);
 }
 
-/* Status indicators. */
 .countIndicator,
 .playedIndicator,
 .mediaSourceIndicator {
@@ -87,54 +72,47 @@
    CARD PLAY / ACTION BUTTONS
    ================================================================ */
 
-/*
- * Primary card play control.
- * Jellyfin positions this control through the direct child selector on
- * .cardOverlayContainer. Reassert that geometry here so the larger
- * ExquisiteFin button stays centered instead of inheriting the bottom-action
- * position from the Modern layout.
- */
+/* Large centered primary play control. */
 .cardOverlayContainer > .cardOverlayFab-primary {
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
     right: auto !important;
     bottom: auto !important;
-    width: 4em !important;
-    height: 4em !important;
-    margin-top: -2em !important;
-    margin-left: -2em !important;
+    width: 5em !important;
+    height: 5em !important;
+    margin-top: -2.5em !important;
+    margin-left: -2.5em !important;
     margin-right: 0 !important;
     margin-bottom: 0 !important;
     padding: 0 !important;
     box-sizing: border-box !important;
-    border: 2px solid var(--exquisite-accent) !important;
+    border: 3px solid var(--exquisite-accent) !important;
     border-radius: 50% !important;
     background: transparent !important;
     color: #fff !important;
     transform: none !important;
     transform-origin: center center !important;
-    box-shadow: 0 0 7px color-mix(in srgb, var(--exquisite-accent) 65%, transparent) !important;
+    box-shadow: 0 0 9px color-mix(in srgb, var(--exquisite-accent) 65%, transparent) !important;
     z-index: 3 !important;
 }
 
 .cardOverlayContainer > .cardOverlayFab-primary:hover {
     background: color-mix(in srgb, var(--exquisite-accent) 12%, transparent) !important;
     border-color: var(--exquisite-accent) !important;
-    box-shadow: 0 0 10px color-mix(in srgb, var(--exquisite-accent) 80%, transparent) !important;
+    box-shadow: 0 0 12px color-mix(in srgb, var(--exquisite-accent) 80%, transparent) !important;
     transform: scale(1.06) !important;
 }
 
 .cardOverlayContainer > .cardOverlayFab-primary .cardOverlayButtonIcon-hover.play_arrow,
 .cardOverlayContainer > .cardOverlayFab-primary .material-icons.play_arrow {
     color: #fff !important;
-    font-size: 1.2em !important;
-    width: 1.9em !important;
-    height: 1.9em !important;
+    font-size: 1.5em !important;
+    width: 2.1em !important;
+    height: 2.1em !important;
     line-height: 1.2em !important;
 }
 
-/* Other card actions keep their normal footprint and only use the accent. */
 .cardOverlayButton.cardOverlayButton-hover.itemAction.paper-icon-button-light:not(.cardOverlayFab-primary) {
     border: var(--exquisite-control-border-width) solid var(--exquisite-accent-border) !important;
     box-shadow: none !important;
@@ -144,7 +122,6 @@
     box-shadow: var(--exquisite-control-glow) !important;
 }
 
-/* Generic raised buttons get a restrained accent on interaction only. */
 .raised:hover,
 .raised:focus-visible,
 .paper-icon-button-light:hover,
@@ -152,7 +129,6 @@
     border-color: var(--exquisite-accent-border) !important;
 }
 
-/* Preserve a clear keyboard focus state without altering layout. */
 button:focus-visible,
 a:focus-visible,
 .paper-icon-button-light:focus-visible {
