@@ -43,7 +43,7 @@ In Jellyfin, open **Dashboard → General → Custom CSS** and add:
 This follows the latest contents of the `main` branch. To pin your setup to the current v0.5.3 stylesheet, use this commit-specific URL instead:
 
 ```css
-@import url("https://cdn.jsdelivr.net/gh/laytnight-coder/ExquisiteFin@7920856c0102ed22569a53e9fbcf012ab199a2e2/Theme/ExquisiteFin.css");
+@import url("https://cdn.jsdelivr.net/gh/laytnight-coder/ExquisiteFin@39b119075159f9e7157f75fa5225c3f623566486/Theme/ExquisiteFin.css");
 ```
 
 After saving the Custom CSS, refresh Jellyfin. If an older temporary testing stylesheet is still configured, replace its import with one of the main stylesheet imports above.
