@@ -157,7 +157,8 @@
     justify-content: flex-end !important;
     gap: 0.8em !important;
     right: 0.7em !important;
-    bottom: 0.5em !important;
+   /* Update the below to update the positon of he 3 icons on the card */
+    bottom: 0.7em !important;
 }
 
 /* Hide the three-dot/menu action explicitly. */
