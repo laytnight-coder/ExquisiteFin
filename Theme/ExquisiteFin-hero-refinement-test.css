@@ -1,9 +1,0 @@
-/*
- * ExquisiteFin Hero Refinement Test
- *
- * Baseline layer restored. This test file now adds no hero refinements;
- * it simply loads the current Genres layout test so individual changes
- * can be tested one at a time from a known-good layout.
- */
-
-@import url("https://cdn.jsdelivr.net/gh/laytnight-coder/ExquisiteFin@d4d6037751954a8c6448c9929010ddd048368dc4/Theme/ExquisiteFin-genres-test.css");
