@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
-"""Build ExquisiteFin's self-contained CSS bundle and optional Media Bar adapter.
+"""Build ExquisiteFin's local CSS bundle and optional Media Bar adapter.
 
-Sources are kept in Theme/source/ with their upstream attribution intact.
-The distributable Theme/ExquisiteFin.css bundles the required core and
-Jellyfin 12 Modern compatibility rules. Plugin-only Modern sections are omitted
-from the core and the Media Bar section is moved to a separate optional file.
+Keep attributed upstream inputs and ExquisiteFin-owned overrides in
+Theme/source/. The main output bundles the supported core plus Jellyfin 12
+Modern rules. Media Bar-specific rules are generated as a separate adapter.
 
-Run from any working directory:
+Run:
     python scripts/build_theme.py
-Check without writing:
+Validate without writing:
     python scripts/build_theme.py --check
 """
 
@@ -26,9 +25,9 @@ BASE_FILE = SOURCE / "ElegantFin.css"
 MODERN_FILE = SOURCE / "Jellyfin12-Modern.css"
 MEDIA_FILE = SOURCE / "MediaBar-ElegantFin.css"
 OVERRIDES_FILE = SOURCE / "ExquisiteFin-overrides.css"
-
 BUNDLE_FILE = THEME / "ExquisiteFin.css"
 MEDIA_ADAPTER_FILE = THEME / "ExquisiteFin-MediaBar.css"
+
 VERSION = "0.6.0"
 OMIT_MODERN_SECTIONS = {12, 14, 18}
 
@@ -37,8 +36,7 @@ def read_css(path: Path) -> str:
     return path.read_text(encoding="utf-8-sig").replace("\r\n", "\n")
 
 
-def modern_section_ranges(css: str) -> tuple[list[str], list[dict[str, int]]]:
-    """Find numbered Modern companion sections and their separator comments."""
+def find_modern_sections(css: str) -> tuple[list[str], list[dict[str, int]]]:
     lines = css.splitlines()
     headings: list[dict[str, int]] = []
     for index, line in enumerate(lines):
@@ -55,40 +53,44 @@ def modern_section_ranges(css: str) -> tuple[list[str], list[dict[str, int]]]:
         end = headings[index + 1]["start"] if index + 1 < len(headings) else len(lines)
         sections.append({**section, "end": end})
     if not sections or sections[0]["number"] != 1:
-        raise ValueError("Could not identify numbered sections in the Modern companion.")
+        raise ValueError("Could not identify numbered sections in the Modern source.")
     return lines, sections
 
 
 def trim_base(css: str) -> tuple[str, str]:
-    """Return the base theme without optional plugin rules, and its font import."""
-    font_pattern = re.compile(
-        r'^\s*@import url\("https://fonts\.googleapis\.com/css2\?family=Inter:[^;]+;\s*',
-        re.MULTILINE,
+    """Keep shared theme rules; remove optional plugins and disabled experiments."""
+    lines = css.splitlines()
+    font_import = next(
+        (
+            line.strip()
+            for line in lines
+            if line.lstrip().startswith(
+                '@import url("https://fonts.googleapis.com/css2?family=Inter:'
+            )
+        ),
+        None,
     )
-    font_match = font_pattern.search(css)
-    if not font_match:
-        raise ValueError("Expected upstream Inter font import was not found.")
-    font_import = font_match.group(0).strip()
-    css = css[: font_match.start()] + css[font_match.end() :]
+    if not font_import:
+        raise ValueError("Expected upstream Inter stylesheet import was not found.")
 
-    # Remove inactive, commented-out add-on import examples from the bundle.
-    css = re.sub(
-        r"/\* Add-ons: Uncomment to enable \*/\s*"
-        r"/\* @import url\(\./assets/add-ons/media-bar-plugin-support-nightly\.css\); \*/\s*"
-        r'/\* @import url\("https://cdn\.jsdelivr\.net/gh/lscambo13/ElegantFin@main/Theme/assets/add-ons/custom-media-covers-latest-min\.css"\); \*/\s*',
-        "",
-        css,
-    )
-    # Remove a long, commented full icon-font request URL; the @font-face
-    # declarations immediately below provide the actual font sources.
-    css = re.sub(
-        r"/\* Material Symbols Rounded - Minimal \*/\s*"
-        r"/\* https://fonts\.googleapis\.com/css2\?family=Material\+Symbols\+Rounded:[\s\S]*?\*/\s*",
-        "",
-        css,
-    )
+    cleaned_lines: list[str] = []
+    for line in lines:
+        stripped = line.strip()
+        if stripped == font_import:
+            continue
+        if stripped in {
+            "/* Add-ons: Uncomment to enable */",
+            "/* @import url(./assets/add-ons/media-bar-plugin-support-nightly.css); */",
+            '/* @import url("https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@main/Theme/assets/add-ons/custom-media-covers-latest-min.css"); */',
+            "/* Material Symbols Rounded - Minimal */",
+        }:
+            continue
+        if stripped.startswith("/* https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:"):
+            continue
+        cleaned_lines.append(line)
+    css = "\n".join(cleaned_lines)
 
-    # Media Bar styles live in the optional ExquisiteFin-MediaBar.css adapter.
+    # Media Bar styles are moved into Theme/ExquisiteFin-MediaBar.css.
     css = re.sub(
         r"/\* basic styling for the Media Bar Plugin - start[\s\S]*?"
         r"/\* basic styling for the Media Bar Plugin - end \*/\s*",
@@ -96,7 +98,7 @@ def trim_base(css: str) -> tuple[str, str]:
         css,
     )
 
-    # Exclude only integrations that explicitly style optional plugins.
+    # Drop optional Jellyfin Enhanced-only external-link and review styling.
     css = re.sub(
         r"/\* Support for Jellyfin Enhanced "
         r"\(https://github\.com/n00bcodr/Jellyfin-Enhanced\) \*/[\s\S]*?(?=\.itemTags,)",
@@ -109,77 +111,82 @@ def trim_base(css: str) -> tuple[str, str]:
         "",
         css,
     )
-    css = re.sub(
-        r"\.collectionItems,\s*\.programGuideSection,\s*"
-        r"/\* Support \.series-episodes-section for KefinTweaks "
-        r"\(https://github\.com/ranaldsgift/KefinTweaks\) \*/\s*"
-        r"\.series-episodes-section,\s*"
-        r"\.series-episodes-section ~ #listChildrenCollapsible\s*\{[^}]*\}\s*"
-        r"\.series-episodes-section\s*\{\s*order:\s*4;\s*\}",
-        ".collectionItems,\n.programGuideSection {\n    grid-column: 1 / -1;\n}",
-        css,
-    )
 
-    # Drop disabled low-end-TV experiments, but retain the active TV fixes.
-    css = re.sub(r"/\* \.layout-tv \*,[\s\S]*?\*/\s*", "", css)
-    css = re.sub(r"/\* \.layout-tv \.show-focus:not\(\.card\):focus,[\s\S]*?\*/\s*", "", css)
-    css = re.sub(r"/\* \.layout-tv \.blurhash-canvas \{[\s\S]*?\*/\s*", "", css)
-    css = re.sub(
+    # Remove the optional KefinTweaks selector without disturbing the shared
+    # collection/program-guide layout rule next to it.
+    group_start = css.find("    .collectionItems,")
+    next_collection_rule = css.find("    .collectionItems {", group_start + 1)
+    if group_start >= 0 and next_collection_rule > group_start:
+        replacement = (
+            "    .collectionItems,\n"
+            "    .programGuideSection {\n"
+            "        grid-column: 1 / -1;\n"
+            "    }\n\n"
+        )
+        css = css[:group_start] + replacement + css[next_collection_rule:]
+    css = re.sub(r"\.series-episodes-section\s*\{\s*order:\s*4;\s*\}\s*", "", css)
+
+    # These commented-out performance experiments never ran in the upstream
+    # theme. Keep the active low-end-TV fixes that follow them.
+    for pattern in (
+        r"/\* \.layout-tv \*,[\s\S]*?\*/\s*",
+        r"/\* \.layout-tv \.show-focus:not\(\.card\):focus,[\s\S]*?\*/\s*",
+        r"/\* \.layout-tv \.blurhash-canvas \{[\s\S]*?\*/\s*",
         r"/\* \.layout-tv \.emby-checkbox:focus \+ span \+ \.checkboxOutline \{[\s\S]*?\*/\s*",
-        "",
-        css,
-    )
+    ):
+        css = re.sub(pattern, "", css)
 
     css = css.replace(
         '--elegantFinFooterText: "ElegantFin v26.09.05";',
         f'--elegantFinFooterText: "ExquisiteFin v{VERSION}";',
     )
+    if ".series-episodes-section" in css:
+        raise ValueError("KefinTweaks selector cleanup failed.")
     return css.strip(), font_import
 
 
 def trim_modern(css: str) -> tuple[str, str]:
-    """Return core Modern rules and the extracted Media Bar section."""
-    lines, sections = modern_section_ranges(css)
-    media = next((section for section in sections if section["number"] == 12), None)
-    if media is None:
-        raise ValueError("Modern companion Media Bar section 12 was not found.")
+    """Bundle core compatibility; return Media Bar rules for the optional adapter."""
+    lines, sections = find_modern_sections(css)
+    media_section = next((s for s in sections if s["number"] == 12), None)
+    if media_section is None:
+        raise ValueError("Could not find Modern companion section 12 (Media Bar).")
 
-    core_parts: list[str] = []
+    parts: list[str] = []
     cursor = 0
     for section in sections:
         if cursor < section["start"]:
-            core_parts.append("\n".join(lines[cursor : section["start"]]))
+            parts.append("\n".join(lines[cursor:section["start"]]))
         if section["number"] not in OMIT_MODERN_SECTIONS:
-            core_parts.append("\n".join(lines[section["start"] : section["end"]]))
+            parts.append("\n".join(lines[section["start"]:section["end"]]))
         cursor = section["end"]
     if cursor < len(lines):
-        core_parts.append("\n".join(lines[cursor:]))
-    core = "\n".join(core_parts).strip() + "\n"
+        parts.append("\n".join(lines[cursor:]))
+    core = "\n".join(parts).strip() + "\n"
+    media = "\n".join(lines[media_section["start"]:media_section["end"]]).strip()
 
-    media_section = "\n".join(lines[media["start"] : media["end"]]).strip()
     core = core.replace(
         '/*! ElegantFin for Jellyfin 12 "Modern" layout | v26.10.07 | GPL-2.0\n'
         " *  https://github.com/mihaif7/elegantfin-jf12\n"
         " *  Load AFTER upstream ElegantFin. See the README for install. */",
         '/*! ElegantFin for Jellyfin 12 "Modern" layout | v26.10.07 | GPL-2.0\n'
         " *  https://github.com/mihaif7/elegantfin-jf12\n"
-        f" *  Vendored into ExquisiteFin v{VERSION}; see Theme/source/ for attributed sources. */",
+        f" *  Vendored into ExquisiteFin v{VERSION}; attributed sources are in Theme/source/. */",
     )
-    return core, media_section
+    return core, media
 
 
-def braces_balanced(css: str) -> bool:
-    """Check braces while ignoring comments and quoted strings."""
+def balanced_css(css: str) -> bool:
     depth = 0
     quote: str | None = None
-    in_comment = False
+    comment = False
     index = 0
     while index < len(css):
         char = css[index]
         next_char = css[index + 1] if index + 1 < len(css) else ""
-        if in_comment:
+        if comment:
             if char == "*" and next_char == "/":
-                in_comment = False
+                comment = False
                 index += 2
                 continue
             index += 1
@@ -193,7 +200,7 @@ def braces_balanced(css: str) -> bool:
             index += 1
             continue
         if char == "/" and next_char == "*":
-            in_comment = True
+            comment = True
             index += 2
             continue
         if char in ("'", '"'):
@@ -205,75 +212,71 @@ def braces_balanced(css: str) -> bool:
             if depth < 0:
                 return False
         index += 1
-    return depth == 0 and quote is None and not in_comment
+    return depth == 0 and quote is None and not comment
 
 
-def without_comments(css: str) -> str:
-    """Strip comments before checking active @import declarations."""
+def strip_comments(css: str) -> str:
     return re.sub(r"/\*[\s\S]*?\*/", "", css)
 
 
 def build() -> tuple[str, str]:
     base, font_import = trim_base(read_css(BASE_FILE))
-    modern, modern_media = trim_modern(read_css(MODERN_FILE))
-    media_support = read_css(MEDIA_FILE).strip()
+    modern, media_modern = trim_modern(read_css(MODERN_FILE))
+    media_legacy = read_css(MEDIA_FILE).strip()
     overrides = read_css(OVERRIDES_FILE).strip()
 
-    header = (
-        "/*!\\n"
-        f" * ExquisiteFin v{VERSION} — self-contained theme bundle\\n"
-        " *\\n"
-        " * Includes selectively trimmed and adapted GPL-2.0 code from:\\n"
-        " * - ElegantFin v26.09.05 by lscambo13\\n"
-        " * - ElegantFin Jellyfin 12 Modern v26.10.07 by mihaif7\\n"
-        " * Original upstream attribution is preserved in the bundled sections\\n"
-        " * and source copies. No upstream theme stylesheet imports are required.\\n"
-        " */\\n"
+    bundle_header = (
+        "/*!\n"
+        f" * ExquisiteFin v{VERSION} — self-contained theme bundle\n"
+        " *\n"
+        " * Includes selectively trimmed and adapted GPL-2.0 code from:\n"
+        " * - ElegantFin v26.09.05 by lscambo13\n"
+        " * - ElegantFin Jellyfin 12 Modern v26.10.07 by mihaif7\n"
+        " * Original upstream attribution is preserved in the bundled sections\n"
+        " * and source copies. No upstream theme stylesheet imports are required.\n"
+        " */\n"
     )
-    bundle = f"{header}{font_import}\\n\\n{base}\\n\\n{modern.strip()}\\n\\n{overrides}\\n"
+    bundle = f"{bundle_header}{font_import}\n\n{base}\n\n{modern.strip()}\n\n{overrides}\n"
 
     media_header = (
-        "/*!\\n"
-        f" * ExquisiteFin Media Bar Adapter v{VERSION} — optional plugin stylesheet\\n"
-        " * Derived from ElegantFin Media Bar support v26.09.05 (lscambo13) and\\n"
-        " * Modern companion v26.10.07 (mihaif7). Both are GPL-2.0.\\n"
-        " * Load after Theme/ExquisiteFin.css. Omit this adapter without Media Bar.\\n"
-        " */\\n"
+        "/*!\n"
+        f" * ExquisiteFin Media Bar Adapter v{VERSION} — optional plugin stylesheet\n"
+        " * Derived from ElegantFin Media Bar support v26.09.05 (lscambo13) and\n"
+        " * Modern companion v26.10.07 (mihaif7). Both are GPL-2.0.\n"
+        " * Load after Theme/ExquisiteFin.css. Omit this adapter without Media Bar.\n"
+        " */\n"
     )
-    media_adapter = f"{media_header}\\n{media_support}\\n\\n{modern_media}\\n"
+    adapter = f"{media_header}\n{media_legacy}\n\n{media_modern}\n"
 
-    if not braces_balanced(bundle):
-        raise ValueError("Generated theme bundle failed CSS brace/string validation.")
-    if not braces_balanced(media_adapter):
-        raise ValueError("Generated Media Bar adapter failed CSS brace/string validation.")
+    if not balanced_css(bundle):
+        raise ValueError("The built core bundle failed CSS structure validation.")
+    if not balanced_css(adapter):
+        raise ValueError("The Media Bar adapter failed CSS structure validation.")
 
-    active_imports = re.findall(r"@import\\s+[^;]+;", without_comments(bundle))
+    active_imports = re.findall(r"@import\s+[^;]+;", strip_comments(bundle))
     if len(active_imports) != 1 or "fonts.googleapis.com" not in active_imports[0]:
-        raise ValueError(f"Unexpected imports in the core bundle: {active_imports!r}")
+        raise ValueError(f"Unexpected active core imports: {active_imports!r}")
     if "basic styling for the Media Bar Plugin - start" in base:
-        raise ValueError("Media Bar base rules were not removed from the core.")
+        raise ValueError("Media Bar core rules were not removed.")
     if ".series-episodes-section" in base:
-        raise ValueError("KefinTweaks selectors remain in the core base.")
-    if any(token in modern for token in ("#slides-container:has(.slide-content)", "[data-jf-ieg-root", "Jellyfin Enhanced")):
-        # A generic mention of Jellyfin Enhanced is only allowed in attribution
-        # comments; plugin selectors should not remain in the Modern core.
-        raise ValueError("Optional plugin sections remain in the core Modern layer.")
-    return bundle, media_adapter
+        raise ValueError("KefinTweaks selectors were not removed.")
+    if any(
+        token in modern
+        for token in ("#slides-container:has(.slide-content)", "[data-jf-ieg-root", "Jellyfin Enhanced")
+    ):
+        raise ValueError("An optional plugin-only Modern section remains in the core.")
+    return bundle, adapter
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument(
-        "--check",
-        action="store_true",
-        help="validate and report output sizes without writing files",
-    )
+    parser.add_argument("--check", action="store_true", help="validate without writing output files")
     args = parser.parse_args()
     bundle, adapter = build()
     if args.check:
-        print(f"Core bundle: {len(bundle):,} characters; CSS structure OK")
-        print(f"Media Bar adapter: {len(adapter):,} characters; CSS structure OK")
-        print("No upstream theme stylesheet imports in the core bundle.")
+        print(f"Core bundle: {len(bundle):,} characters; structure OK")
+        print(f"Media Bar adapter: {len(adapter):,} characters; structure OK")
+        print("Core has no upstream theme stylesheet imports.")
         return 0
     BUNDLE_FILE.write_text(bundle, encoding="utf-8")
     MEDIA_ADAPTER_FILE.write_text(adapter, encoding="utf-8")
