@@ -1,43 +1,9 @@
 /*
- * ExquisiteFin Hero Refinement Test v3
+ * ExquisiteFin Hero Refinement Test
  *
- * Visual refinement test for the movie detail hero. Builds on the current
- * Genres layout test; desktop-first and intentionally isolated from the
- * main ExquisiteFin stylesheet.
+ * Baseline layer restored. This test file now adds no hero refinements;
+ * it simply loads the current Genres layout test so individual changes
+ * can be tested one at a time from a known-good layout.
  */
 
 @import url("https://cdn.jsdelivr.net/gh/laytnight-coder/ExquisiteFin@d4d6037751954a8c6448c9929010ddd048368dc4/Theme/ExquisiteFin-genres-test.css");
-
-@media (min-width: 901px) {
-    /* 1. Metadata: 5% larger with more breathing room between values. */
-    #itemDetailPage .itemMiscInfo-primary {
-        font-size: 1.05em !important;
-        gap: 0.55em !important;
-        position: relative !important;
-        top: -0.35rem !important;
-    }
-
-    /* 2. Action section: increase the whole control row by 5%. */
-    #itemDetailPage .mainDetailButtons {
-        font-size: 1.05em !important;
-        position: relative !important;
-        top: -0.35rem !important;
-    }
-
-    /* Keep the existing Genres styling, but lift it with the rest of the hero. */
-    #itemDetailPage .itemDetailsGroup > div:last-child {
-        top: 0.7rem !important;
-    }
-
-    /* 4. Tagline: noticeably larger, more italic, and lifted with extra space above it. */
-    #itemDetailPage .tagline {
-        font-size: 1.20em !important;
-        font-style: italic !important;
-        font-weight: 500 !important;
-        margin-top: 0.75rem !important;
-        position: relative !important;
-        top: -0.45rem !important;
-    }
-
-    /* Leave the film logo's native positioning completely untouched. */
-}
