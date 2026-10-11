@@ -2,6 +2,15 @@
 
 All notable ExquisiteFin changes are documented here.
 
+## [0.4.4] - 2026-10-11
+
+### Changed
+
+- Increased the clean secondary card action icons to approximately twice their previous visual size.
+- Increased the clickable icon area to keep the larger controls comfortable to use.
+- Kept the simple white icon-only treatment with no circles, borders, glass, or idle glow.
+- Kept the three-dot/menu action explicitly hidden.
+
 ## [0.4.3] - 2026-10-11
 
 ### Changed
