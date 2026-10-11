@@ -1,5 +1,5 @@
 /*
- * ExquisiteFin v0.3.1
+ * ExquisiteFin v0.3.2
  *
  * A maintainable Jellyfin 12 Modern compatibility theme based on ElegantFin.
  */
@@ -41,9 +41,6 @@
  * Jellyfin establishes the card height through the card padder's
  * percentage padding. ElegantFin changes this to 50% for CollectionFolder
  * and UserView cards. ExquisiteFin owns that geometry directly.
- *
- * The data attributes live on Jellyfin 12 Modern's .card wrapper, so the
- * selector intentionally starts at .card[data-type=...].
  */
 .card[data-isfolder="true"][data-type="CollectionFolder"] .cardPadder-overflowBackdrop,
 .card[data-isfolder="true"][data-type="UserView"] .cardPadder-overflowBackdrop {
@@ -61,7 +58,7 @@
     --activeColor: var(--exquisite-accent);
     --activeColorAlpha: color-mix(in srgb, var(--exquisite-accent) 90%, transparent);
     --uiAccentColor: var(--exquisite-accent);
-    --btnMiniPlayColor: var(--exquisite-accent);
+    --btnMiniPlayColor: transparent;
     --btnMiniPlayBorderColor: var(--exquisite-accent-border);
     --checkboxCheckedBgColor: var(--exquisite-accent);
 
@@ -75,10 +72,7 @@
     --selectorBackgroundColorAlpha: hsla(210, 22%, 18%, 0.5);
 }
 
-/*
- * Status indicators use explicit selectors so the accent remains visible
- * even where a component does not consume ElegantFin's accent variables.
- */
+/* Status indicators. */
 .countIndicator,
 .playedIndicator,
 .mediaSourceIndicator {
@@ -90,27 +84,52 @@
 }
 
 /* ================================================================
-   INTERACTIVE CONTROLS
+   CARD PLAY / ACTION BUTTONS
    ================================================================ */
 
 /*
- * Keep card action buttons visually tied to the accent without changing
- * their size or placement. The hover state supplies the stronger glow.
+ * Primary card play control.
+ * Keep the control centered by retaining Jellyfin/ElegantFin's placement,
+ * while making the button larger, circular, teal-outlined, transparent,
+ * and easy to see against poster art.
  */
-.cardOverlayButton.cardOverlayButton-hover.itemAction.paper-icon-button-light {
+.cardOverlayButton.cardOverlayButton-hover.itemAction.paper-icon-button-light.cardOverlayFab-primary {
+    width: 2.8em !important;
+    height: 2.8em !important;
+    padding: 2px !important;
+    border: 2px solid var(--exquisite-accent) !important;
+    border-radius: 50% !important;
+    background: transparent !important;
+    color: #fff !important;
+    transform: scale(1.15) !important;
+    transform-origin: center center !important;
+    box-shadow: 0 0 6px color-mix(in srgb, var(--exquisite-accent) 65%, transparent) !important;
+}
+
+.cardOverlayButton.cardOverlayButton-hover.itemAction.paper-icon-button-light.cardOverlayFab-primary:hover {
+    background: color-mix(in srgb, var(--exquisite-accent) 12%, transparent) !important;
+    box-shadow: 0 0 9px color-mix(in srgb, var(--exquisite-accent) 80%, transparent) !important;
+}
+
+.cardOverlayButtonIcon-hover.play_arrow {
+    font-size: 1.1em !important;
+    width: 1.8em !important;
+    height: 1.8em !important;
+    line-height: 1.2em !important;
+}
+
+.cardOverlayButton.cardOverlayButton-hover.itemAction .material-icons {
+    font-size: 1.4em !important;
+}
+
+/* Other card actions keep their normal footprint and only use the accent. */
+.cardOverlayButton.cardOverlayButton-hover.itemAction.paper-icon-button-light:not(.cardOverlayFab-primary) {
     border: var(--exquisite-control-border-width) solid var(--exquisite-accent-border) !important;
     box-shadow: none !important;
 }
 
-.cardOverlayButton.cardOverlayButton-hover.itemAction.paper-icon-button-light:hover,
-.cardOverlayButton.cardOverlayButton-hover.itemAction.paper-icon-button-light:focus-visible {
-    border-color: var(--exquisite-accent) !important;
+.cardOverlayButton.cardOverlayButton-hover.itemAction.paper-icon-button-light:not(.cardOverlayFab-primary):hover {
     box-shadow: var(--exquisite-control-glow) !important;
-}
-
-/* Mini play controls use the same accent as the rest of the UI. */
-.cardOverlayButtonIcon-hover.play_arrow {
-    color: var(--exquisite-accent) !important;
 }
 
 /* Generic raised buttons get a restrained accent on interaction only. */
