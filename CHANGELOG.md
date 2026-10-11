@@ -2,6 +2,13 @@
 
 All notable ExquisiteFin changes are documented here.
 
+## [0.5.0] - 2026-10-11
+
+### Changed
+
+- Increased the size of Continue Watching / resume cards to make the homepage row more visually prominent.
+- Set ElegantFin's `--resumeCardScale` to `1.20`, adding variation to the homepage without changing library card geometry.
+
 ## [0.4.6] - 2026-10-11
 
 ### Fixed
