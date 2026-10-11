@@ -2,6 +2,34 @@
 
 All notable ExquisiteFin changes are documented here.
 
+## [0.5.3] - 2026-10-12
+
+### Changed
+
+- Promoted the tested desktop Genres placement and rounded-pill styling from the temporary test layer into the main stylesheet.
+- Kept the Genres pill directly beneath the movie hero actions and removed the original row from the lower metadata flow visually.
+- Reorganized `Theme/ExquisiteFin.css` into clearly numbered sections for settings, home/library presentation, card actions, movie details, and interactive states.
+- Combined theme variables into one settings block and clarified comments for the hidden home library heading and card-action controls.
+
+### Maintenance
+
+- Removed temporary Genres and hero-refinement test stylesheets after promoting the confirmed Genres styling.
+- Updated the README and design notes to describe the current theme rather than the original v0.1 baseline.
+
+## [0.5.2] - 2026-10-11
+
+### Changed
+
+- Centered the main movie-detail synopsis in Jellyfin 12 Modern.
+- Centered the IMDb/TMDb external-link group beneath the synopsis.
+- Kept compatibility with both Modern `.overview` and legacy `.itemOverview` markup.
+
+## [0.5.1] - 2026-10-11
+
+### Changed
+
+- Added centered alignment for the IMDb/TMDb external links on movie-detail pages.
+
 ## [0.5.0] - 2026-10-11
 
 ### Changed
@@ -72,7 +100,7 @@ The large centered play button remains the hero interaction. Secondary actions n
 ### Changed
 
 - Increased the centered primary play ring from `5.5em` to `6em`.
-- Increased the play symbol from `2.2em` to `3em` for a substantially larger play control.
+- Increased the play symbol from `2.2em` to `3em` for a substantially larger control.
 - Replaced the previous radial/frosted center with a mostly transparent `20%` grey-tinted surface.
 - Reduced the backdrop blur to `1px` so the poster remains clearly visible through the control.
 
@@ -105,11 +133,11 @@ The large centered play button remains the hero interaction. Secondary actions n
 ### Fixed
 
 - Corrected the primary card play button positioning so the enlarged teal-outlined control remains centered on the card.
-- Explicitly restored the Jellyfin card overlay's center positioning, preventing the button from inheriting the bottom action-button position in the Jellyfin 12 Modern layout.
+- Explicitly restored Jellyfin's card overlay center positioning, preventing the button from inheriting the bottom action-button position in the Jellyfin 12 Modern layout.
 
 ### Design decision
 
-The primary play button is now targeted through `.cardOverlayContainer > .cardOverlayFab-primary`, matching Jellyfin's own centered play-button geometry while ExquisiteFin controls only the visual treatment.
+The primary card play button is targeted through `.cardOverlayContainer > .cardOverlayFab-primary`, matching Jellyfin's own centered play-button geometry while ExquisiteFin controls only the visual treatment.
 
 ## [0.3.2] - 2026-10-11
 
