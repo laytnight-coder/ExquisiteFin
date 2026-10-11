@@ -1,5 +1,5 @@
 /*
- * ExquisiteFin v0.4.0
+ * ExquisiteFin v0.4.1
  *
  * A maintainable Jellyfin 12 Modern compatibility theme based on ElegantFin.
  */
@@ -57,6 +57,10 @@
     --btnMiniPlayColor: transparent;
     --btnMiniPlayBorderColor: var(--exquisite-accent-border);
     --checkboxCheckedBgColor: var(--exquisite-accent);
+
+    /* Card overlay actions: show Mark Played / Favorite buttons and hide the menu */
+    --extraCardButtonsVisibility: block;
+    --menuButtonVisibility: none;
 
     --darkerGradientPoint: var(--exquisite-surface-dark);
     --darkerGradientPointAlpha: hsla(210, 12%, 10%, 0.85);
@@ -181,7 +185,8 @@
 
 /* ---------------------------------------------------------------
    GENERAL INTERACTIVE STATES
-   --------------------------------------------------------------- */
+   ---------------------------------------------------------------
+*/
 
 /* Hover/focus border accent */
 .raised:hover,
