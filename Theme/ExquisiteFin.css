@@ -1,5 +1,5 @@
 /*
- * ExquisiteFin v0.4.1
+ * ExquisiteFin v0.4.2
  *
  * A maintainable Jellyfin 12 Modern compatibility theme based on ElegantFin.
  */
@@ -172,15 +172,63 @@
    SECONDARY CARD ACTION BUTTONS
    --------------------------------------------------------------- */
 
-/* Teal outline for secondary card actions */
-.cardOverlayButton.cardOverlayButton-hover.itemAction.paper-icon-button-light:not(.cardOverlayFab-primary) {
-    border: var(--exquisite-control-border-width) solid var(--exquisite-accent-border) !important;
-    box-shadow: none !important;
+/* Compact glass-style action group in the bottom-right of cards */
+.cardOverlayButton-br {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 0.35em !important;
+    right: 0.6em !important;
+    bottom: 0.6em !important;
 }
 
-/* Secondary action hover glow */
-.cardOverlayButton.cardOverlayButton-hover.itemAction.paper-icon-button-light:not(.cardOverlayFab-primary):hover {
-    box-shadow: var(--exquisite-control-glow) !important;
+/* Small, consistent circular action buttons */
+.cardOverlayButton-br > .cardOverlayButton {
+    width: 2.45em !important;
+    height: 2.45em !important;
+    min-width: 2.45em !important;
+    min-height: 2.45em !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 1px solid var(--exquisite-accent-border) !important;
+    border-radius: 50% !important;
+    background: rgba(20, 25, 25, 0.72) !important;
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
+    box-shadow: none !important;
+    color: #fff !important;
+    transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease !important;
+}
+
+/* Keep secondary action icons crisp and centered */
+.cardOverlayButton-br > .cardOverlayButton .cardOverlayButtonIcon,
+.cardOverlayButton-br > .cardOverlayButton .material-icons,
+.cardOverlayButton-br > .cardOverlayButton .material-symbols-rounded {
+    color: #fff !important;
+    font-size: 1.05em !important;
+    line-height: 1 !important;
+}
+
+/* Subtle teal hover state */
+.cardOverlayButton-br > .cardOverlayButton:hover {
+    background: rgba(20, 25, 25, 0.88) !important;
+    border-color: var(--exquisite-accent) !important;
+    box-shadow: 0 0 7px color-mix(in srgb, var(--exquisite-accent) 60%, transparent) !important;
+    transform: scale(1.08) !important;
+}
+
+/* Teal icon for active/selected secondary actions */
+.cardOverlayButton-br > .cardOverlayButton[aria-pressed="true"] .cardOverlayButtonIcon,
+.cardOverlayButton-br > .cardOverlayButton[aria-pressed="true"] .material-icons,
+.cardOverlayButton-br > .cardOverlayButton[aria-pressed="true"] .material-symbols-rounded,
+.cardOverlayButton-br > .cardOverlayButton.active .cardOverlayButtonIcon,
+.cardOverlayButton-br > .cardOverlayButton.active .material-icons,
+.cardOverlayButton-br > .cardOverlayButton.active .material-symbols-rounded {
+    color: var(--exquisite-accent) !important;
 }
 
 /* ---------------------------------------------------------------
