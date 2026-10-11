@@ -2,6 +2,21 @@
 
 All notable ExquisiteFin changes are documented here.
 
+## [0.4.3] - 2026-10-11
+
+### Changed
+
+- Reworked the secondary card actions from the glass/circular treatment to a clean icon-only style inspired by the reference design.
+- Removed secondary-button borders, backgrounds, blur, and idle glow.
+- Kept the secondary icons white with a subtle shadow for readability over poster artwork.
+- Added restrained teal hover and active states without turning the controls into glowing discs.
+- Explicitly hides the card menu/three-dot action so it cannot reappear through the Modern layout.
+- Kept the primary centered play button unchanged.
+
+### Design decision
+
+The primary play button remains the visual hero. Secondary actions are now intentionally lightweight: simple white icons with spacing and only subtle interaction feedback.
+
 ## [0.4.2] - 2026-10-11
 
 ### Changed
