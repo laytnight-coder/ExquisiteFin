@@ -79,19 +79,26 @@
     left: 50% !important;
     right: auto !important;
     bottom: auto !important;
-    width: 6em !important;
-    height: 6em !important;
+   /* BUTTON SIZE */
+    width: 8em !important;
+    height: 8em !important;
+    /* Keep it centered when changing size */
     margin-top: -3em !important;
     margin-left: -3em !important;
+   
     margin-right: 0 !important;
     margin-bottom: 0 !important;
     padding: 0 !important;
     box-sizing: border-box !important;
-    border: 3px solid var(--exquisite-accent) !important;
+    /* RING */
+    border: 4px solid var(--exquisite-accent) !important;
     border-radius: 50% !important;
-    background: rgba(128, 128, 128, 0.20) !important;
-    backdrop-filter: blur(1px) !important;
-    -webkit-backdrop-filter: blur(1px) !important;
+    /* CENTER FILL */
+    background: rgba(128, 128, 128, 0.40) !important;
+    /* BLUR */
+    backdrop-filter: blur(0px) !important;
+    -webkit-backdrop-filter: blur(0px) !important;
+   
     color: #fff !important;
     transform: none !important;
     transform-origin: center center !important;
