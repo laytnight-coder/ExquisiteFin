@@ -1,5 +1,5 @@
 /*
- * ExquisiteFin v0.3.9
+ * ExquisiteFin v0.4.0
  *
  * A maintainable Jellyfin 12 Modern compatibility theme based on ElegantFin.
  */
@@ -75,6 +75,12 @@
     background: var(--exquisite-accent) !important;
 }
 
+/* Episode count indicators: move from the top-right to the top-left of cards */
+.cardIndicators {
+    left: 0.225em !important;
+    right: auto !important;
+}
+
 /* Played-state icon */
 .playstatebutton-icon-played {
     color: var(--exquisite-accent) !important;
@@ -145,8 +151,7 @@
 
 /* ---------------------------------------------------------------
    PLAY SYMBOL
-   ---------------------------------------------------------------
-*/
+   --------------------------------------------------------------- */
 
 /* Play symbol size */
 .cardOverlayContainer > .cardOverlayFab-primary .cardOverlayButtonIcon-hover.play_arrow,
@@ -161,8 +166,7 @@
 
 /* ---------------------------------------------------------------
    SECONDARY CARD ACTION BUTTONS
-   ---------------------------------------------------------------
-*/
+   --------------------------------------------------------------- */
 
 /* Teal outline for secondary card actions */
 .cardOverlayButton.cardOverlayButton-hover.itemAction.paper-icon-button-light:not(.cardOverlayFab-primary) {
@@ -177,8 +181,7 @@
 
 /* ---------------------------------------------------------------
    GENERAL INTERACTIVE STATES
-   ---------------------------------------------------------------
-*/
+   --------------------------------------------------------------- */
 
 /* Hover/focus border accent */
 .raised:hover,
