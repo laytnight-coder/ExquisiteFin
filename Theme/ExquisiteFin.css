@@ -1,9 +1,12 @@
 /*
- * ExquisiteFin v0.3.7
+ * ExquisiteFin v0.3.8
  *
  * A maintainable Jellyfin 12 Modern compatibility theme based on ElegantFin.
  */
 
+/* ================================================================
+   UPSTREAM THEME IMPORTS
+   ================================================================ */
 @import url("https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@v26.09.05/Theme/ElegantFin-jellyfin-theme-build-latest-minified.css");
 @import url("https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@v26.09.05/Theme/assets/add-ons/media-bar-plugin-support-latest-min.css");
 @import url("https://cdn.jsdelivr.net/gh/mihaif7/elegantfin-jf12@v26.10.07/Theme/ElegantFin-jf12-modern-latest.css");
@@ -35,11 +38,13 @@
    EXQUISITEFIN OVERRIDES
    ================================================================ */
 
+/* Library card geometry */
 .card[data-isfolder="true"][data-type="CollectionFolder"] .cardPadder-overflowBackdrop,
 .card[data-isfolder="true"][data-type="UserView"] .cardPadder-overflowBackdrop {
     padding-bottom: var(--exquisite-library-card-padding) !important;
 }
 
+/* Jellyfin / ElegantFin theme variables */
 :root {
     --activeColor: var(--exquisite-accent);
     --activeColorAlpha: color-mix(in srgb, var(--exquisite-accent) 90%, transparent);
@@ -58,12 +63,14 @@
     --selectorBackgroundColorAlpha: hsla(210, 22%, 18%, 0.5);
 }
 
+/* Library status indicators */
 .countIndicator,
 .playedIndicator,
 .mediaSourceIndicator {
     background: var(--exquisite-accent) !important;
 }
 
+/* Played-state icon */
 .playstatebutton-icon-played {
     color: var(--exquisite-accent) !important;
 }
@@ -72,51 +79,73 @@
    CARD PLAY / ACTION BUTTONS
    ================================================================ */
 
-/* Larger centered primary play control with a subtle 20% grey glass center. */
+/* ---------------------------------------------------------------
+   PRIMARY PLAY BUTTON
+   --------------------------------------------------------------- */
+
+/* Position and size */
 .cardOverlayContainer > .cardOverlayFab-primary {
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
     right: auto !important;
     bottom: auto !important;
-   /* BUTTON SIZE */
+
+    /* BUTTON SIZE */
     width: 7em !important;
     height: 7em !important;
+
     /* Keep it centered when changing size */
     margin-top: -3.5em !important;
     margin-left: -3.5em !important;
-   
     margin-right: 0 !important;
     margin-bottom: 0 !important;
+
     padding: 0 !important;
     box-sizing: border-box !important;
+
     /* RING */
     border: 4px solid var(--exquisite-accent) !important;
     border-radius: 50% !important;
+
     /* CENTER FILL */
     background: rgba(128, 128, 128, 0.40) !important;
+
     /* BLUR */
     backdrop-filter: blur(0px) !important;
     -webkit-backdrop-filter: blur(0px) !important;
-   
+
+    /* White halo + teal accent glow */
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.65),
+        0 0 4px rgba(255, 255, 255, 0.45),
+        0 0 10px color-mix(in srgb, var(--exquisite-accent) 65%, transparent) !important;
+
     color: #fff !important;
     transform: none !important;
     transform-origin: center center !important;
-    box-shadow: 0 0 10px color-mix(in srgb, var(--exquisite-accent) 65%, transparent) !important;
     z-index: 3 !important;
 }
 
+/* Hover state */
 .cardOverlayContainer > .cardOverlayFab-primary:hover {
     background: rgba(128, 128, 128, 0.24) !important;
     border-color: var(--exquisite-accent) !important;
-    box-shadow: 0 0 14px color-mix(in srgb, var(--exquisite-accent) 82%, transparent) !important;
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.75),
+        0 0 5px rgba(255, 255, 255, 0.55),
+        0 0 14px color-mix(in srgb, var(--exquisite-accent) 82%, transparent) !important;
     transform: scale(1.05) !important;
 }
 
+/* ---------------------------------------------------------------
+   PLAY SYMBOL
+   --------------------------------------------------------------- */
+
+/* PLAY SYMBOL SIZE */
 .cardOverlayContainer > .cardOverlayFab-primary .cardOverlayButtonIcon-hover.play_arrow,
 .cardOverlayContainer > .cardOverlayFab-primary .material-icons.play_arrow {
-    /* PLAY SYMBOL SIZE */
-   color: #fff !important;
+    color: #fff !important;
     font-size: 5em !important;
     width: 2.4em !important;
     height: 2.4em !important;
@@ -124,15 +153,26 @@
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.35) !important;
 }
 
+/* ---------------------------------------------------------------
+   SECONDARY CARD ACTION BUTTONS
+   --------------------------------------------------------------- */
+
+/* Teal outline for secondary card actions */
 .cardOverlayButton.cardOverlayButton-hover.itemAction.paper-icon-button-light:not(.cardOverlayFab-primary) {
     border: var(--exquisite-control-border-width) solid var(--exquisite-accent-border) !important;
     box-shadow: none !important;
 }
 
+/* Secondary action hover glow */
 .cardOverlayButton.cardOverlayButton-hover.itemAction.paper-icon-button-light:not(.cardOverlayFab-primary):hover {
     box-shadow: var(--exquisite-control-glow) !important;
 }
 
+/* ---------------------------------------------------------------
+   GENERAL INTERACTIVE STATES
+   --------------------------------------------------------------- */
+
+/* Hover/focus border accent */
 .raised:hover,
 .raised:focus-visible,
 .paper-icon-button-light:hover,
@@ -140,6 +180,7 @@
     border-color: var(--exquisite-accent-border) !important;
 }
 
+/* Keyboard focus indicator */
 button:focus-visible,
 a:focus-visible,
 .paper-icon-button-light:focus-visible {
