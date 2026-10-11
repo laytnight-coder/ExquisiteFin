@@ -1,5 +1,5 @@
 /*
- * ExquisiteFin v0.5.0
+ * ExquisiteFin v0.5.1
  *
  * A maintainable Jellyfin 12 Modern compatibility theme based on ElegantFin.
  */
@@ -98,11 +98,13 @@
 
 /* ================================================================
    CARD PLAY / ACTION BUTTONS
-   ================================================================ */
+   ================================================================
+*/
 
 /* ---------------------------------------------------------------
    PRIMARY PLAY BUTTON
-   --------------------------------------------------------------- */
+   ---------------------------------------------------------------
+*/
 .cardOverlayContainer > .cardOverlayFab-primary {
     position: absolute !important;
     top: 50% !important;
@@ -292,8 +294,25 @@
 }
 
 /* ---------------------------------------------------------------
+   MOVIE DETAILS / DESCRIPTION + EXTERNAL LINKS
+   ---------------------------------------------------------------
+*/
+#itemDetailPage .itemOverview {
+    text-align: center !important;
+}
+
+#itemDetailPage .itemExternalLinks {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    text-align: center !important;
+}
+
+/* ---------------------------------------------------------------
    MOVIE DETAILS / BACKDROP POSITION
-   --------------------------------------------------------------- */
+   ---------------------------------------------------------------
+*/
 #itemDetailPage .backdropImage {
     background-position: center top !important;
     background-position-y: 0% !important;
