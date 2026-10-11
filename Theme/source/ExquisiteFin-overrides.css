@@ -9,11 +9,7 @@
    1. SETTINGS AND UPSTREAM THEME VARIABLES
    ================================================================ */
 
-/* Upstream theme layers — keep these before all ExquisiteFin overrides. */
-@import url("https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@v26.09.05/Theme/ElegantFin-jellyfin-theme-build-latest-minified.css");
-@import url("https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@v26.09.05/Theme/assets/add-ons/media-bar-plugin-support-latest-min.css");
-@import url("https://cdn.jsdelivr.net/gh/mihaif7/elegantfin-jf12@v26.10.07/Theme/ElegantFin-jf12-modern-latest.css");
-
+/* Upstream layers are bundled by scripts/build_theme.py. */
 :root {
     /* Library card geometry */
     --exquisite-library-card-padding: 25%;
