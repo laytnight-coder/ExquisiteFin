@@ -2,6 +2,14 @@
 
 All notable ExquisiteFin changes are documented here.
 
+## [0.3.5] - 2026-10-11
+
+### Changed
+
+- Increased the centered primary card play button from `4em` to `5em`.
+- Increased the play symbol substantially so it reads clearly inside the larger control.
+- Increased the outline and glow slightly to keep the larger button visually defined.
+
 ## [0.3.4] - 2026-10-11
 
 ### Changed
