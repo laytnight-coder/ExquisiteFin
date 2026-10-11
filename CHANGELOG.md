@@ -2,18 +2,23 @@
 
 All notable ExquisiteFin changes are documented here.
 
+## [0.3.3] - 2026-10-11
+
+### Fixed
+
+- Corrected the primary card play button positioning so the enlarged teal-outlined control remains centered on the card.
+- Explicitly restored the Jellyfin card overlay's center positioning, preventing the button from inheriting the bottom action-button position in the Jellyfin 12 Modern layout.
+
+### Design decision
+
+The primary play button is now targeted through `.cardOverlayContainer > .cardOverlayFab-primary`, matching Jellyfin's own centered play-button geometry while ExquisiteFin controls only the visual treatment.
+
 ## [0.3.2] - 2026-10-11
 
 ### Fixed
 
-- Restored the card play button as a centered, larger circular control rather than a filled teal disc.
-- Made the primary card play button transparent inside with a teal border and white play glyph.
-- Added a restrained teal glow while preserving Jellyfin/ElegantFin's existing overlay placement.
-- Kept non-primary card actions at their normal size so the play-button treatment does not affect other controls.
-
-### Design decision
-
-The v0.3.1 generic mini-play accent made the play control appear as a solid teal circle in Jellyfin 12 Modern. v0.3.2 narrows the styling to the actual primary card overlay button and uses the previous ExquisiteFin visual direction as the reference: central, larger, teal-outlined, transparent, and easy to read over poster artwork.
+- Changed the primary card play button from a filled accent control to a transparent button with a teal outline and white play icon.
+- Kept the play button visually centered and circular while preserving the existing card action controls.
 
 ## [0.3.1] - 2026-10-11
 
