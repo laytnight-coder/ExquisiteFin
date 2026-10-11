@@ -1,5 +1,5 @@
 /*
- * ExquisiteFin v0.4.6
+ * ExquisiteFin v0.4.7
  *
  * A maintainable Jellyfin 12 Modern compatibility theme based on ElegantFin.
  */
@@ -97,52 +97,35 @@
 /* ---------------------------------------------------------------
    PRIMARY PLAY BUTTON
    --------------------------------------------------------------- */
-
-/* Position and size */
 .cardOverlayContainer > .cardOverlayFab-primary {
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
     right: auto !important;
     bottom: auto !important;
-
-    /* BUTTON SIZE */
     width: 7em !important;
     height: 7em !important;
-
-    /* Keep it centered when changing size */
     margin-top: -3.5em !important;
     margin-left: -3.5em !important;
     margin-right: 0 !important;
     margin-bottom: 0 !important;
-
     padding: 0 !important;
     box-sizing: border-box !important;
-
-    /* RING */
     border: 4px solid var(--exquisite-accent) !important;
     border-radius: 50% !important;
-
-    /* CENTER FILL */
     background: rgba(128, 128, 128, 0.60) !important;
-
-    /* BLUR */
     backdrop-filter: blur(0px) !important;
     -webkit-backdrop-filter: blur(0px) !important;
-
-    /* White halo + teal accent glow */
     box-shadow:
         0 0 0 1px rgba(255, 255, 255, 0.65),
         0 0 4px rgba(255, 255, 255, 0.45),
         0 0 10px color-mix(in srgb, var(--exquisite-accent) 65%, transparent) !important;
-
     color: #fff !important;
     transform: none !important;
     transform-origin: center center !important;
     z-index: 3 !important;
 }
 
-/* Hover state */
 .cardOverlayContainer > .cardOverlayFab-primary:hover {
     background: rgba(128, 128, 128, 0.24) !important;
     border-color: var(--exquisite-accent) !important;
@@ -153,12 +136,7 @@
     transform: scale(1.05) !important;
 }
 
-/* ---------------------------------------------------------------
-   PLAY SYMBOL
-   ---------------------------------------------------------------
-*/
-
-/* Play symbol size */
+/* Play symbol */
 .cardOverlayContainer > .cardOverlayFab-primary .cardOverlayButtonIcon-hover.play_arrow,
 .cardOverlayContainer > .cardOverlayFab-primary .material-icons.play_arrow {
     color: #fff !important;
@@ -173,19 +151,13 @@
    SECONDARY CARD ACTION BUTTONS
    ---------------------------------------------------------------
 */
-
-/*
- * Keep secondary actions clean and unobtrusive, matching the simple
- * icon treatment of the reference design rather than making each
- * action look like a miniature play button.
- */
 .cardOverlayButton-br {
     display: flex !important;
     align-items: center !important;
     justify-content: flex-end !important;
     gap: 0.8em !important;
     right: 0.7em !important;
-    bottom: 0.65em !important;
+    bottom: 0.5em !important;
 }
 
 /* Hide the three-dot/menu action explicitly. */
@@ -216,7 +188,7 @@
     transition: color 0.15s ease, transform 0.15s ease, opacity 0.15s ease !important;
 }
 
-/* Clean white secondary icons — approximately twice the previous visual size. */
+/* Clean white secondary icons */
 .cardOverlayButton-br > .cardOverlayButton:not([data-action="menu"]) .cardOverlayButtonIcon,
 .cardOverlayButton-br > .cardOverlayButton:not([data-action="menu"]) .material-icons,
 .cardOverlayButton-br > .cardOverlayButton:not([data-action="menu"]) .material-symbols-rounded {
@@ -252,14 +224,7 @@
     color: var(--exquisite-accent) !important;
 }
 
-/*
- * Selected actions use their own semantic colours.
- * The repeated state-class selectors intentionally increase specificity
- * enough to beat the Modern layout's generic white icon rule even when
- * the pointer is no longer over the icon.
- */
-
-/* Bookmark selected -> blue */
+/* Selected actions use their own semantic colours. */
 .cardOverlayButton-br > .cardOverlayButton:has(.material-icons.bookmark),
 .cardOverlayButton-br > .cardOverlayButton:has(.material-symbols-rounded.bookmark) {
     color: #3b82f6 !important;
@@ -272,12 +237,10 @@
     color: #3b82f6 !important;
 }
 
-/* Mark Played selected -> green */
 .cardOverlayButton-br > .cardOverlayButton .playstatebutton-icon-played.playstatebutton-icon-played {
     color: #39d98a !important;
 }
 
-/* Favorite / heart selected -> red */
 .cardOverlayButton-br > .cardOverlayButton .ratingbutton-icon-withrating.ratingbutton-icon-withrating {
     color: #ff3b5c !important;
 }
@@ -305,11 +268,17 @@
 }
 
 /* ---------------------------------------------------------------
+   PROGRESS / TIME REMAINING BAR
+   ---------------------------------------------------------------
+*/
+.card .itemProgressBar {
+    transform: translateY(-0.25em) !important;
+}
+
+/* ---------------------------------------------------------------
    GENERAL INTERACTIVE STATES
    ---------------------------------------------------------------
 */
-
-/* Hover/focus border accent */
 .raised:hover,
 .raised:focus-visible,
 .paper-icon-button-light:hover,
@@ -317,7 +286,6 @@
     border-color: var(--exquisite-accent-border) !important;
 }
 
-/* Keyboard focus indicator */
 button:focus-visible,
 a:focus-visible,
 .paper-icon-button-light:focus-visible {
