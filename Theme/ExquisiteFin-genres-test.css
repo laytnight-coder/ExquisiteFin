@@ -1,5 +1,5 @@
 /*
- * ExquisiteFin Genres Layout Test v4
+ * ExquisiteFin Genres Layout Test v5
  *
  * Moves the dynamic Genres row from the lower metadata table into the
  * movie hero, directly below the main action buttons, and styles it as
@@ -9,15 +9,9 @@
 @import url("https://cdn.jsdelivr.net/gh/laytnight-coder/ExquisiteFin@664f004ec22c36012bb9450d0e6aad9b854101df/Theme/ExquisiteFin.css");
 
 @media (min-width: 901px) {
-    /*
-     * Keep the live Genres row out of the normal metadata table flow, but
-     * position it relative to the existing detail metadata container.
-     * v3 was still overlapping the action buttons, so v4 moves the pill
-     * farther down into the gap above the tagline.
-     */
     #itemDetailPage .itemDetailsGroup > div:last-child {
         position: absolute !important;
-        top: 2rem !important;
+        top: 1.5rem !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
         z-index: 8 !important;
@@ -28,6 +22,7 @@
         max-width: min(90vw, 60rem) !important;
         margin: 0 !important;
         padding: 0.38rem 1.2rem !important;
+        padding-right: 1.8rem !important;
         box-sizing: border-box !important;
         overflow: visible !important;
 
