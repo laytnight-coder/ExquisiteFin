@@ -1,5 +1,5 @@
 /*
- * ExquisiteFin v0.4.8
+ * ExquisiteFin v0.4.9
  *
  * A maintainable Jellyfin 12 Modern compatibility theme based on ElegantFin.
  */
@@ -32,6 +32,9 @@
     /* Interactive controls */
     --exquisite-control-border-width: 1px;
     --exquisite-control-glow: 0 0 5px color-mix(in srgb, var(--exquisite-accent) 75%, transparent);
+
+    /* Movie backdrop test: disable ElegantFin's default top trim. */
+    --backdropTrimFromTop: 0%;
 }
 
 /* ================================================================
@@ -290,6 +293,7 @@
    --------------------------------------------------------------- */
 #itemDetailPage .backdropImage {
     background-position: center top !important;
+    background-position-y: 0% !important;
 }
 
 /* ---------------------------------------------------------------
