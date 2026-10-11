@@ -1,5 +1,5 @@
 /*
- * ExquisiteFin v0.4.9
+ * ExquisiteFin v0.5.0
  *
  * A maintainable Jellyfin 12 Modern compatibility theme based on ElegantFin.
  */
@@ -60,6 +60,9 @@
     --btnMiniPlayColor: transparent;
     --btnMiniPlayBorderColor: var(--exquisite-accent-border);
     --checkboxCheckedBgColor: var(--exquisite-accent);
+
+    /* Continue Watching: make the resume cards a little more prominent */
+    --resumeCardScale: 1.20;
 
     /* Card overlay actions: show Mark Played / Favorite buttons and hide the menu */
     --extraCardButtonsVisibility: block;
