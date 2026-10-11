@@ -1,0 +1,400 @@
+/*
+ * ExquisiteFin-owned overrides.
+ *
+ * Edit this source file and run scripts/build_theme.py to regenerate the
+ * bundled Theme/ExquisiteFin.css distribution stylesheet.
+ */
+
+/* ================================================================
+   1. SETTINGS AND UPSTREAM THEME VARIABLES
+   ================================================================ */
+
+/* Upstream theme layers — keep these before all ExquisiteFin overrides. */
+@import url("https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@v26.09.05/Theme/ElegantFin-jellyfin-theme-build-latest-minified.css");
+@import url("https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@v26.09.05/Theme/assets/add-ons/media-bar-plugin-support-latest-min.css");
+@import url("https://cdn.jsdelivr.net/gh/mihaif7/elegantfin-jf12@v26.10.07/Theme/ElegantFin-jf12-modern-latest.css");
+
+:root {
+    /* Library card geometry */
+    --exquisite-library-card-padding: 25%;
+
+    /* ExquisiteFin accent */
+    --exquisite-accent: #00c79f;
+    --exquisite-accent-border: #00c79f;
+
+    /* ExquisiteFin surface palette */
+    --exquisite-surface-dark: hsla(210, 12%, 10%, 1);
+    --exquisite-surface-light: hsla(210, 12%, 16%, 1);
+    --exquisite-surface-header: hsla(210, 12%, 10%, 0.8);
+    --exquisite-surface-drawer: hsla(210, 12%, 12%, 0.95);
+    --exquisite-selector: hsla(210, 22%, 18%, 1);
+
+    /* Focus and interaction */
+    --exquisite-control-border-width: 1px;
+    --exquisite-control-glow: 0 0 5px color-mix(in srgb, var(--exquisite-accent) 75%, transparent);
+
+    /* Jellyfin / ElegantFin accent variables */
+    --activeColor: var(--exquisite-accent);
+    --activeColorAlpha: color-mix(in srgb, var(--exquisite-accent) 90%, transparent);
+    --uiAccentColor: var(--exquisite-accent);
+    --btnMiniPlayColor: transparent;
+    --btnMiniPlayBorderColor: var(--exquisite-accent-border);
+    --checkboxCheckedBgColor: var(--exquisite-accent);
+
+    /* Continue Watching cards */
+    --resumeCardScale: 1.20;
+
+    /* Card action visibility */
+    --extraCardButtonsVisibility: block;
+    --menuButtonVisibility: none;
+
+    /* Jellyfin / ElegantFin background surfaces */
+    --darkerGradientPoint: var(--exquisite-surface-dark);
+    --darkerGradientPointAlpha: hsla(210, 12%, 10%, 0.85);
+    --lighterGradientPoint: var(--exquisite-surface-light);
+    --lighterGradientPointAlpha: hsla(210, 12%, 16%, 0.85);
+    --headerColor: var(--exquisite-surface-header);
+    --drawerColor: var(--exquisite-surface-drawer);
+    --selectorBackgroundColor: var(--exquisite-selector);
+    --selectorBackgroundColorAlpha: hsla(210, 22%, 18%, 0.5);
+
+    /* Keep movie detail backdrops anchored to the top of the image. */
+    --backdropTrimFromTop: 0%;
+}
+
+/* ================================================================
+   2. HOME AND LIBRARY PRESENTATION
+   ================================================================ */
+
+/* Use a wide 4:1 padder for library folder/collection cards. */
+.card[data-isfolder="true"][data-type="CollectionFolder"] .cardPadder-overflowBackdrop,
+.card[data-isfolder="true"][data-type="UserView"] .cardPadder-overflowBackdrop {
+    padding-bottom: var(--exquisite-library-card-padding) !important;
+}
+
+/* Hide the "My Media" heading above the home library shortcuts. */
+.section0 .sectionTitle {
+    display: none !important;
+}
+
+/* Accent library and media-status indicators. */
+.countIndicator,
+.playedIndicator,
+.mediaSourceIndicator {
+    background: var(--exquisite-accent) !important;
+}
+
+/* Place episode/count indicators at the top-left of cards. */
+.cardIndicators {
+    left: 0.225em !important;
+    right: auto !important;
+}
+
+/* Keep played-state icons consistent with the ExquisiteFin accent. */
+.playstatebutton-icon-played {
+    color: var(--exquisite-accent) !important;
+}
+
+/* ================================================================
+   3. CARD PLAY AND SECONDARY ACTIONS
+   ================================================================ */
+
+/* Large centered primary play control. */
+.cardOverlayContainer > .cardOverlayFab-primary {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 7em !important;
+    height: 7em !important;
+    margin-top: -3.5em !important;
+    margin-left: -3.5em !important;
+    margin-right: 0 !important;
+    margin-bottom: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    border: 4px solid var(--exquisite-accent) !important;
+    border-radius: 50% !important;
+    background: rgba(128, 128, 128, 0.60) !important;
+    backdrop-filter: blur(0px) !important;
+    -webkit-backdrop-filter: blur(0px) !important;
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.65),
+        0 0 4px rgba(255, 255, 255, 0.45),
+        0 0 10px color-mix(in srgb, var(--exquisite-accent) 65%, transparent) !important;
+    color: #fff !important;
+    transform: none !important;
+    transform-origin: center center !important;
+    z-index: 3 !important;
+}
+
+.cardOverlayContainer > .cardOverlayFab-primary:hover {
+    background: rgba(128, 128, 128, 0.24) !important;
+    border-color: var(--exquisite-accent) !important;
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.75),
+        0 0 5px rgba(255, 255, 255, 0.55),
+        0 0 14px color-mix(in srgb, var(--exquisite-accent) 82%, transparent) !important;
+    transform: scale(1.05) !important;
+}
+
+.cardOverlayContainer > .cardOverlayFab-primary .cardOverlayButtonIcon-hover.play_arrow,
+.cardOverlayContainer > .cardOverlayFab-primary .material-icons.play_arrow {
+    color: #fff !important;
+    font-size: 5em !important;
+    width: 2.4em !important;
+    height: 2.4em !important;
+    line-height: 1.05em !important;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* Position the lightweight secondary action group at the card's lower-right. */
+.cardOverlayButton-br {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 0.8em !important;
+    /* Adjust this value to move the three secondary icons vertically. */
+    bottom: 0.25em !important;
+    right: 0.7em !important;
+}
+
+/* Hide the three-dot card menu. */
+.cardOverlayButton-br > .cardOverlayButton[data-action="menu"],
+.cardOverlayButton-br button[data-action="menu"],
+.cardOverlayButton-br a[data-action="menu"] {
+    display: none !important;
+}
+
+/* Icon-only secondary controls: no button disc, border, or idle glow. */
+.cardOverlayButton-br > .cardOverlayButton:not([data-action="menu"]) {
+    width: 3.6em !important;
+    height: 3.6em !important;
+    min-width: 3.6em !important;
+    min-height: 3.6em !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: #fff !important;
+    transform: none !important;
+    transition: color 0.15s ease, transform 0.15s ease, opacity 0.15s ease !important;
+}
+
+.cardOverlayButton-br > .cardOverlayButton:not([data-action="menu"]) .cardOverlayButtonIcon,
+.cardOverlayButton-br > .cardOverlayButton:not([data-action="menu"]) .material-icons,
+.cardOverlayButton-br > .cardOverlayButton:not([data-action="menu"]) .material-symbols-rounded {
+    background: transparent !important;
+    color: #fff !important;
+    font-size: 2.35em !important;
+    line-height: 1 !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.75) !important;
+}
+
+.cardOverlayButton-br > .cardOverlayButton:not([data-action="menu"]):hover {
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: var(--exquisite-accent) !important;
+    transform: scale(1.08) !important;
+}
+
+.cardOverlayButton-br > .cardOverlayButton:not([data-action="menu"]):hover .cardOverlayButtonIcon,
+.cardOverlayButton-br > .cardOverlayButton:not([data-action="menu"]):hover .material-icons,
+.cardOverlayButton-br > .cardOverlayButton:not([data-action="menu"]):hover .material-symbols-rounded {
+    color: var(--exquisite-accent) !important;
+}
+
+/* General selected/pressed fallback for secondary card actions. */
+.cardOverlayButton-br > .cardOverlayButton[aria-pressed="true"] .cardOverlayButtonIcon,
+.cardOverlayButton-br > .cardOverlayButton[aria-pressed="true"] .material-icons,
+.cardOverlayButton-br > .cardOverlayButton[aria-pressed="true"] .material-symbols-rounded,
+.cardOverlayButton-br > .cardOverlayButton.active .cardOverlayButtonIcon,
+.cardOverlayButton-br > .cardOverlayButton.active .material-icons,
+.cardOverlayButton-br > .cardOverlayButton.active .material-symbols-rounded {
+    color: var(--exquisite-accent) !important;
+}
+
+/* Selected bookmark: blue. Repeat classes to win against generic icon rules. */
+.cardOverlayButton-br > .cardOverlayButton:has(.material-icons.bookmark),
+.cardOverlayButton-br > .cardOverlayButton:has(.material-symbols-rounded.bookmark) {
+    color: #3b82f6 !important;
+}
+
+.cardOverlayButton-br > .cardOverlayButton:has(.material-icons.bookmark) .material-icons.bookmark.bookmark,
+.cardOverlayButton-br > .cardOverlayButton:has(.material-symbols-rounded.bookmark) .material-symbols-rounded.bookmark.bookmark,
+.cardOverlayButton-br > .cardOverlayButton:has(.material-icons.bookmark) .cardOverlayButtonIcon.cardOverlayButtonIcon,
+.cardOverlayButton-br > .cardOverlayButton:has(.material-symbols-rounded.bookmark) .cardOverlayButtonIcon.cardOverlayButtonIcon {
+    color: #3b82f6 !important;
+}
+
+/* Selected Mark Played: green. */
+.cardOverlayButton-br > .cardOverlayButton .playstatebutton-icon-played.playstatebutton-icon-played {
+    color: #39d98a !important;
+}
+
+/* Selected Favorite: red. */
+.cardOverlayButton-br > .cardOverlayButton .ratingbutton-icon-withrating.ratingbutton-icon-withrating {
+    color: #ff3b5c !important;
+}
+
+/* Preserve each selected action's semantic colour while hovered. */
+.cardOverlayButton-br > .cardOverlayButton:has(.material-icons.bookmark):hover,
+.cardOverlayButton-br > .cardOverlayButton:has(.material-symbols-rounded.bookmark):hover {
+    color: #3b82f6 !important;
+}
+
+.cardOverlayButton-br > .cardOverlayButton:has(.material-icons.bookmark):hover .material-icons.bookmark,
+.cardOverlayButton-br > .cardOverlayButton:has(.material-symbols-rounded.bookmark):hover .material-symbols-rounded.bookmark,
+.cardOverlayButton-br > .cardOverlayButton:has(.material-icons.bookmark):hover .cardOverlayButtonIcon {
+    color: #3b82f6 !important;
+}
+
+.cardOverlayButton-br > .cardOverlayButton:has(.playstatebutton-icon-played):hover,
+.cardOverlayButton-br > .cardOverlayButton:has(.playstatebutton-icon-played):hover .playstatebutton-icon-played {
+    color: #39d98a !important;
+}
+
+.cardOverlayButton-br > .cardOverlayButton:has(.ratingbutton-icon-withrating):hover,
+.cardOverlayButton-br > .cardOverlayButton:has(.ratingbutton-icon-withrating):hover .ratingbutton-icon-withrating {
+    color: #ff3b5c !important;
+}
+
+/* Lift the playback progress strip slightly within each card. */
+.card .itemProgressBar {
+    transform: translateY(-0.80em) !important;
+}
+
+/* ================================================================
+   4. MOVIE DETAILS
+   ================================================================ */
+
+/* Keep the tagline, synopsis, and external rating links centred. */
+.tagline {
+    text-align: center !important;
+    transform: translateY(-1.00em) !important;
+}
+
+#itemDetailPage .overview,
+#itemDetailPage .itemOverview {
+    text-align: center !important;
+}
+
+#itemDetailPage .itemExternalLinks {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    text-align: center !important;
+}
+
+/* Keep movie detail backdrop artwork anchored at the top. */
+#itemDetailPage .backdropImage {
+    background-position: center top !important;
+    background-position-y: 0% !important;
+}
+
+/*
+ * Desktop movie hero: visually relocate the Genres row from the lower
+ * metadata table to a compact pill beneath the main action buttons.
+ * The absolute positioning removes the original row from table flow.
+ * The mobile and TV layouts are intentionally left untouched.
+ */
+@media (min-width: 901px) {
+    #itemDetailPage .itemDetailsGroup > div:last-child {
+        position: absolute !important;
+        top: 0.9rem !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        z-index: 8 !important;
+
+        height: auto !important;
+        min-height: 0 !important;
+        width: max-content !important;
+        max-width: min(90vw, 60rem) !important;
+        margin: 0 !important;
+        padding: 0.38rem 1.2rem !important;
+        padding-right: 2.4rem !important;
+        box-sizing: border-box !important;
+        overflow: visible !important;
+
+        display: inline-flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0.5em !important;
+
+        border: 0 !important;
+        border-radius: 999px !important;
+        background: rgba(45, 45, 45, 0.92) !important;
+        box-shadow: none !important;
+        color: #fff !important;
+        text-align: center !important;
+        white-space: nowrap !important;
+    }
+
+    #itemDetailPage .itemDetailsGroup > div:last-child h5 {
+        display: block !important;
+        flex: 0 0 auto !important;
+        width: auto !important;
+        margin: 0 !important;
+        color: #fff !important;
+        font-size: 0.9rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 0 !important;
+        text-transform: none !important;
+        white-space: nowrap !important;
+    }
+
+    #itemDetailPage .itemDetailsGroup > div:last-child > :last-child {
+        flex: 0 0 auto !important;
+        width: auto !important;
+        margin: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-wrap: nowrap !important;
+        gap: 0.35em !important;
+        white-space: nowrap !important;
+    }
+
+    #itemDetailPage .itemDetailsGroup > div:last-child .button-link {
+        color: #fff !important;
+        text-decoration: none !important;
+        font-weight: 700 !important;
+        padding: 0 !important;
+        background: transparent !important;
+        border: 0 !important;
+    }
+
+    #itemDetailPage .itemDetailsGroup > div:last-child .button-link:hover {
+        color: var(--exquisite-accent) !important;
+    }
+}
+
+/* ================================================================
+   5. GENERAL INTERACTIVE STATES
+   ================================================================ */
+
+/* Teal hover/focus border for raised controls. */
+.raised:hover,
+.raised:focus-visible,
+.paper-icon-button-light:hover,
+.paper-icon-button-light:focus-visible {
+    border-color: var(--exquisite-accent-border) !important;
+}
+
+/* Visible keyboard focus that matches the ExquisiteFin accent. */
+button:focus-visible,
+a:focus-visible,
+.paper-icon-button-light:focus-visible {
+    outline: var(--exquisite-control-border-width) solid var(--exquisite-accent) !important;
+    outline-offset: 2px;
+}
