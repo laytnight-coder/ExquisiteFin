@@ -1,5 +1,5 @@
 /*
- * ExquisiteFin v0.5.1
+ * ExquisiteFin v0.5.2
  *
  * A maintainable Jellyfin 12 Modern compatibility theme based on ElegantFin.
  */
@@ -101,10 +101,6 @@
    ================================================================
 */
 
-/* ---------------------------------------------------------------
-   PRIMARY PLAY BUTTON
-   ---------------------------------------------------------------
-*/
 .cardOverlayContainer > .cardOverlayFab-primary {
     position: absolute !important;
     top: 50% !important;
@@ -144,7 +140,6 @@
     transform: scale(1.05) !important;
 }
 
-/* Play symbol */
 .cardOverlayContainer > .cardOverlayFab-primary .cardOverlayButtonIcon-hover.play_arrow,
 .cardOverlayContainer > .cardOverlayFab-primary .material-icons.play_arrow {
     color: #fff !important;
@@ -155,10 +150,6 @@
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.35) !important;
 }
 
-/* ---------------------------------------------------------------
-   SECONDARY CARD ACTION BUTTONS
-   ---------------------------------------------------------------
-*/
 .cardOverlayButton-br {
     display: flex !important;
     align-items: center !important;
@@ -169,14 +160,12 @@
     right: 0.7em !important;
 }
 
-/* Hide the three-dot/menu action explicitly. */
 .cardOverlayButton-br > .cardOverlayButton[data-action="menu"],
 .cardOverlayButton-br button[data-action="menu"],
 .cardOverlayButton-br a[data-action="menu"] {
     display: none !important;
 }
 
-/* Simple icon-only actions: no circles, borders, glass, or glow. */
 .cardOverlayButton-br > .cardOverlayButton:not([data-action="menu"]) {
     width: 3.6em !important;
     height: 3.6em !important;
@@ -197,7 +186,6 @@
     transition: color 0.15s ease, transform 0.15s ease, opacity 0.15s ease !important;
 }
 
-/* Clean white secondary icons */
 .cardOverlayButton-br > .cardOverlayButton:not([data-action="menu"]) .cardOverlayButtonIcon,
 .cardOverlayButton-br > .cardOverlayButton:not([data-action="menu"]) .material-icons,
 .cardOverlayButton-br > .cardOverlayButton:not([data-action="menu"]) .material-symbols-rounded {
@@ -208,7 +196,6 @@
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.75) !important;
 }
 
-/* Subtle hover feedback without turning the buttons into glowing discs. */
 .cardOverlayButton-br > .cardOverlayButton:not([data-action="menu"]):hover {
     border: 0 !important;
     background: transparent !important;
@@ -223,7 +210,6 @@
     color: var(--exquisite-accent) !important;
 }
 
-/* Default active/selected fallback */
 .cardOverlayButton-br > .cardOverlayButton[aria-pressed="true"] .cardOverlayButtonIcon,
 .cardOverlayButton-br > .cardOverlayButton[aria-pressed="true"] .material-icons,
 .cardOverlayButton-br > .cardOverlayButton[aria-pressed="true"] .material-symbols-rounded,
@@ -233,7 +219,6 @@
     color: var(--exquisite-accent) !important;
 }
 
-/* Selected actions use their own semantic colours. */
 .cardOverlayButton-br > .cardOverlayButton:has(.material-icons.bookmark),
 .cardOverlayButton-br > .cardOverlayButton:has(.material-symbols-rounded.bookmark) {
     color: #3b82f6 !important;
@@ -254,7 +239,6 @@
     color: #ff3b5c !important;
 }
 
-/* Keep selected semantic colours stable while hovering. */
 .cardOverlayButton-br > .cardOverlayButton:has(.material-icons.bookmark):hover,
 .cardOverlayButton-br > .cardOverlayButton:has(.material-symbols-rounded.bookmark):hover {
     color: #3b82f6 !important;
@@ -276,27 +260,25 @@
     color: #ff3b5c !important;
 }
 
-/* ---------------------------------------------------------------
-   PROGRESS / TIME REMAINING BAR
-   ---------------------------------------------------------------
-*/
 .card .itemProgressBar {
     transform: translateY(-0.80em) !important;
 }
 
-/* ---------------------------------------------------------------
-   MOVIE DETAILS / TAGLINE
-   ---------------------------------------------------------------
+/* ================================================================
+   MOVIE DETAILS
+   ================================================================
 */
 .tagline {
     text-align: center !important;
     transform: translateY(-1.00em) !important;
 }
 
-/* ---------------------------------------------------------------
-   MOVIE DETAILS / DESCRIPTION + EXTERNAL LINKS
-   ---------------------------------------------------------------
-*/
+/* Modern Jellyfin uses .overview for the main description. */
+#itemDetailPage .overview {
+    text-align: center !important;
+}
+
+/* Keep compatibility with legacy detail markup as well. */
 #itemDetailPage .itemOverview {
     text-align: center !important;
 }
@@ -309,18 +291,14 @@
     text-align: center !important;
 }
 
-/* ---------------------------------------------------------------
-   MOVIE DETAILS / BACKDROP POSITION
-   ---------------------------------------------------------------
-*/
 #itemDetailPage .backdropImage {
     background-position: center top !important;
     background-position-y: 0% !important;
 }
 
-/* ---------------------------------------------------------------
+/* ================================================================
    GENERAL INTERACTIVE STATES
-   ---------------------------------------------------------------
+   ================================================================
 */
 .raised:hover,
 .raised:focus-visible,
