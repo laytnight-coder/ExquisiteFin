@@ -2,6 +2,14 @@
 
 All notable ExquisiteFin changes are documented here.
 
+## [0.4.6] - 2026-10-11
+
+### Fixed
+
+- Fixed selected secondary card-action colours reverting to white when the pointer leaves the icon.
+- Increased the specificity of the selected bookmark, Mark Played, and Favorite selectors so Jellyfin 12 Modern's generic white-icon rule cannot override the selected colour when the action is no longer hovered.
+- Kept the selected semantic colours persistent: bookmark blue, Mark Played green, and Favorite red.
+
 ## [0.4.5] - 2026-10-11
 
 ### Fixed
