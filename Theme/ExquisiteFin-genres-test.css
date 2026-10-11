@@ -1,0 +1,75 @@
+/*
+ * ExquisiteFin Genres Layout Test
+ *
+ * Moves the dynamic Genres row from the lower metadata table into the
+ * movie hero, directly below the main action buttons, and styles it as
+ * compact rounded pills. Desktop-first test layer; mobile/TV are untouched.
+ */
+
+@import url("https://cdn.jsdelivr.net/gh/laytnight-coder/ExquisiteFin@664f004ec22c36012bb9450d0e6aad9b854101df/Theme/ExquisiteFin.css");
+
+@media (min-width: 901px) {
+    /* Anchor the genre row to the action-button row rather than using a
+       fixed viewport offset. This keeps the placement tied to the hero. */
+    #itemDetailPage .mainDetailButtons {
+        anchor-name: --exquisite-detail-actions;
+    }
+
+    #itemDetailPage .itemDetailsGroup > div:last-child {
+        position: absolute !important;
+        position-anchor: --exquisite-detail-actions;
+        top: anchor(bottom) !important;
+        left: anchor(center) !important;
+        transform: translateX(-50%) !important;
+        z-index: 8 !important;
+
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0.5em !important;
+        width: max-content !important;
+        max-width: min(90vw, 60rem) !important;
+        margin: 0.65rem 0 0 !important;
+        padding: 0.38rem 0.9rem !important;
+        box-sizing: border-box !important;
+
+        border: 0 !important;
+        border-radius: 999px !important;
+        background: rgba(45, 45, 45, 0.92) !important;
+        box-shadow: none !important;
+        color: #fff !important;
+        text-align: center !important;
+    }
+
+    #itemDetailPage .itemDetailsGroup > div:last-child h5 {
+        margin: 0 !important;
+        color: #fff !important;
+        font-size: 0.9rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 0 !important;
+        text-transform: none !important;
+        white-space: nowrap !important;
+    }
+
+    #itemDetailPage .itemDetailsGroup > div:last-child > :last-child {
+        margin: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+        gap: 0.35em !important;
+    }
+
+    #itemDetailPage .itemDetailsGroup > div:last-child .button-link {
+        color: #fff !important;
+        text-decoration: none !important;
+        font-weight: 700 !important;
+        padding: 0 !important;
+        background: transparent !important;
+        border: 0 !important;
+    }
+
+    #itemDetailPage .itemDetailsGroup > div:last-child .button-link:hover {
+        color: var(--exquisite-accent) !important;
+    }
+}
