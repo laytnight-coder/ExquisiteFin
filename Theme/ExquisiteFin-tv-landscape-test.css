@@ -1,0 +1,13 @@
+/*
+ * ExquisiteFin TV Landscape Test
+ *
+ * Temporary test layer for changing TV Series library covers from portrait
+ * artwork to 16:9 landscape thumbnails.
+ */
+
+@import url("https://cdn.jsdelivr.net/gh/laytnight-coder/ExquisiteFin@2007e571ff43fd41bc12a7934cfbbc8e5958cdcb/Theme/ExquisiteFin.css");
+
+/* TV Series covers: portrait -> 16:9 landscape */
+.card[data-type="Series"] .cardPadder-overflowPortrait {
+    padding-bottom: 56.25% !important;
+}
