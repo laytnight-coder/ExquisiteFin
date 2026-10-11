@@ -1,5 +1,5 @@
 /*
- * ExquisiteFin v0.3.3
+ * ExquisiteFin v0.3.4
  *
  * A maintainable Jellyfin 12 Modern compatibility theme based on ElegantFin.
  */
@@ -91,7 +91,7 @@
  * Primary card play control.
  * Jellyfin positions this control through the direct child selector on
  * .cardOverlayContainer. Reassert that geometry here so the larger
- * ExquisiteFin button stays centered instead of inheriting a bottom-action
+ * ExquisiteFin button stays centered instead of inheriting the bottom-action
  * position from the Modern layout.
  */
 .cardOverlayContainer > .cardOverlayFab-primary {
@@ -100,10 +100,10 @@
     left: 50% !important;
     right: auto !important;
     bottom: auto !important;
-    width: 3em !important;
-    height: 3em !important;
-    margin-top: -1.5em !important;
-    margin-left: -1.5em !important;
+    width: 4em !important;
+    height: 4em !important;
+    margin-top: -2em !important;
+    margin-left: -2em !important;
     margin-right: 0 !important;
     margin-bottom: 0 !important;
     padding: 0 !important;
@@ -114,23 +114,23 @@
     color: #fff !important;
     transform: none !important;
     transform-origin: center center !important;
-    box-shadow: 0 0 6px color-mix(in srgb, var(--exquisite-accent) 65%, transparent) !important;
+    box-shadow: 0 0 7px color-mix(in srgb, var(--exquisite-accent) 65%, transparent) !important;
     z-index: 3 !important;
 }
 
 .cardOverlayContainer > .cardOverlayFab-primary:hover {
     background: color-mix(in srgb, var(--exquisite-accent) 12%, transparent) !important;
     border-color: var(--exquisite-accent) !important;
-    box-shadow: 0 0 9px color-mix(in srgb, var(--exquisite-accent) 80%, transparent) !important;
-    transform: scale(1.08) !important;
+    box-shadow: 0 0 10px color-mix(in srgb, var(--exquisite-accent) 80%, transparent) !important;
+    transform: scale(1.06) !important;
 }
 
 .cardOverlayContainer > .cardOverlayFab-primary .cardOverlayButtonIcon-hover.play_arrow,
 .cardOverlayContainer > .cardOverlayFab-primary .material-icons.play_arrow {
     color: #fff !important;
-    font-size: 1.1em !important;
-    width: 1.8em !important;
-    height: 1.8em !important;
+    font-size: 1.2em !important;
+    width: 1.9em !important;
+    height: 1.9em !important;
     line-height: 1.2em !important;
 }
 
