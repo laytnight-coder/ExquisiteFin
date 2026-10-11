@@ -1,5 +1,5 @@
 /*
- * ExquisiteFin v0.4.5
+ * ExquisiteFin v0.4.6
  *
  * A maintainable Jellyfin 12 Modern compatibility theme based on ElegantFin.
  */
@@ -254,8 +254,9 @@
 
 /*
  * Selected actions use their own semantic colours.
- * These selectors deliberately come after the generic white/teal rules
- * above so the Modern layout cannot wash the selected colours back out.
+ * The repeated state-class selectors intentionally increase specificity
+ * enough to beat the Modern layout's generic white icon rule even when
+ * the pointer is no longer over the icon.
  */
 
 /* Bookmark selected -> blue */
@@ -264,20 +265,20 @@
     color: #3b82f6 !important;
 }
 
-.cardOverlayButton-br > .cardOverlayButton:has(.material-icons.bookmark) .material-icons,
-.cardOverlayButton-br > .cardOverlayButton:has(.material-symbols-rounded.bookmark) .material-symbols-rounded,
-.cardOverlayButton-br > .cardOverlayButton:has(.material-icons.bookmark) .cardOverlayButtonIcon,
-.cardOverlayButton-br > .cardOverlayButton:has(.material-symbols-rounded.bookmark) .cardOverlayButtonIcon {
+.cardOverlayButton-br > .cardOverlayButton:has(.material-icons.bookmark) .material-icons.bookmark.bookmark,
+.cardOverlayButton-br > .cardOverlayButton:has(.material-symbols-rounded.bookmark) .material-symbols-rounded.bookmark.bookmark,
+.cardOverlayButton-br > .cardOverlayButton:has(.material-icons.bookmark) .cardOverlayButtonIcon.cardOverlayButtonIcon,
+.cardOverlayButton-br > .cardOverlayButton:has(.material-symbols-rounded.bookmark) .cardOverlayButtonIcon.cardOverlayButtonIcon {
     color: #3b82f6 !important;
 }
 
 /* Mark Played selected -> green */
-.cardOverlayButton-br > .cardOverlayButton .playstatebutton-icon-played {
+.cardOverlayButton-br > .cardOverlayButton .playstatebutton-icon-played.playstatebutton-icon-played {
     color: #39d98a !important;
 }
 
 /* Favorite / heart selected -> red */
-.cardOverlayButton-br > .cardOverlayButton .ratingbutton-icon-withrating {
+.cardOverlayButton-br > .cardOverlayButton .ratingbutton-icon-withrating.ratingbutton-icon-withrating {
     color: #ff3b5c !important;
 }
 
@@ -287,10 +288,9 @@
     color: #3b82f6 !important;
 }
 
-.cardOverlayButton-br > .cardOverlayButton:has(.material-icons.bookmark):hover .material-icons,
-.cardOverlayButton-br > .cardOverlayButton:has(.material-symbols-rounded.bookmark):hover .material-symbols-rounded,
-.cardOverlayButton-br > .cardOverlayButton:has(.material-icons.bookmark):hover .cardOverlayButtonIcon,
-.cardOverlayButton-br > .cardOverlayButton:has(.material-symbols-rounded.bookmark):hover .cardOverlayButtonIcon {
+.cardOverlayButton-br > .cardOverlayButton:has(.material-icons.bookmark):hover .material-icons.bookmark,
+.cardOverlayButton-br > .cardOverlayButton:has(.material-symbols-rounded.bookmark):hover .material-symbols-rounded.bookmark,
+.cardOverlayButton-br > .cardOverlayButton:has(.material-icons.bookmark):hover .cardOverlayButtonIcon {
     color: #3b82f6 !important;
 }
 
