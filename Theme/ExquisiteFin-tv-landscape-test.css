@@ -1,5 +1,5 @@
 /*
- * ExquisiteFin TV Landscape Test v3
+ * ExquisiteFin TV Landscape Test v4
  *
  * Temporary test layer for changing TV Series library covers from portrait
  * artwork to 16:9 landscape thumbnails while keeping homepage cards portrait.
@@ -18,8 +18,8 @@
 }
 
 /* Enlarge the landscape TV cards in the Shows library. */
-#tvshowsPage .itemsContainer-tv > .portraitCard,
-#tvshowsPage .itemsContainer-tv > .overflowPortraitCard,
-#tvshowsPage .itemsContainer-tv > .mixedPortraitCard {
+#tvshowsPage .portraitCard,
+#tvshowsPage .overflowPortraitCard,
+#tvshowsPage .mixedPortraitCard {
     width: 16.666666666666667% !important;
 }
