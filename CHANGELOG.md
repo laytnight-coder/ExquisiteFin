@@ -2,6 +2,15 @@
 
 All notable ExquisiteFin changes are documented here.
 
+## [0.3.7] - 2026-10-11
+
+### Changed
+
+- Increased the centered primary play ring from `5.5em` to `6em`.
+- Increased the play symbol from `2.2em` to `3em` for a substantially larger play control.
+- Replaced the previous radial/frosted center with a mostly transparent `20%` grey-tinted surface.
+- Reduced the backdrop blur to `1px` so the poster remains clearly visible through the control.
+
 ## [0.3.6] - 2026-10-11
 
 ### Changed
