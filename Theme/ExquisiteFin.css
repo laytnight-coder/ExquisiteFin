@@ -1,5 +1,5 @@
 /*
- * ExquisiteFin v0.3.8
+ * ExquisiteFin v0.3.9
  *
  * A maintainable Jellyfin 12 Modern compatibility theme based on ElegantFin.
  */
@@ -42,6 +42,11 @@
 .card[data-isfolder="true"][data-type="CollectionFolder"] .cardPadder-overflowBackdrop,
 .card[data-isfolder="true"][data-type="UserView"] .cardPadder-overflowBackdrop {
     padding-bottom: var(--exquisite-library-card-padding) !important;
+}
+
+/* Homepage: hide the "My Media" section title */
+.section0 .sectionTitle {
+    display: none !important;
 }
 
 /* Jellyfin / ElegantFin theme variables */
@@ -140,9 +145,10 @@
 
 /* ---------------------------------------------------------------
    PLAY SYMBOL
-   --------------------------------------------------------------- */
+   ---------------------------------------------------------------
+*/
 
-/* PLAY SYMBOL SIZE */
+/* Play symbol size */
 .cardOverlayContainer > .cardOverlayFab-primary .cardOverlayButtonIcon-hover.play_arrow,
 .cardOverlayContainer > .cardOverlayFab-primary .material-icons.play_arrow {
     color: #fff !important;
@@ -155,7 +161,8 @@
 
 /* ---------------------------------------------------------------
    SECONDARY CARD ACTION BUTTONS
-   --------------------------------------------------------------- */
+   ---------------------------------------------------------------
+*/
 
 /* Teal outline for secondary card actions */
 .cardOverlayButton.cardOverlayButton-hover.itemAction.paper-icon-button-light:not(.cardOverlayFab-primary) {
@@ -170,7 +177,8 @@
 
 /* ---------------------------------------------------------------
    GENERAL INTERACTIVE STATES
-   --------------------------------------------------------------- */
+   ---------------------------------------------------------------
+*/
 
 /* Hover/focus border accent */
 .raised:hover,
