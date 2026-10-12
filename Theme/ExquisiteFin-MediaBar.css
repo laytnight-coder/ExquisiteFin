@@ -1,0 +1,562 @@
+/*!
+ * ExquisiteFin Media Bar Adapter v0.6.0 — optional plugin stylesheet
+ * Derived from ElegantFin Media Bar support v26.09.05 (lscambo13) and
+ * Modern companion v26.10.07 (mihaif7). Both are GPL-2.0.
+ * Load after Theme/ExquisiteFin.css. Omit this adapter without Media Bar.
+ */
+
+/*! Add-on: Media Bar Plugin Support v26.09.05 for the ElegantFin Theme for Jellyfin by lscambo13 */
+/* this styles the media bar plugin - start */
+.play-button::before,
+.detail-button::before,
+.favorite-button::before,
+.favorite-button.favorited::before {
+    font-weight: 400;
+}
+
+.play-button {
+    font-family: "Inter";
+    font-size: 1em;
+    font-weight: 500;
+    order: 1;
+}
+
+.detail-button,
+.favorite-button {
+    order: 2;
+}
+
+.backdrop:not(.tmla-mask),
+.backdrop-container,
+.backdrop-overlay {
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.85), 70%, rgba(0, 0, 0, 0));
+    -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.85), 70%, rgba(0, 0, 0, 0));
+    background-color: transparent;
+}
+
+.backdrop:not(.tmla-mask) {
+    transform-origin: center left;
+}
+
+.rating-value {
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.age-rating {
+    font-size: 0.8em;
+    font-family: "Archivo Narrow", sans-serif;
+    color: unset;
+}
+
+#slides-container {
+    width: calc(100vw - (2 * var(--sidePadding)));
+    height: 62%;
+    top: calc(var(--appBarHeight) * 2 + 1.25em);
+    user-select: none;
+    position: absolute;
+    left: var(--sidePadding);
+    overflow: visible;
+}
+
+.slide {
+    border: var(--defaultBorder);
+    border-radius: var(--largerRadius);
+    overflow: hidden;
+    transition: border 0s;
+}
+
+.logo-container {
+    top: 10vh;
+}
+
+.backdrop:not(.tmla-mask),
+.backdrop-container,
+.backdrop-overlay {
+    mask-image: none;
+    -webkit-mask-image: none;
+}
+
+.backdrop-overlay {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.85), 40%, transparent);
+}
+
+.pause-button,
+.volume-toggle {
+    top: 1em !important;
+}
+
+.separator-icon {
+    font-size: 5px;
+    color: var(--dimTextColor);
+}
+
+.dot {
+    border-radius: 0.25em;
+    width: 0.375em;
+    height: 0.375em;
+    transition: width 0.5s;
+    opacity: 0.5;
+    background-color: var(--textColor) !important;
+}
+
+.dot.active {
+    width: 2em;
+    transform: none;
+}
+
+@media only screen and (orientation: landscape) {
+    .button-container,
+    .dots-container,
+    .plot-container,
+    .genre,
+    .info-container {
+        top: unset;
+    }
+
+    .button-container {
+        bottom: 3em;
+    }
+
+    .dots-container {
+        bottom: 4.5em;
+    }
+
+    .plot-container {
+        height: 4em;
+        bottom: 7em;
+    }
+
+    .genre {
+        bottom: 12em;
+    }
+
+    .info-container {
+        bottom: 14em;
+    }
+
+    .logo-container {
+        top: 3%;
+        align-items: flex-end;
+        max-width: 35vw;
+    }
+
+    .gradient-overlay {
+        mask: none;
+        -webkit-mask: none;
+        background: linear-gradient(37deg, rgb(0 0 0 / 20%) 32%, rgb(29 29 29 / 7%) 47%, rgb(29 29 29 / 0%) 100%);
+    }
+}
+
+@media only screen and (max-width: 767px) and (orientation: portrait) {
+    .button-container {
+        bottom: 3em;
+    }
+
+    .tomato-rating,
+    .genre {
+        display: none;
+    }
+
+    .dots-container {
+        bottom: 6em;
+    }
+
+    .info-container {
+        bottom: 5em;
+    }
+
+    .logo-container {
+        top: calc(100% - 15em);
+    }
+
+    .backdrop:not(.tmla-mask) {
+        transform-origin: center;
+    }
+
+    .left-arrow,
+    .right-arrow {
+        display: none !important;
+    }
+
+    .play-button {
+        order: 2;
+    }
+}
+
+@media (min-width: 75em) {
+    #slides-container {
+        top: calc(var(--appBarHeight) + 1.25em);
+    }
+
+    .layout-tv #slides-container {
+        top: calc(var(--appBarHeight) * 2 + 1.25em);
+    }
+}
+
+@media (min-width: 100em) {
+    .layout-tv #slides-container {
+        top: calc(var(--appBarHeight) + 1.25em);
+    }
+}
+
+@media only screen and (max-height: 767px) and (orientation: landscape) {
+    #slides-container {
+        height: 57%;
+    }
+
+    .logo-container {
+        top: 3%;
+    }
+}
+
+/* this styles the media bar plugin - end */
+
+/* ══════════════════════════════════════════════════════════════════════════
+ * 12. Media Bar plugin
+ * The Media Bar plugin's slideshow and the home page beneath it. Inert
+ * without the plugin.
+ * ══════════════════════════════════════════════════════════════════════════ */
+
+@container ef12mediabar (width < 96.7vw) {
+    .backdrop-container.full-width-video,
+    .gradient-overlay.full-width-video {
+        mask-image: none;
+        -webkit-mask-image: none;
+    }
+}
+
+:root {
+    --ef12-mediaBarHeight: 62vh;
+    --ef12-mediaBarGap: 1.25rem;
+}
+
+@media only screen and (max-height: 767px) and (orientation: landscape) {
+    :root {
+        --ef12-mediaBarHeight: 57vh;
+    }
+}
+
+:root:has(#slides-container) {
+    --ef12-mediaBarV2Height: 90vh;
+    --ef12-mediaBarV2StockDrop: max(0px, calc(var(--ef12-mediaBarV2Height)
+        - var(--ef12-mediaBarHeight) - var(--ef12-mediaBarGap) - 5rem));
+    --ef12-mediaBarV2StockRail: calc(var(--ef12-appBarHeight)
+        + max(env(safe-area-inset-top), var(--safe-area-inset-top, 0px))
+        + 2.5rem + 1rem);
+}
+
+@container ef12mediabar (width < 96.7vw) {
+    body:has(.MuiAppBar-root):not(.media-bar-mobile-16-9, .media-bar-mobile-4-3) #slides-container:not(:has(.slide-content)) .mute-button {
+        top: 1em !important;
+    }
+}
+
+@container ef12mediabar (width >= 96.7vw) {
+    body:has(.MuiAppBar-root):not(.media-bar-mobile-16-9, .media-bar-mobile-4-3) #slides-container:not(:has(.slide-content)) :is(.pause-button, .mute-button) {
+        top: var(--ef12-mediaBarV2StockRail) !important;
+    }
+
+    @media only screen and (max-width: 767px) and (orientation: portrait) {
+        body:has(.MuiAppBar-root):not(.media-bar-mobile-16-9, .media-bar-mobile-4-3) #slides-container:not(:has(.slide-content)) .slide {
+            padding-bottom: calc(var(--ef12-mediaBarV2StockDrop) + 1.5em);
+        }
+        body:has(.MuiAppBar-root):not(.media-bar-mobile-16-9, .media-bar-mobile-4-3) #slides-container:not(:has(.slide-content)) .dots-container {
+            top: calc(var(--ef12-mediaBarV2StockRail) + 1rem);
+            padding-bottom: 1rem !important;
+        }
+    }
+}
+
+@media (min-width: 75em) {
+    body:has(.MuiAppBar-root):has(#slides-container):not(:has(#slides-container .slide-content)):not(.media-bar-mobile-16-9, .media-bar-mobile-4-3) .homeSectionsContainer {
+        top: calc(var(--appBarHeight) + 1.25em + var(--ef12-mediaBarHeight)
+            + 0.5rem - var(--ef12-appBarHeight)) !important;
+    }
+}
+
+@media not all and (min-width: 75em) {
+    body:has(.MuiAppBar-root):has(#slides-container):not(:has(#slides-container .slide-content)):not(.media-bar-mobile-16-9, .media-bar-mobile-4-3) .homeSectionsContainer {
+        top: calc(var(--ef12-mediaBarHeight) + 1.25em + 0.5rem) !important;
+    }
+}
+
+@media not all and (min-width: 75em) {
+    body:has(.MuiAppBar-root):not(.media-bar-mobile-16-9, .media-bar-mobile-4-3) #slides-container {
+        --appBarHeight: calc((var(--ef12-appBarHeight)
+            + max(env(safe-area-inset-top), var(--safe-area-inset-top, 0px))) / 2);
+    }
+}
+
+@media only screen and (max-width: 767px) and (orientation: portrait) {
+    body:has(.MuiAppBar-root):not(.media-bar-mobile-16-9, .media-bar-mobile-4-3) #slides-container .slide {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 0.4em;
+        padding: 1.5em 1.25em;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    body:has(.MuiAppBar-root):not(.media-bar-mobile-16-9, .media-bar-mobile-4-3) #slides-container .button-container {
+        margin-top: 0.85em;
+        gap: 0.75rem;
+    }
+
+    body:has(.MuiAppBar-root):not(.media-bar-mobile-16-9, .media-bar-mobile-4-3) #slides-container .play-button {
+        order: 1;
+        padding-inline: 1em !important;
+    }
+
+    body:has(.MuiAppBar-root):not(.media-bar-mobile-16-9, .media-bar-mobile-4-3) #slides-container .detail-button {
+        order: 2;
+    }
+
+    body:has(.MuiAppBar-root):not(.media-bar-mobile-16-9, .media-bar-mobile-4-3) #slides-container .favorite-button {
+        order: 3;
+    }
+
+    body:has(.MuiAppBar-root):not(.media-bar-mobile-16-9, .media-bar-mobile-4-3) #slides-container .trailer-button {
+        order: 4;
+        padding-inline: 0 !important;
+    }
+
+    body:has(.MuiAppBar-root):not(.media-bar-mobile-16-9, .media-bar-mobile-4-3) #slides-container :is(.logo-container, .info-container, .genre, .button-container) {
+        position: static;
+        inset: auto;
+        transform: none;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    body:has(.MuiAppBar-root):not(.media-bar-mobile-16-9, .media-bar-mobile-4-3) #slides-container .logo-container {
+        height: auto;
+        max-height: 30%;
+        align-items: flex-end;
+        justify-content: center;
+    }
+
+    body:has(.MuiAppBar-root):not(.media-bar-mobile-16-9, .media-bar-mobile-4-3) #slides-container .logo {
+        position: static;
+        transform: none;
+        max-height: 100%;
+        max-width: 100%;
+    }
+
+    body:has(.MuiAppBar-root):not(.media-bar-mobile-16-9, .media-bar-mobile-4-3) #slides-container .logo-title-fallback {
+        font-size: clamp(1.5rem, 7vw, 2.75rem) !important;
+    }
+
+    body:has(.MuiAppBar-root):not(.media-bar-mobile-16-9, .media-bar-mobile-4-3) #slides-container .dots-container {
+        top: calc(1em + 1.1rem);
+        bottom: auto;
+        left: 15px;
+        transform: translateY(-50%);
+        padding: 0.7rem 0 0 !important;
+        max-width: calc(100% - 8rem);
+    }
+
+    body:has(.MuiAppBar-root):not(.media-bar-mobile-16-9, .media-bar-mobile-4-3) #slides-container .progress-bar-dots {
+        top: 0;
+        bottom: auto;
+    }
+
+    body:has(.MuiAppBar-root):not(.media-bar-mobile-16-9, .media-bar-mobile-4-3) #slides-container :is(.pause-button, .mute-button) {
+        top: 1em !important;
+    }
+}
+
+body:has(.MuiAppBar-root) #slides-container :is(.detail-button, .favorite-button) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+body:has(.MuiAppBar-root) #slides-container :is(.play-button, .trailer-button) {
+    margin: 0 !important;
+}
+
+body:has(.MuiAppBar-root) #slides-container .trailer-button {
+    border-radius: 0.5rem;
+}
+
+@media only screen and (orientation: landscape) {
+    body:has(.MuiAppBar-root):not(.media-bar-mobile-16-9, .media-bar-mobile-4-3) #slides-container .dots-container {
+        bottom: 3em;
+        height: 3em;
+        padding-bottom: 0 !important;
+    }
+}
+
+body:has(.MuiAppBar-root) #slides-container {
+    container-type: size;
+    container-name: ef12mediabar;
+}
+
+:root:has(#slides-container .slide-content) {
+    --ef12-mediaBarV3Height: var(--ef12-mediaBarHeight, 62vh);
+    --ef12-mediaBarV3Inset: 3.75rem;
+    --ef12-mediaBarV3Rail: 1em;
+    --ef12-mediaBarV3Edge: 0.8em;
+    --ef12-mediaBarV3ChromePitch: 2.7em;
+    --ef12-mediaBarV3ArrowSize: 2.25rem;
+    --ef12-mediaBarV3SectionsTop: calc(var(--ef12-mediaBarV3Height)
+        + var(--ef12-mediaBarGap, 1.25rem) * 2 + 0.75rem);
+    --ef12-mediaBarV3BarHeight: var(--slideshow-height, 100vh);
+    --ef12-mediaBarV3BarUsed: max(var(--ef12-mediaBarV3BarHeight),
+        calc(var(--ef12-mediaBarV3SectionsTop) + 5rem + 20vh));
+    --ef12-mediaBarV3StockDrop: calc(var(--ef12-mediaBarV3BarUsed)
+        - var(--ef12-mediaBarV3SectionsTop) - 1.5rem);
+    --ef12-mediaBarV3StockRow: calc(var(--ef12-mediaBarV3StockDrop) - 2.7rem);
+}
+
+body:has(.MuiAppBar-root) #slides-container:has(.slide-content) {
+    --slideshow-height: var(--ef12-mediaBarV3BarUsed);
+}
+
+:root.layout-mobile #slides-container:has(.slide-content) {
+    --ef12-mediaBarV3ChromeSize: 2rem;
+    --ef12-mediaBarV3Inset: 1.25rem;
+}
+
+:root.layout-desktop #slides-container.layout-plate:has(.slide-content) {
+    --ef12-mediaBarV3Inset: 1rem;
+}
+
+@container ef12mediabar (width < 96.7vw) {
+    #slides-container:has(.slide-content) .slide-content {
+        bottom: var(--ef12-mediaBarV3Inset);
+        max-height: calc(100% - var(--ef12-mediaBarV3Inset));
+    }
+
+    #slides-container:has(.slide-content) .plot-container {
+        flex: 0 0 auto !important;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+
+    #slides-container.layout-plate:has(.slide-content) .plate-specs {
+        flex: 0 0 auto !important;
+        overflow: visible !important;
+    }
+
+    #slides-container:has(.slide-content) .ss-settings-toggle {
+        top: var(--ef12-mediaBarV3Rail) !important;
+    }
+
+    #slides-container:has(.slide-content) .arrow {
+        top: auto !important;
+        left: auto !important;
+        bottom: var(--ef12-mediaBarV3Rail) !important;
+        transform: none !important;
+    }
+
+    #slides-container:has(.slide-content) .right-arrow {
+        right: var(--ef12-mediaBarV3Edge) !important;
+    }
+
+    #slides-container:has(.slide-content) .left-arrow {
+        right: calc(var(--ef12-mediaBarV3Edge) + var(--ef12-mediaBarV3ChromePitch)) !important;
+    }
+
+    #slides-container:has(.slide-content) .dots-container {
+        top: auto !important;
+        bottom: calc(var(--ef12-mediaBarV3Rail) + 0.55rem) !important;
+        left: var(--slideshow-gutter) !important;
+        right: auto !important;
+        transform: none !important;
+        height: auto !important;
+        padding: 0 !important;
+    }
+
+    #slides-container.layout-plate:has(.slide-content) .dots-container {
+        display: none !important;
+    }
+
+    #slides-container:has(.slide-content) :is(.backdrop-overlay, .gradient-overlay) {
+        background: none !important;
+    }
+
+    #slides-container:has(.slide-content) .slide {
+        --slideshow-bottom-fade: linear-gradient(to top, #000 0%, #000 100%);
+        --slideshow-height: var(--ef12-mediaBarV3BarHeight);
+    }
+
+    :root.layout-desktop #slides-container.layout-plate:has(.slide-content) .slide-content {
+        max-height: calc(100% - var(--ef12-mediaBarV3Inset) * 2);
+    }
+
+    :root.layout-mobile #slides-container:has(.slide-content) :is(.pause-button, .volume-toggle, .ss-settings-toggle) {
+        width: var(--ef12-mediaBarV3ChromeSize) !important;
+        height: var(--ef12-mediaBarV3ChromeSize) !important;
+    }
+
+    :root.layout-mobile #slides-container:has(.slide-content) :is(.pause-button, .volume-toggle, .ss-settings-toggle) i {
+        font-size: var(--ef12-mediaBarV3ChromeSize) !important;
+    }
+
+    :root.layout-mobile #slides-container:has(.slide-content) .dots-container {
+        top: var(--ef12-mediaBarV3Rail) !important;
+        height: var(--ef12-mediaBarV3ChromeSize) !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+        align-items: center !important;
+        bottom: auto !important;
+        left: var(--slideshow-gutter) !important;
+        right: auto !important;
+        transform: none !important;
+    }
+
+    :root.layout-mobile #slides-container.layout-plate:has(.slide-content) .plate {
+        -webkit-mask-image: none !important;
+        mask-image: none !important;
+    }
+}
+
+body:has(#slides-container .slide-content) .homeSectionsContainer {
+    margin-top: 0 !important;
+    top: var(--ef12-mediaBarV3SectionsTop) !important;
+}
+
+@container ef12mediabar (width >= 96.7vw) {
+    :root:is(.layout-desktop, .layout-mobile) #slides-container:has(.slide-content) .slide {
+        --ef12-mediaBarV3FadeSpan: calc(100% - var(--ef12-mediaBarV3SectionsTop) - 5rem);
+        --slideshow-bottom-fade: linear-gradient(to top,
+            transparent 0,
+            rgb(0 0 0 / 0.55) calc(var(--ef12-mediaBarV3FadeSpan) * 0.45),
+            #000 var(--ef12-mediaBarV3FadeSpan));
+    }
+
+    :root:is(.layout-desktop, .layout-mobile) #slides-container.layout-plate:has(.slide-content) .plate {
+        -webkit-mask-image: var(--slideshow-bottom-fade) !important;
+        mask-image: var(--slideshow-bottom-fade) !important;
+    }
+}
+
+@container ef12mediabar (width >= 96.7vw) {
+    :root:is(.layout-desktop, .layout-mobile) #slides-container:has(.slide-content) .slide-content {
+        bottom: var(--ef12-mediaBarV3StockDrop);
+        max-height: calc(100% - var(--ef12-mediaBarV3StockDrop) - 2rem);
+    }
+
+    :root:is(.layout-desktop, .layout-mobile) #slides-container:has(.slide-content) .dots-container {
+        top: auto !important;
+        bottom: var(--ef12-mediaBarV3StockRow) !important;
+        left: var(--slideshow-gutter) !important;
+        right: auto !important;
+        transform: none !important;
+    }
+
+    :root:is(.layout-desktop, .layout-mobile) #slides-container:has(.slide-content) .arrow {
+        top: auto !important;
+        bottom: var(--ef12-mediaBarV3StockRow) !important;
+        transform: none !important;
+    }
+}
