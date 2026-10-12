@@ -2,6 +2,20 @@
 
 All notable ExquisiteFin changes are documented here.
 
+## [0.6.1] - 2026-10-12
+
+### Changed
+
+- Moved the Modern companion's TV-specific Media Bar slideshow backdrop rule from the core bundle into the optional `Theme/ExquisiteFin-MediaBar.css` adapter.
+- Removed ElegantFin's default lower-corner positioning rule for the primary card play button from the generated core bundle; ExquisiteFin's own centered positioning remains authoritative.
+- Updated the build script so both optimizations are reproducible from the preserved, attributed source files.
+
+### Notes
+
+- The core bundle is 326 characters smaller than v0.6.0; this is a correctness/maintenance cleanup rather than a meaningful runtime performance change.
+- The InPlayerEpisodePreview progress rule remains in core until plugin use is confirmed, since the rule is small and safe to leave available.
+- CSS structure and active imports were checked. A live Jellyfin visual smoke test is still recommended after updating.
+
 ## [0.6.0] - 2026-10-12
 
 ### Changed
