@@ -5610,6 +5610,17 @@ body:has(.MuiAppBar-root) .homeSectionsContainer div:not(.sectionTitleContainer-
     }
 }
 
+/* =========================================================
+   ExquisiteFin — Compact Movie Details Metadata
+   Reduces the unused fourth row left by the repositioned Genres
+   ========================================================= */
+
+@media (min-width: 901px) {
+    #itemDetailPage .itemDetailsGroup {
+        height: 118.5px !important;
+    }
+}
+
 /* ================================================================
    5. GENERAL INTERACTIVE STATES
    ================================================================ */
