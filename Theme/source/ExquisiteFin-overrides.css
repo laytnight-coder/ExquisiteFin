@@ -406,14 +406,14 @@ a:focus-visible,
    ================================================================ */
 
 /*
- * Use Jellyfin's simpler text-and-icon navigation treatment for the app-bar
- * library links. Only the active page uses the ExquisiteFin teal accent.
+ * Jellyfin 12 Modern renders the library links as MUI text buttons.
+ * Keep them flat like stock Jellyfin: no pill, border, or shadow.
+ * Only the active library gets the ExquisiteFin teal accent.
  */
-.sectionTabs .emby-tab-button {
-    margin: 0.25em 0.4em !important;
-    padding: 0 0.4em !important;
-    height: auto !important;
-    min-height: 0 !important;
+.MuiAppBar-root .MuiButton-text:not(.MuiButtonGroup-grouped):not(:has(.MuiButton-startIcon > img)) {
+    margin-inline: 0.2rem !important;
+    padding-block: 0.15rem !important;
+    padding-inline: 0.4rem !important;
     border: 0 !important;
     border-radius: 0 !important;
     background: transparent !important;
@@ -421,7 +421,15 @@ a:focus-visible,
     color: var(--textColor) !important;
 }
 
-.sectionTabs .emby-tab-button-active {
+.MuiAppBar-root .MuiButton-text:not(.MuiButtonGroup-grouped):not(:has(.MuiButton-startIcon > img)):hover,
+.MuiAppBar-root .MuiButton-text:not(.MuiButtonGroup-grouped):not(:has(.MuiButton-startIcon > img)):focus-visible {
+    background: transparent !important;
+    box-shadow: none !important;
+    color: var(--textColor) !important;
+}
+
+/* Jellyfin marks the current library with MuiButton-textPrimary. */
+.MuiAppBar-root .MuiButton-textPrimary:not(.MuiButtonGroup-grouped):not(:has(.MuiButton-startIcon > img)) {
     border: 0 !important;
     border-radius: 0 !important;
     background: transparent !important;
@@ -429,21 +437,13 @@ a:focus-visible,
     color: var(--exquisite-accent) !important;
 }
 
-.sectionTabs .emby-tab-button:hover,
-.sectionTabs .emby-tab-button:focus-visible {
-    background: transparent !important;
-    box-shadow: none !important;
-    color: var(--textColor) !important;
-}
-
-.sectionTabs .emby-tab-button-active:hover,
-.sectionTabs .emby-tab-button-active:focus-visible {
+.MuiAppBar-root .MuiButton-textPrimary:not(.MuiButtonGroup-grouped):not(:has(.MuiButton-startIcon > img)):hover,
+.MuiAppBar-root .MuiButton-textPrimary:not(.MuiButtonGroup-grouped):not(:has(.MuiButton-startIcon > img)):focus-visible {
     background: transparent !important;
     color: var(--exquisite-accent) !important;
 }
 
-.sectionTabs .emby-tab-button::before,
-.sectionTabs .emby-tab-button .material-icons,
-.sectionTabs .emby-tab-button .material-symbols-rounded {
+.MuiAppBar-root .MuiButton-text:not(.MuiButtonGroup-grouped):not(:has(.MuiButton-startIcon > img)) .MuiButton-startIcon,
+.MuiAppBar-root .MuiButton-text:not(.MuiButtonGroup-grouped):not(:has(.MuiButton-startIcon > img)) .MuiButton-startIcon > * {
     color: inherit !important;
 }
