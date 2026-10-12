@@ -2,7 +2,7 @@
 
 **ExquisiteFin** is a custom CSS theme for Jellyfin 12's Modern interface. It uses adapted, locally bundled CSS from ElegantFin and its Jellyfin 12 Modern companion, with ExquisiteFin's own teal-accented styling layered on top.
 
-> **Current version:** v0.6.2  
+> **Current version:** v0.6.3  
 > **Target UI:** Jellyfin 12 Modern  
 > **Status:** Active development. The bundled CSS has been structurally validated; a fresh live Jellyfin smoke test is still recommended after upgrading.
 
@@ -12,6 +12,7 @@
 - Teal/emerald accent built around `#00c79f`.
 - Centralized ExquisiteFin colour, surface, focus, and layout variables.
 - Teal hover borders and visible keyboard focus styling.
+- Flat header library navigation with no pill backgrounds; the current page uses ExquisiteFin teal.
 
 ### Home and library
 - Wide 4:1 collection and library-folder cards.
@@ -40,10 +41,10 @@ In Jellyfin, open **Dashboard → General → Custom CSS** and add this single i
 @import url("https://cdn.jsdelivr.net/gh/laytnight-coder/ExquisiteFin@main/Theme/ExquisiteFin.css");
 ```
 
-For a reproducible v0.6.2 install pinned to the current bundle commit:
+For a reproducible v0.6.3 install pinned to the current bundle commit:
 
 ```css
-@import url("https://cdn.jsdelivr.net/gh/laytnight-coder/ExquisiteFin@5ed73f906f262ac91cb07dfd35b17a2250e23294/Theme/ExquisiteFin.css");
+@import url("https://cdn.jsdelivr.net/gh/laytnight-coder/ExquisiteFin@41dac8952a13264afee137e3c4acf6f08cfe5bf7/Theme/ExquisiteFin.css");
 ```
 
 Save the Custom CSS and refresh Jellyfin. ExquisiteFin now bundles the required ElegantFin base rules, Jellyfin 12 Modern compatibility rules, and ExquisiteFin overrides into **one stylesheet**. It no longer imports ElegantFin or the Modern companion as separate CSS files.
@@ -57,11 +58,11 @@ If you use Media Bar or Media Bar Enhanced, add the adapter as a second import, 
 @import url("https://cdn.jsdelivr.net/gh/laytnight-coder/ExquisiteFin@main/Theme/ExquisiteFin-MediaBar.css");
 ```
 
-Pinned v0.6.2 URLs:
+Pinned v0.6.3 URLs:
 
 ```css
-@import url("https://cdn.jsdelivr.net/gh/laytnight-coder/ExquisiteFin@5ed73f906f262ac91cb07dfd35b17a2250e23294/Theme/ExquisiteFin.css");
-@import url("https://cdn.jsdelivr.net/gh/laytnight-coder/ExquisiteFin@a11ac4fdaf06e3c0b856b26088d83e5335c4b658/Theme/ExquisiteFin-MediaBar.css");
+@import url("https://cdn.jsdelivr.net/gh/laytnight-coder/ExquisiteFin@41dac8952a13264afee137e3c4acf6f08cfe5bf7/Theme/ExquisiteFin.css");
+@import url("https://cdn.jsdelivr.net/gh/laytnight-coder/ExquisiteFin@a6241767da343dc295b14ca4f49821c1fe5017c3/Theme/ExquisiteFin-MediaBar.css");
 ```
 
 The Media Bar adapter is optional. Do not add it unless the plugin is installed.
@@ -72,7 +73,7 @@ The main stylesheet no longer depends on CSS files hosted by either upstream the
 
 For font rendering, the bundle still requests Inter through Google Fonts and loads Material Symbols font files from Google's font CDN, matching the upstream appearance. These are **font assets**, not upstream theme CSS dependencies. The theme is independent of upstream stylesheet delivery, but it is not an entirely offline package.
 
-The card indicator inset now matches the vertical top inset: 0.5em on desktop and 0.45em on mobile. The generated core also omits ElegantFin's default lower-corner play positioning, and the TV-only Media Bar slideshow selector stays in the optional adapter.
+The card indicator inset now matches the vertical top inset: 0.5em on desktop and 0.45em on mobile. The header links now use a flat Jellyfin-style treatment, with teal reserved for the active page. The generated core also omits ElegantFin's default lower-corner play positioning, and the TV-only Media Bar slideshow selector stays in the optional adapter.
 
 The build also omits ElegantFin's default lower-corner primary-play positioning rule from the generated bundle, because ExquisiteFin supplies its own centered position. The original source copy remains intact so the build can be regenerated from the attributed upstream input.
 
