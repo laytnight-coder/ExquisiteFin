@@ -5684,6 +5684,7 @@ body.jellyfin-v12 a.MuiButton-root img {
 
 /* Base rating badge */
 .mediaInfoOfficialRating[data-exquisite-rating] {
+    background-image: none !important;
     color: #ffffff !important;
     font-weight: 700 !important;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55) !important;
@@ -5691,9 +5692,7 @@ body.jellyfin-v12 a.MuiButton-root img {
     border-width: 1px !important;
     border-style: solid !important;
 
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.12),
-        0 1px 2px rgba(0, 0, 0, 0.25) !important;
+    box-shadow: none !important;
 }
 
 
@@ -5706,12 +5705,7 @@ body.jellyfin-v12 a.MuiButton-root img {
 .mediaInfoOfficialRating[data-exquisite-rating="U"],
 .mediaInfoOfficialRating[data-exquisite-rating="G"],
 .mediaInfoOfficialRating[data-exquisite-rating="US-G"] {
-    background: linear-gradient(
-        180deg,
-        #3f8f46 0%,
-        #2e7035 100%
-    ) !important;
-
+    background: #2e7035 !important;
     border-color: #5eaa65 !important;
 }
 
@@ -5724,12 +5718,7 @@ body.jellyfin-v12 a.MuiButton-root img {
 .mediaInfoOfficialRating[data-exquisite-rating="UK-PG"],
 .mediaInfoOfficialRating[data-exquisite-rating="PG"],
 .mediaInfoOfficialRating[data-exquisite-rating="US-PG"] {
-    background: linear-gradient(
-        180deg,
-        #a68116 0%,
-        #806300 100%
-    ) !important;
-
+    background: #806300 !important;
     border-color: #c6a52b !important;
 }
 
@@ -5746,12 +5735,7 @@ body.jellyfin-v12 a.MuiButton-root img {
 .mediaInfoOfficialRating[data-exquisite-rating="12A"],
 .mediaInfoOfficialRating[data-exquisite-rating="PG-13"],
 .mediaInfoOfficialRating[data-exquisite-rating="US-PG-13"] {
-    background: linear-gradient(
-        180deg,
-        #b27612 0%,
-        #8c5700 100%
-    ) !important;
-
+    background: #8c5700 !important;
     border-color: #d19a35 !important;
 }
 
@@ -5765,12 +5749,7 @@ body.jellyfin-v12 a.MuiButton-root img {
 .mediaInfoOfficialRating[data-exquisite-rating="15"],
 .mediaInfoOfficialRating[data-exquisite-rating="R"],
 .mediaInfoOfficialRating[data-exquisite-rating="US-R"] {
-    background: linear-gradient(
-        180deg,
-        #c45b16 0%,
-        #984000 100%
-    ) !important;
-
+    background: #984000 !important;
     border-color: #e47a32 !important;
 }
 
@@ -5784,12 +5763,7 @@ body.jellyfin-v12 a.MuiButton-root img {
 .mediaInfoOfficialRating[data-exquisite-rating="18"],
 .mediaInfoOfficialRating[data-exquisite-rating="NC-17"],
 .mediaInfoOfficialRating[data-exquisite-rating="US-NC-17"] {
-    background: linear-gradient(
-        180deg,
-        #963535 0%,
-        #6d2020 100%
-    ) !important;
-
+    background: #6d2020 !important;
     border-color: #bd5555 !important;
 }
 
@@ -5802,11 +5776,6 @@ body.jellyfin-v12 a.MuiButton-root img {
 .mediaInfoOfficialRating[data-exquisite-rating="US-NR"],
 .mediaInfoOfficialRating[data-exquisite-rating="UNRATED"],
 .mediaInfoOfficialRating[data-exquisite-rating="NOT RATED"] {
-    background: linear-gradient(
-        180deg,
-        #626b75 0%,
-        #454c54 100%
-    ) !important;
-
+    background: #454c54 !important;
     border-color: #808b96 !important;
 }
