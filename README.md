@@ -2,7 +2,7 @@
 
 **ExquisiteFin** is a custom CSS theme for Jellyfin 12's Modern interface. It uses adapted, locally bundled CSS from ElegantFin and its Jellyfin 12 Modern companion, with ExquisiteFin's own teal-accented styling layered on top.
 
-> **Current version:** v0.6.0  
+> **Current version:** v0.6.1  
 > **Target UI:** Jellyfin 12 Modern  
 > **Status:** Active development. The bundled CSS has been structurally validated; a fresh live Jellyfin smoke test is still recommended after upgrading.
 
@@ -40,10 +40,10 @@ In Jellyfin, open **Dashboard → General → Custom CSS** and add this single i
 @import url("https://cdn.jsdelivr.net/gh/laytnight-coder/ExquisiteFin@main/Theme/ExquisiteFin.css");
 ```
 
-For a reproducible v0.6.0 install pinned to the current bundle commit:
+For a reproducible v0.6.1 install pinned to the current bundle commit:
 
 ```css
-@import url("https://cdn.jsdelivr.net/gh/laytnight-coder/ExquisiteFin@d1e52ce886dba8abf5d0ac0276ed686a7de99ba8/Theme/ExquisiteFin.css");
+@import url("https://cdn.jsdelivr.net/gh/laytnight-coder/ExquisiteFin@22c05b470d4ba981c9771059f44ffaad3b9eefde/Theme/ExquisiteFin.css");
 ```
 
 Save the Custom CSS and refresh Jellyfin. ExquisiteFin now bundles the required ElegantFin base rules, Jellyfin 12 Modern compatibility rules, and ExquisiteFin overrides into **one stylesheet**. It no longer imports ElegantFin or the Modern companion as separate CSS files.
@@ -57,11 +57,11 @@ If you use Media Bar or Media Bar Enhanced, add the adapter as a second import, 
 @import url("https://cdn.jsdelivr.net/gh/laytnight-coder/ExquisiteFin@main/Theme/ExquisiteFin-MediaBar.css");
 ```
 
-Pinned v0.6.0 URLs:
+Pinned v0.6.1 URLs:
 
 ```css
-@import url("https://cdn.jsdelivr.net/gh/laytnight-coder/ExquisiteFin@d1e52ce886dba8abf5d0ac0276ed686a7de99ba8/Theme/ExquisiteFin.css");
-@import url("https://cdn.jsdelivr.net/gh/laytnight-coder/ExquisiteFin@383d64bff67a0ed99d9d1e52fceb8d550f8704e4/Theme/ExquisiteFin-MediaBar.css");
+@import url("https://cdn.jsdelivr.net/gh/laytnight-coder/ExquisiteFin@22c05b470d4ba981c9771059f44ffaad3b9eefde/Theme/ExquisiteFin.css");
+@import url("https://cdn.jsdelivr.net/gh/laytnight-coder/ExquisiteFin@14b4f14075451aecfb2980bc24fceca703544e56/Theme/ExquisiteFin-MediaBar.css");
 ```
 
 The Media Bar adapter is optional. Do not add it unless the plugin is installed.
@@ -72,6 +72,8 @@ The main stylesheet no longer depends on CSS files hosted by either upstream the
 
 For font rendering, the bundle still requests Inter through Google Fonts and loads Material Symbols font files from Google's font CDN, matching the upstream appearance. These are **font assets**, not upstream theme CSS dependencies. The theme is independent of upstream stylesheet delivery, but it is not an entirely offline package.
 
+The build also omits ElegantFin's default lower-corner primary-play positioning rule from the generated bundle, because ExquisiteFin supplies its own centered position. The original source copy remains intact so the build can be regenerated from the attributed upstream input.
+
 The vendored rules are based on:
 
 - [ElegantFin](https://github.com/lscambo13/ElegantFin), v26.09.05, by lscambo13.
@@ -79,7 +81,7 @@ The vendored rules are based on:
 
 Because the code is now vendored, upstream stylesheet updates will not flow in automatically. The source versions are intentionally explicit so future updates can be reviewed and tested rather than changing the UI unexpectedly.
 
-To reduce plugin-only CSS in the main bundle, the Jellyfin Enhanced, Episodes Ratings Grid, and KefinTweaks-specific styling blocks have been omitted from the core. Media Bar support is separate by design.
+To reduce plugin-only CSS in the main bundle, the Jellyfin Enhanced, Episodes Ratings Grid, and KefinTweaks-specific styling blocks have been omitted from the core. The Media Bar slideshow's TV-specific selector is also kept in the optional adapter. The small InPlayerEpisodePreview progress rule remains in core for now.
 
 ## Settings
 
