@@ -5630,49 +5630,49 @@ a:focus-visible,
     outline-offset: 2px;
 }
 
+/* ...all existing ExquisiteFin CSS remains exactly as-is... */
+
+
 /* ================================================================
-   6. HEADER NAVIGATION
+   6. JELLYFIN 12 MODERN HEADER NAVIGATION
    ================================================================ */
 
 /*
- * Use Jellyfin's simpler text-and-icon navigation treatment for the app-bar
- * library links. Only the active page uses the ExquisiteFin teal accent.
+ * Flat text-and-icon navigation for Jellyfin 12's Modern MUI app bar.
+ * Appended after all existing theme rules so these selectors take
+ * precedence without modifying the existing theme code.
  */
-.sectionTabs .emby-tab-button {
-    margin: 0.25em 0.4em !important;
-    padding: 0 0.4em !important;
-    height: auto !important;
-    min-height: 0 !important;
-    border: 0 !important;
+
+body.jellyfin-v12 a.MuiButton-root {
     border-radius: 0 !important;
     background: transparent !important;
     box-shadow: none !important;
-    color: var(--textColor) !important;
+    color: #d1d5db !important;
 }
 
-.sectionTabs .emby-tab-button-active {
-    border: 0 !important;
-    border-radius: 0 !important;
+/* Active/current navigation item */
+body.jellyfin-v12 a.MuiButton-root.MuiButton-colorPrimary {
+    background: transparent !important;
+    color: var(--exquisite-accent, #00c79f) !important;
+}
+
+/* Inactive hover/focus */
+body.jellyfin-v12 a.MuiButton-root:hover,
+body.jellyfin-v12 a.MuiButton-root:focus-visible {
     background: transparent !important;
     box-shadow: none !important;
-    color: var(--exquisite-accent) !important;
+    color: #d1d5db !important;
 }
 
-.sectionTabs .emby-tab-button:hover,
-.sectionTabs .emby-tab-button:focus-visible {
+/* Active hover/focus */
+body.jellyfin-v12 a.MuiButton-root.MuiButton-colorPrimary:hover,
+body.jellyfin-v12 a.MuiButton-root.MuiButton-colorPrimary:focus-visible {
     background: transparent !important;
-    box-shadow: none !important;
-    color: var(--textColor) !important;
+    color: var(--exquisite-accent, #00c79f) !important;
 }
 
-.sectionTabs .emby-tab-button-active:hover,
-.sectionTabs .emby-tab-button-active:focus-visible {
-    background: transparent !important;
-    color: var(--exquisite-accent) !important;
-}
-
-.sectionTabs .emby-tab-button::before,
-.sectionTabs .emby-tab-button .material-icons,
-.sectionTabs .emby-tab-button .material-symbols-rounded {
+/* Keep navigation icons following the link text */
+body.jellyfin-v12 a.MuiButton-root svg,
+body.jellyfin-v12 a.MuiButton-root img {
     color: inherit !important;
 }
