@@ -28,7 +28,7 @@ OVERRIDES_FILE = SOURCE / "ExquisiteFin-overrides.css"
 BUNDLE_FILE = THEME / "ExquisiteFin.css"
 MEDIA_ADAPTER_FILE = THEME / "ExquisiteFin-MediaBar.css"
 
-VERSION = "0.6.1"
+VERSION = "0.6.2"
 OMIT_MODERN_SECTIONS = {12, 14, 18}
 
 
