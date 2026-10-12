@@ -1,5 +1,5 @@
 /*!
- * ExquisiteFin v0.6.2 — self-contained theme bundle
+ * ExquisiteFin v0.6.3 — self-contained theme bundle
  *
  * Includes selectively trimmed and adapted GPL-2.0 code from:
  * - ElegantFin v26.09.05 by lscambo13
@@ -32,7 +32,7 @@
 }
 
 :root {
-    --elegantFinFooterText: "ExquisiteFin v0.6.2";
+    --elegantFinFooterText: "ExquisiteFin v0.6.3";
 
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
@@ -4270,7 +4270,7 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child {
 
 /*! ElegantFin for Jellyfin 12 "Modern" layout | v26.10.07 | GPL-2.0
  *  https://github.com/mihaif7/elegantfin-jf12
- *  Vendored into ExquisiteFin v0.6.2; attributed sources are in Theme/source/. */
+ *  Vendored into ExquisiteFin v0.6.3; attributed sources are in Theme/source/. */
 
 /* ══════════════════════════════════════════════════════════════════════════
  * 1. Knobs
@@ -5628,4 +5628,51 @@ a:focus-visible,
 .paper-icon-button-light:focus-visible {
     outline: var(--exquisite-control-border-width) solid var(--exquisite-accent) !important;
     outline-offset: 2px;
+}
+
+/* ================================================================
+   6. HEADER NAVIGATION
+   ================================================================ */
+
+/*
+ * Use Jellyfin's simpler text-and-icon navigation treatment for the app-bar
+ * library links. Only the active page uses the ExquisiteFin teal accent.
+ */
+.sectionTabs .emby-tab-button {
+    margin: 0.25em 0.4em !important;
+    padding: 0 0.4em !important;
+    height: auto !important;
+    min-height: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: var(--textColor) !important;
+}
+
+.sectionTabs .emby-tab-button-active {
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: var(--exquisite-accent) !important;
+}
+
+.sectionTabs .emby-tab-button:hover,
+.sectionTabs .emby-tab-button:focus-visible {
+    background: transparent !important;
+    box-shadow: none !important;
+    color: var(--textColor) !important;
+}
+
+.sectionTabs .emby-tab-button-active:hover,
+.sectionTabs .emby-tab-button-active:focus-visible {
+    background: transparent !important;
+    color: var(--exquisite-accent) !important;
+}
+
+.sectionTabs .emby-tab-button::before,
+.sectionTabs .emby-tab-button .material-icons,
+.sectionTabs .emby-tab-button .material-symbols-rounded {
+    color: inherit !important;
 }
