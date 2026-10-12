@@ -1,6 +1,6 @@
 # ExquisiteFin design notes
 
-## Current baseline — v0.6.1
+## Current baseline — v0.6.2
 
 ExquisiteFin targets Jellyfin 12 Modern. The distributable core is now a self-contained theme bundle at `Theme/ExquisiteFin.css`: it combines the required ElegantFin v26.09.05 rules, Jellyfin 12 Modern compatibility from v26.10.07, and ExquisiteFin's overrides.
 
@@ -9,6 +9,8 @@ The core no longer imports either upstream theme stylesheet. It still loads Inte
 The optional `Theme/ExquisiteFin-MediaBar.css` adapter keeps the Media Bar plugin styles separate from the main theme. Import it after the main theme only when Media Bar or Media Bar Enhanced is installed.
 
 ## Visual direction
+
+Card indicators use an inset that matches their top spacing: 0.5em on desktop and 0.45em on mobile. ExquisiteFin keeps their left alignment and does not alter indicator colour or size.
 
 - Dark blue-gray surfaces with a restrained teal accent (`#00c79f`).
 - Wide collection/library-folder cards and slightly enlarged Continue Watching cards.
