@@ -1,5 +1,5 @@
 /*!
- * ExquisiteFin v0.6.0 — self-contained theme bundle
+ * ExquisiteFin v0.6.1 — self-contained theme bundle
  *
  * Includes selectively trimmed and adapted GPL-2.0 code from:
  * - ElegantFin v26.09.05 by lscambo13
@@ -32,7 +32,7 @@
 }
 
 :root {
-    --elegantFinFooterText: "ExquisiteFin v0.6.0";
+    --elegantFinFooterText: "ExquisiteFin v0.6.1";
 
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
@@ -632,14 +632,6 @@ select {
 .cardBox:not(.visualCardBox) .cardPadder {
     background-color: var(--lighterGradientPoint);
     box-shadow: none;
-}
-
-.cardOverlayContainer > .cardOverlayFab-primary {
-    margin-left: unset;
-    margin-top: unset;
-    top: unset;
-    left: calc(var(--overlayPlayButtonPosition) - 1.5em);
-    bottom: calc(var(--overlayPlayButtonPosition) - 1.5em);
 }
 
 .cardOverlayContainer > .cardOverlayFab-primary,
@@ -4278,7 +4270,7 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child {
 
 /*! ElegantFin for Jellyfin 12 "Modern" layout | v26.10.07 | GPL-2.0
  *  https://github.com/mihaif7/elegantfin-jf12
- *  Vendored into ExquisiteFin v0.6.0; attributed sources are in Theme/source/. */
+ *  Vendored into ExquisiteFin v0.6.1; attributed sources are in Theme/source/. */
 
 /* ══════════════════════════════════════════════════════════════════════════
  * 1. Knobs
@@ -5198,11 +5190,6 @@ body:has(.MuiAppBar-root) .homeSectionsContainer div:not(.sectionTitleContainer-
 
 :root.layout-tv .mainAnimatedPage {
     overflow-x: clip;
-}
-
-:root.layout-tv #slides-container .backdrop-container {
-    bottom: 0;
-    height: auto;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
