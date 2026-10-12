@@ -5510,7 +5510,7 @@ body:has(.MuiAppBar-root) .homeSectionsContainer div:not(.sectionTitleContainer-
 /* Keep the tagline, synopsis, and external rating links centred. */
 .tagline {
     text-align: center !important;
-    transform: translateY(-2.00em) !important;
+    transform: translateY(-0.50em) !important;
 }
 
 #itemDetailPage .overview,
