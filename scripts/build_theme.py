@@ -199,6 +199,7 @@ def trim_modern(css: str) -> tuple[str, str, str]:
         " *  https://github.com/mihaif7/elegantfin-jf12\n"
         f" *  Vendored into ExquisiteFin v{VERSION}; attributed sources are in Theme/source/. */",
     )
+    core = core.strip() + "\n"
     return core, media, tv_media_rule.strip()
 
 
