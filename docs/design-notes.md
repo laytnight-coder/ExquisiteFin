@@ -1,6 +1,6 @@
 # ExquisiteFin design notes
 
-## Current baseline — v0.6.0
+## Current baseline — v0.6.1
 
 ExquisiteFin targets Jellyfin 12 Modern. The distributable core is now a self-contained theme bundle at `Theme/ExquisiteFin.css`: it combines the required ElegantFin v26.09.05 rules, Jellyfin 12 Modern compatibility from v26.10.07, and ExquisiteFin's overrides.
 
@@ -29,7 +29,7 @@ Files in `Theme/source/` are the attributed upstream inputs plus ExquisiteFin-ow
 
 Run `python scripts/build_theme.py` to generate the distributable core and optional Media Bar adapter. Run `python scripts/build_theme.py --check` to validate the generated CSS structure and confirm that the core has no upstream theme stylesheet imports without rewriting files.
 
-The build trims Media Bar from the core and writes its base and Modern-specific styles into the optional adapter. Jellyfin Enhanced, Episodes Ratings Grid, and KefinTweaks-only sections are not included in the core bundle to avoid carrying plugin-specific CSS by default.
+The build trims Media Bar from the core and writes its base and Modern-specific styles into the optional adapter, including the TV-specific slideshow backdrop rule. Jellyfin Enhanced, Episodes Ratings Grid, and KefinTweaks-only sections are not included in the core bundle to avoid carrying plugin-specific CSS by default. ElegantFin's generic lower-corner play-button positioning is also omitted from the generated bundle because ExquisiteFin's later override fully supplies the intended centered position; the upstream source remains unchanged. The small InPlayerEpisodePreview progress rule remains in core for now.
 
 Some selectors appear in both the ElegantFin and Modern sources, notably `:root` and `:root[data-theme="light"]`. These are intentional cascade layers: the Modern companion maps theme colours into Jellyfin's MUI palette and should not be treated as duplicate blocks without checking each property.
 
