@@ -40,3 +40,5 @@ body.jellyfin-v12 a.MuiButton-root svg,
 body.jellyfin-v12 a.MuiButton-root img {
     color: inherit !important;
 }
+
+/* Trigger bundle rebuild so the accepted navigation is regenerated in the main CSS. */
