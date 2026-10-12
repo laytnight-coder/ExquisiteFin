@@ -1,5 +1,5 @@
 /*!
- * ExquisiteFin v0.6.1 — self-contained theme bundle
+ * ExquisiteFin v0.6.2 — self-contained theme bundle
  *
  * Includes selectively trimmed and adapted GPL-2.0 code from:
  * - ElegantFin v26.09.05 by lscambo13
@@ -32,7 +32,7 @@
 }
 
 :root {
-    --elegantFinFooterText: "ExquisiteFin v0.6.1";
+    --elegantFinFooterText: "ExquisiteFin v0.6.2";
 
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
@@ -4270,7 +4270,7 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child {
 
 /*! ElegantFin for Jellyfin 12 "Modern" layout | v26.10.07 | GPL-2.0
  *  https://github.com/mihaif7/elegantfin-jf12
- *  Vendored into ExquisiteFin v0.6.1; attributed sources are in Theme/source/. */
+ *  Vendored into ExquisiteFin v0.6.2; attributed sources are in Theme/source/. */
 
 /* ══════════════════════════════════════════════════════════════════════════
  * 1. Knobs
@@ -5309,9 +5309,15 @@ body:has(.MuiAppBar-root) .homeSectionsContainer div:not(.sectionTitleContainer-
     background: var(--exquisite-accent) !important;
 }
 
-/* Place episode/count indicators at the top-left of cards. */
+/* Place episode/count indicators at the top-left with equal top/side insets. */
 .cardIndicators {
-    left: 0.225em !important;
+    left: 0.5em !important;
+    right: auto !important;
+}
+
+/* ElegantFin uses a slightly smaller top inset on mobile; match it on the side. */
+.layout-mobile .cardIndicators {
+    left: 0.45em !important;
     right: auto !important;
 }
 
