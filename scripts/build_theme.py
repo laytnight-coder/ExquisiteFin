@@ -28,7 +28,7 @@ OVERRIDES_FILE = SOURCE / "ExquisiteFin-overrides.css"
 BUNDLE_FILE = THEME / "ExquisiteFin.css"
 MEDIA_ADAPTER_FILE = THEME / "ExquisiteFin-MediaBar.css"
 
-VERSION = "0.6.0"
+VERSION = "0.6.1"
 OMIT_MODERN_SECTIONS = {12, 14, 18}
 
 
@@ -126,6 +126,18 @@ def trim_base(css: str) -> tuple[str, str]:
         css = css[:group_start] + replacement + css[next_collection_rule:]
     css = re.sub(r"\.series-episodes-section\s*\{\s*order:\s*4;\s*\}\s*", "", css)
 
+    # ElegantFin positions the primary card play button near a card corner.
+    # ExquisiteFin explicitly supplies the complete centered positioning, so
+    # keep the shared visual rule below but omit this redundant position block.
+    css = re.sub(
+        r"\.cardOverlayContainer > \.cardOverlayFab-primary\s*\{\s*"
+        r"margin-left: unset;\s*margin-top: unset;\s*top: unset;\s*"
+        r"left: calc\(var\(--overlayPlayButtonPosition\) - 1\.5em\);\s*"
+        r"bottom: calc\(var\(--overlayPlayButtonPosition\) - 1\.5em\);\s*\}\s*",
+        "",
+        css,
+    )
+
     # These commented-out performance experiments never ran in the upstream
     # theme. Keep the active low-end-TV fixes that follow them.
     for pattern in (
@@ -142,11 +154,13 @@ def trim_base(css: str) -> tuple[str, str]:
     )
     if ".series-episodes-section" in css:
         raise ValueError("KefinTweaks selector cleanup failed.")
+    if re.search(r"\.cardOverlayContainer > \.cardOverlayFab-primary\s*\{", css):
+        raise ValueError("Redundant ElegantFin primary-play positioning remains.")
     return css.strip(), font_import
 
 
-def trim_modern(css: str) -> tuple[str, str]:
-    """Bundle core compatibility; return Media Bar rules for the optional adapter."""
+def trim_modern(css: str) -> tuple[str, str, str]:
+    """Bundle core compatibility; return optional Media Bar rules separately."""
     lines, sections = find_modern_sections(css)
     media_section = next((s for s in sections if s["number"] == 12), None)
     if media_section is None:
@@ -165,6 +179,18 @@ def trim_modern(css: str) -> tuple[str, str]:
     core = "\n".join(parts).strip() + "\n"
     media = "\n".join(lines[media_section["start"]:media_section["end"]]).strip()
 
+    # This TV-specific rule only targets the Media Bar slideshow. Move it into
+    # the optional adapter rather than loading it for users without that plugin.
+    tv_media_rule_pattern = re.compile(
+        r":root\.layout-tv #slides-container \.backdrop-container\s*\{\s*"
+        r"bottom: 0;\s*height: auto;\s*\}\s*"
+    )
+    tv_media_rule, rule_count = tv_media_rule_pattern.subn("", core)
+    if rule_count != 1:
+        raise ValueError(
+            f"Expected one TV Media Bar rule to move, found {rule_count}."
+        )
+
     core = core.replace(
         '/*! ElegantFin for Jellyfin 12 "Modern" layout | v26.10.07 | GPL-2.0\n'
         " *  https://github.com/mihaif7/elegantfin-jf12\n"
@@ -173,7 +199,7 @@ def trim_modern(css: str) -> tuple[str, str]:
         " *  https://github.com/mihaif7/elegantfin-jf12\n"
         f" *  Vendored into ExquisiteFin v{VERSION}; attributed sources are in Theme/source/. */",
     )
-    return core, media
+    return core, media, tv_media_rule.strip()
 
 
 def balanced_css(css: str) -> bool:
@@ -221,7 +247,7 @@ def strip_comments(css: str) -> str:
 
 def build() -> tuple[str, str]:
     base, font_import = trim_base(read_css(BASE_FILE))
-    modern, media_modern = trim_modern(read_css(MODERN_FILE))
+    modern, media_modern, media_tv_rule = trim_modern(read_css(MODERN_FILE))
     media_legacy = read_css(MEDIA_FILE).strip()
     overrides = read_css(OVERRIDES_FILE).strip()
 
@@ -246,7 +272,11 @@ def build() -> tuple[str, str]:
         " * Load after Theme/ExquisiteFin.css. Omit this adapter without Media Bar.\n"
         " */\n"
     )
-    adapter = f"{media_header}\n{media_legacy}\n\n{media_modern}\n"
+    adapter = (
+        f"{media_header}\n{media_legacy}\n\n{media_modern}\n\n"
+        f"/* Modern TV slideshow adaptation; only used with Media Bar. */\n"
+        f"{media_tv_rule}\n"
+    )
 
     if not balanced_css(bundle):
         raise ValueError("The built core bundle failed CSS structure validation.")
@@ -258,6 +288,12 @@ def build() -> tuple[str, str]:
         raise ValueError(f"Unexpected active core imports: {active_imports!r}")
     if "basic styling for the Media Bar Plugin - start" in base:
         raise ValueError("Media Bar core rules were not removed.")
+    if re.search(r"\.cardOverlayContainer > \.cardOverlayFab-primary\s*\{", base):
+        raise ValueError("Redundant primary-play positioning remains in the core.")
+    if ":root.layout-tv #slides-container .backdrop-container" in modern:
+        raise ValueError("TV-specific Media Bar rule remains in the core.")
+    if ":root.layout-tv #slides-container .backdrop-container" not in adapter:
+        raise ValueError("TV-specific Media Bar rule is missing from the adapter.")
     if ".series-episodes-section" in base:
         raise ValueError("KefinTweaks selectors were not removed.")
     if any(
