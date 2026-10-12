@@ -1,41 +1,51 @@
 # ExquisiteFin design notes
 
-## Current baseline
+## Current baseline — v0.6.0
 
-ExquisiteFin is a custom CSS theme for Jellyfin 12 Modern built on ElegantFin and the ElegantFin Jellyfin Modern companion. The active stylesheet is `Theme/ExquisiteFin.css`; it contains all ExquisiteFin-owned overrides and imports the upstream layers first.
+ExquisiteFin targets Jellyfin 12 Modern. The distributable core is now a self-contained theme bundle at `Theme/ExquisiteFin.css`: it combines the required ElegantFin v26.09.05 rules, Jellyfin 12 Modern compatibility from v26.10.07, and ExquisiteFin's overrides.
 
-The current visual direction is:
+The core no longer imports either upstream theme stylesheet. It still loads Inter and Material Symbols font assets from Google-hosted endpoints to preserve the current typography and icons, so "self-contained" here means independent of upstream theme CSS delivery rather than fully offline.
+
+The optional `Theme/ExquisiteFin-MediaBar.css` adapter keeps the Media Bar plugin styles separate from the main theme. Import it after the main theme only when Media Bar or Media Bar Enhanced is installed.
+
+## Visual direction
 
 - Dark blue-gray surfaces with a restrained teal accent (`#00c79f`).
 - Wide collection/library-folder cards and slightly enlarged Continue Watching cards.
-- A prominent centered play control and clean, icon-only secondary card actions.
+- A prominent centered play control and clean icon-only secondary card actions.
 - Persistent semantic colours for selected bookmark, Mark Played, and Favorite states.
 - Centered movie synopsis and external rating links.
-- A rounded Genres pill beneath the movie hero actions on desktop-sized layouts.
+- A rounded Genres pill beneath hero actions on desktop-sized layouts.
 - Clear keyboard focus and hover states.
 
-## CSS structure
+## Source and distribution
 
-The main stylesheet is grouped by purpose:
+Files in `Theme/source/` are the attributed upstream inputs plus ExquisiteFin-owned overrides:
 
-1. Settings and upstream theme variables.
-2. Home and library presentation.
-3. Card play and secondary actions.
-4. Movie details.
-5. General interactive states.
+- `ElegantFin.css` — ElegantFin v26.09.05 readable base.
+- `Jellyfin12-Modern.css` — Modern companion v26.10.07.
+- `MediaBar-ElegantFin.css` — ElegantFin's optional Media Bar support.
+- `ExquisiteFin-overrides.css` — ExquisiteFin-owned settings and visual rules.
 
-ExquisiteFin-specific rules remain after the upstream imports. Frequently tuned settings are kept near the top of the file rather than scattered through selectors.
+Run `python scripts/build_theme.py` to generate the distributable core and optional Media Bar adapter. Run `python scripts/build_theme.py --check` to validate the generated CSS structure and confirm that the core has no upstream theme stylesheet imports without rewriting files.
+
+The build trims Media Bar from the core and writes its base and Modern-specific styles into the optional adapter. Jellyfin Enhanced, Episodes Ratings Grid, and KefinTweaks-only sections are not included in the core bundle to avoid carrying plugin-specific CSS by default.
+
+Some selectors appear in both the ElegantFin and Modern sources, notably `:root` and `:root[data-theme="light"]`. These are intentional cascade layers: the Modern companion maps theme colours into Jellyfin's MUI palette and should not be treated as duplicate blocks without checking each property.
 
 ## Development approach
 
-Visual changes should be isolated and tested **one at a time** before they are merged into the main stylesheet. When a temporary testing file is useful, it should be removed after its confirmed styling is promoted or discarded.
+- Change one visible component at a time and verify it in Jellyfin before merging.
+- Inspect the current Modern UI markup before adding selectors.
+- Keep user-facing variables together and group overrides by purpose.
+- Review source updates deliberately; vendored upstream code will not refresh automatically.
+- Test desktop, mobile, and TV layouts separately when a change should affect more than one layout.
+- Keep optional plugin compatibility in separate adapters where practical.
+- Preserve upstream attribution and GPL-2.0 licensing notices.
 
-For layout issues, inspect the actual Jellyfin Modern DOM and the upstream rules before adding overrides. A selector that worked with a legacy layout may not target the same element in Modern.
+## Upstream sources and licensing
 
-Desktop, mobile, and TV layouts should be checked separately whenever a change is expected to work across those form factors. Avoid broad hero repositioning rules unless the change has been validated against the full details-page layout.
+- [ElegantFin](https://github.com/lscambo13/ElegantFin) by lscambo13, v26.09.05.
+- [ElegantFin Jellyfin 12 Modern companion](https://github.com/mihaif7/elegantfin-jf12) by mihaif7, v26.10.07.
 
-## Upstream dependencies and licensing
-
-The stylesheet currently imports pinned versions of ElegantFin, its Media Bar plugin support, and the Jellyfin Modern companion. ExquisiteFin is therefore not fully self-contained yet. Gradually replace upstream-dependent pieces where that improves clarity or independence, without modifying the upstream repositories.
-
-ElegantFin is maintained by lscambo13, and the Jellyfin Modern companion by mihaif7. ExquisiteFin is an independent project. See the repository's `LICENSE` file for licensing information.
+ExquisiteFin is an independent project; it does not modify upstream repositories and is not an official ElegantFin or Jellyfin project. See the repository's `LICENSE` for licensing information.
