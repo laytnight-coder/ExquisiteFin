@@ -1,0 +1,46 @@
+/*
+ * ExquisiteFin Header Navigation Test
+ *
+ * Temporary visual test. Uses the last known-good ExquisiteFin bundle and
+ * targets Jellyfin 12 Modern's actual MUI app-bar library buttons.
+ */
+
+@import url("https://cdn.jsdelivr.net/gh/laytnight-coder/ExquisiteFin@41dac8952a13264afee137e3c4acf6f08cfe5bf7/Theme/ExquisiteFin.css");
+
+/* Flat Jellyfin-style library links: no pills, teal active page. */
+.MuiAppBar-root .MuiButton-text:not(.MuiButtonGroup-grouped):not(:has(.MuiButton-startIcon > img)) {
+    margin-inline: 0.2rem !important;
+    padding-block: 0.15rem !important;
+    padding-inline: 0.4rem !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: var(--textColor) !important;
+}
+
+.MuiAppBar-root .MuiButton-text:not(.MuiButtonGroup-grouped):not(:has(.MuiButton-startIcon > img)):hover,
+.MuiAppBar-root .MuiButton-text:not(.MuiButtonGroup-grouped):not(:has(.MuiButton-startIcon > img)):focus-visible {
+    background: transparent !important;
+    box-shadow: none !important;
+    color: var(--textColor) !important;
+}
+
+.MuiAppBar-root .MuiButton-textPrimary:not(.MuiButtonGroup-grouped):not(:has(.MuiButton-startIcon > img)) {
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: var(--exquisite-accent) !important;
+}
+
+.MuiAppBar-root .MuiButton-textPrimary:not(.MuiButtonGroup-grouped):not(:has(.MuiButton-startIcon > img)):hover,
+.MuiAppBar-root .MuiButton-textPrimary:not(.MuiButtonGroup-grouped):not(:has(.MuiButton-startIcon > img)):focus-visible {
+    background: transparent !important;
+    color: var(--exquisite-accent) !important;
+}
+
+.MuiAppBar-root .MuiButton-text:not(.MuiButtonGroup-grouped):not(:has(.MuiButton-startIcon > img)) .MuiButton-startIcon,
+.MuiAppBar-root .MuiButton-text:not(.MuiButtonGroup-grouped):not(:has(.MuiButton-startIcon > img)) .MuiButton-startIcon > * {
+    color: inherit !important;
+}
