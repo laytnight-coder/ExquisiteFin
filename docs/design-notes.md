@@ -1,6 +1,6 @@
 # ExquisiteFin design notes
 
-## Current baseline — v0.6.2
+## Current baseline — v0.6.3
 
 ExquisiteFin targets Jellyfin 12 Modern. The distributable core is now a self-contained theme bundle at `Theme/ExquisiteFin.css`: it combines the required ElegantFin v26.09.05 rules, Jellyfin 12 Modern compatibility from v26.10.07, and ExquisiteFin's overrides.
 
@@ -19,6 +19,7 @@ Card indicators use an inset that matches their top spacing: 0.5em on desktop an
 - Centered movie synopsis and external rating links.
 - A rounded Genres pill beneath hero actions on desktop-sized layouts.
 - Clear keyboard focus and hover states.
+- Flat header library navigation; the current section is highlighted in teal instead of a pill.
 
 ## Source and distribution
 
