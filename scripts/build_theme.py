@@ -25,10 +25,11 @@ BASE_FILE = SOURCE / "ElegantFin.css"
 MODERN_FILE = SOURCE / "Jellyfin12-Modern.css"
 MEDIA_FILE = SOURCE / "MediaBar-ElegantFin.css"
 OVERRIDES_FILE = SOURCE / "ExquisiteFin-overrides.css"
+HEADER_FILE = SOURCE / "ExquisiteFin-header.css"
 BUNDLE_FILE = THEME / "ExquisiteFin.css"
 MEDIA_ADAPTER_FILE = THEME / "ExquisiteFin-MediaBar.css"
 
-VERSION = "0.6.3"
+VERSION = "0.6.4"
 OMIT_MODERN_SECTIONS = {12, 14, 18}
 
 
@@ -251,6 +252,7 @@ def build() -> tuple[str, str]:
     modern, media_modern, media_tv_rule = trim_modern(read_css(MODERN_FILE))
     media_legacy = read_css(MEDIA_FILE).strip()
     overrides = read_css(OVERRIDES_FILE).strip()
+    header = read_css(HEADER_FILE).strip()
 
     bundle_header = (
         "/*!\n"
@@ -263,7 +265,7 @@ def build() -> tuple[str, str]:
         " * and source copies. No upstream theme stylesheet imports are required.\n"
         " */\n"
     )
-    bundle = f"{bundle_header}{font_import}\n\n{base}\n\n{modern.strip()}\n\n{overrides}\n"
+    bundle = f"{bundle_header}{font_import}\n\n{base}\n\n{modern.strip()}\n\n{overrides}\n\n{header}\n"
 
     media_header = (
         "/*!\n"
