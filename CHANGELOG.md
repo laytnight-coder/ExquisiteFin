@@ -2,6 +2,14 @@
 
 All notable ExquisiteFin changes are documented here.
 
+## [0.6.2] - 2026-10-12
+
+### Changed
+
+- Increased the desktop card-indicator left inset from `0.225em` to `0.5em`, matching ElegantFin's existing top inset.
+- Added a mobile-specific `0.45em` left inset to match ElegantFin's smaller mobile top inset.
+- Kept the indicator group left-aligned and preserved the existing colours, size, and indicator appearance.
+
 ## [0.6.1] - 2026-10-12
 
 ### Changed
