@@ -80,9 +80,15 @@
     background: var(--exquisite-accent) !important;
 }
 
-/* Place episode/count indicators at the top-left of cards. */
+/* Place episode/count indicators at the top-left with equal top/side insets. */
 .cardIndicators {
-    left: 0.225em !important;
+    left: 0.5em !important;
+    right: auto !important;
+}
+
+/* ElegantFin uses a slightly smaller top inset on mobile; match it on the side. */
+.layout-mobile .cardIndicators {
+    left: 0.45em !important;
     right: auto !important;
 }
 
