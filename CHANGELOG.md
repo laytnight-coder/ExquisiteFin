@@ -2,6 +2,15 @@
 
 All notable ExquisiteFin changes are documented here.
 
+## [0.6.3] - 2026-10-12
+
+### Changed
+
+- Restyled the header's library navigation as flat text-and-icon links, closer to Jellyfin's default appearance.
+- Removed the pill background, rounded corners, and button shadow from header library tabs.
+- Kept inactive links light and highlighted the active page with the ExquisiteFin teal accent.
+- Made hover/focus states remain flat instead of restoring pill backgrounds.
+
 ## [0.6.2] - 2026-10-12
 
 ### Changed
