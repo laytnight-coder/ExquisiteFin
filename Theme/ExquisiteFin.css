@@ -1,5 +1,5 @@
 /*!
- * ExquisiteFin v0.6.4 — self-contained theme bundle
+ * ExquisiteFin v0.6.3 — self-contained theme bundle
  *
  * Includes selectively trimmed and adapted GPL-2.0 code from:
  * - ElegantFin v26.09.05 by lscambo13
@@ -32,7 +32,7 @@
 }
 
 :root {
-    --elegantFinFooterText: "ExquisiteFin v0.6.4";
+    --elegantFinFooterText: "ExquisiteFin v0.6.3";
 
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
@@ -4270,7 +4270,7 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child {
 
 /*! ElegantFin for Jellyfin 12 "Modern" layout | v26.10.07 | GPL-2.0
  *  https://github.com/mihaif7/elegantfin-jf12
- *  Vendored into ExquisiteFin v0.6.4; attributed sources are in Theme/source/. */
+ *  Vendored into ExquisiteFin v0.6.3; attributed sources are in Theme/source/. */
 
 /* ══════════════════════════════════════════════════════════════════════════
  * 1. Knobs
@@ -5635,14 +5635,14 @@ a:focus-visible,
    ================================================================ */
 
 /*
- * Jellyfin 12 Modern renders the library links as MUI text buttons.
- * Keep them flat like stock Jellyfin: no pill, border, or shadow.
- * Only the active library gets the ExquisiteFin teal accent.
+ * Use Jellyfin's simpler text-and-icon navigation treatment for the app-bar
+ * library links. Only the active page uses the ExquisiteFin teal accent.
  */
-.MuiAppBar-root .MuiButton-text:not(.MuiButtonGroup-grouped):not(:has(.MuiButton-startIcon > img)) {
-    margin-inline: 0.2rem !important;
-    padding-block: 0.15rem !important;
-    padding-inline: 0.4rem !important;
+.sectionTabs .emby-tab-button {
+    margin: 0.25em 0.4em !important;
+    padding: 0 0.4em !important;
+    height: auto !important;
+    min-height: 0 !important;
     border: 0 !important;
     border-radius: 0 !important;
     background: transparent !important;
@@ -5650,15 +5650,7 @@ a:focus-visible,
     color: var(--textColor) !important;
 }
 
-.MuiAppBar-root .MuiButton-text:not(.MuiButtonGroup-grouped):not(:has(.MuiButton-startIcon > img)):hover,
-.MuiAppBar-root .MuiButton-text:not(.MuiButtonGroup-grouped):not(:has(.MuiButton-startIcon > img)):focus-visible {
-    background: transparent !important;
-    box-shadow: none !important;
-    color: var(--textColor) !important;
-}
-
-/* Jellyfin marks the current library with MuiButton-textPrimary. */
-.MuiAppBar-root .MuiButton-textPrimary:not(.MuiButtonGroup-grouped):not(:has(.MuiButton-startIcon > img)) {
+.sectionTabs .emby-tab-button-active {
     border: 0 !important;
     border-radius: 0 !important;
     background: transparent !important;
@@ -5666,58 +5658,21 @@ a:focus-visible,
     color: var(--exquisite-accent) !important;
 }
 
-.MuiAppBar-root .MuiButton-textPrimary:not(.MuiButtonGroup-grouped):not(:has(.MuiButton-startIcon > img)):hover,
-.MuiAppBar-root .MuiButton-textPrimary:not(.MuiButtonGroup-grouped):not(:has(.MuiButton-startIcon > img)):focus-visible {
-    background: transparent !important;
-    color: var(--exquisite-accent) !important;
-}
-
-.MuiAppBar-root .MuiButton-text:not(.MuiButtonGroup-grouped):not(:has(.MuiButton-startIcon > img)) .MuiButton-startIcon,
-.MuiAppBar-root .MuiButton-text:not(.MuiButtonGroup-grouped):not(:has(.MuiButton-startIcon > img)) .MuiButton-startIcon > * {
-    color: inherit !important;
-}
-
-/*
- * ExquisiteFin-owned Jellyfin 12 Modern header navigation.
- *
- * Jellyfin 12 Modern uses MUI Button components for the library navigation.
- * The stable MUI color classes provide the active/inactive state hooks.
- * This accepted navigation styling is bundled into Theme/ExquisiteFin.css.
- */
-
-/* Flat library navigation: no pills, discs, or button shadows. */
-body.jellyfin-v12 a.MuiButton-root {
-    border-radius: 0 !important;
+.sectionTabs .emby-tab-button:hover,
+.sectionTabs .emby-tab-button:focus-visible {
     background: transparent !important;
     box-shadow: none !important;
-    color: #d1d5db !important;
+    color: var(--textColor) !important;
 }
 
-/* Active/current navigation item. */
-body.jellyfin-v12 a.MuiButton-root.MuiButton-colorPrimary {
+.sectionTabs .emby-tab-button-active:hover,
+.sectionTabs .emby-tab-button-active:focus-visible {
     background: transparent !important;
     color: var(--exquisite-accent) !important;
 }
 
-/* Inactive hover/focus stays flat. */
-body.jellyfin-v12 a.MuiButton-root:hover,
-body.jellyfin-v12 a.MuiButton-root:focus-visible {
-    background: transparent !important;
-    box-shadow: none !important;
-    color: #d1d5db !important;
-}
-
-/* Active hover/focus keeps the ExquisiteFin accent. */
-body.jellyfin-v12 a.MuiButton-root.MuiButton-colorPrimary:hover,
-body.jellyfin-v12 a.MuiButton-root.MuiButton-colorPrimary:focus-visible {
-    background: transparent !important;
-    color: var(--exquisite-accent) !important;
-}
-
-/* Keep navigation icons following the link text colour. */
-body.jellyfin-v12 a.MuiButton-root svg,
-body.jellyfin-v12 a.MuiButton-root img {
+.sectionTabs .emby-tab-button::before,
+.sectionTabs .emby-tab-button .material-icons,
+.sectionTabs .emby-tab-button .material-symbols-rounded {
     color: inherit !important;
 }
-
-/* Trigger bundle rebuild so the accepted navigation is regenerated in the main CSS. */

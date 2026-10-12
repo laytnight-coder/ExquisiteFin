@@ -1,12 +1,12 @@
 # ExquisiteFin design notes
 
-## Current baseline — v0.6.4
+## Current baseline — v0.6.2
 
-ExquisiteFin targets Jellyfin 12 Modern. The distributable core is the complete `Theme/ExquisiteFin.css` bundle: it combines the required ElegantFin v26.09.05 rules, Jellyfin 12 Modern compatibility from v26.10.07, and ExquisiteFin's accepted overrides.
+ExquisiteFin targets Jellyfin 12 Modern. The distributable core is now a self-contained theme bundle at `Theme/ExquisiteFin.css`: it combines the required ElegantFin v26.09.05 rules, Jellyfin 12 Modern compatibility from v26.10.07, and ExquisiteFin's overrides.
 
-The core no longer imports either upstream theme stylesheet. It still loads Inter and Material Symbols font assets from Google-hosted endpoints to preserve the current typography and icons, so "self-contained" means independent of upstream theme CSS delivery rather than fully offline.
+The core no longer imports either upstream theme stylesheet. It still loads Inter and Material Symbols font assets from Google-hosted endpoints to preserve the current typography and icons, so "self-contained" here means independent of upstream theme CSS delivery rather than fully offline.
 
-The optional `Theme/ExquisiteFin-MediaBar.css` adapter keeps Media Bar plugin styles separate from the main theme. Import it after the main theme only when Media Bar or Media Bar Enhanced is installed.
+The optional `Theme/ExquisiteFin-MediaBar.css` adapter keeps the Media Bar plugin styles separate from the main theme. Import it after the main theme only when Media Bar or Media Bar Enhanced is installed.
 
 ## Visual direction
 
@@ -19,51 +19,33 @@ Card indicators use an inset that matches their top spacing: 0.5em on desktop an
 - Centered movie synopsis and external rating links.
 - A rounded Genres pill beneath hero actions on desktop-sized layouts.
 - Clear keyboard focus and hover states.
-- Flat header library navigation; the current section is highlighted in teal instead of a pill.
 
-## Distribution
+## Source and distribution
 
-The repository now contains only the maintained distributable theme files plus documentation:
+Files in `Theme/source/` are the attributed upstream inputs plus ExquisiteFin-owned overrides:
 
-```text
-ExquisiteFin/
-├── Theme/
-│   ├── ExquisiteFin.css
-│   └── ExquisiteFin-MediaBar.css
-├── docs/
-│   └── design-notes.md
-├── CHANGELOG.md
-├── LICENSE
-└── README.md
-```
+- `ElegantFin.css` — ElegantFin v26.09.05 readable base.
+- `Jellyfin12-Modern.css` — Modern companion v26.10.07.
+- `MediaBar-ElegantFin.css` — ElegantFin's optional Media Bar support.
+- `ExquisiteFin-overrides.css` — ExquisiteFin-owned settings and visual rules.
 
-There is no source tree or build script in the distributable repository. `Theme/ExquisiteFin.css` is the maintained main bundle, and `Theme/ExquisiteFin-MediaBar.css` is the maintained optional plugin adapter.
+Run `python scripts/build_theme.py` to generate the distributable core and optional Media Bar adapter. Run `python scripts/build_theme.py --check` to validate the generated CSS structure and confirm that the core has no upstream theme stylesheet imports without rewriting files.
 
-The Media Bar adapter keeps plugin-specific rules out of the core, including the TV-specific slideshow adaptation. Jellyfin Enhanced, Episodes Ratings Grid, and KefinTweaks-only sections are not carried in the core bundle.
+The build trims Media Bar from the core and writes its base and Modern-specific styles into the optional adapter, including the TV-specific slideshow backdrop rule. Jellyfin Enhanced, Episodes Ratings Grid, and KefinTweaks-only sections are not included in the core bundle to avoid carrying plugin-specific CSS by default. ElegantFin's generic lower-corner play-button positioning is also omitted from the generated bundle because ExquisiteFin's later override fully supplies the intended centered position; the upstream source remains unchanged. The small InPlayerEpisodePreview progress rule remains in core for now.
 
-## Accepted layout decisions
-
-- The primary card play control is centered and uses the ExquisiteFin teal outline treatment.
-- Secondary card actions are icon-only and positioned together at the lower right.
-- Collection and UserView cards use the intended wide 4:1 geometry.
-- Continue Watching uses `--resumeCardScale: 1.20`.
-- Movie backdrops use `--backdropTrimFromTop: 0%`.
-- Movie Genres is displayed as a dark rounded pill beneath the hero actions on desktop-sized layouts.
-- Jellyfin 12 Modern header navigation uses flat text links, with inactive links light and the active page in ExquisiteFin teal.
-- The library toolbar spacing is not overridden. The browser layout is already correct, and the earlier negative-margin experiment is deliberately excluded.
+Some selectors appear in both the ElegantFin and Modern sources, notably `:root` and `:root[data-theme="light"]`. These are intentional cascade layers: the Modern companion maps theme colours into Jellyfin's MUI palette and should not be treated as duplicate blocks without checking each property.
 
 ## Development approach
 
-- Change one visible component at a time and verify it in Jellyfin before committing.
+- Change one visible component at a time and verify it in Jellyfin before merging.
 - Inspect the current Modern UI markup before adding selectors.
 - Keep user-facing variables together and group overrides by purpose.
+- Review source updates deliberately; vendored upstream code will not refresh automatically.
 - Test desktop, mobile, and TV layouts separately when a change should affect more than one layout.
-- Keep optional plugin compatibility in the separate Media Bar adapter.
-- Preserve upstream attribution and GPL-2.0 licensing notices in the distributed CSS.
+- Keep optional plugin compatibility in separate adapters where practical.
+- Preserve upstream attribution and GPL-2.0 licensing notices.
 
 ## Upstream sources and licensing
-
-The bundled CSS is adapted from:
 
 - [ElegantFin](https://github.com/lscambo13/ElegantFin) by lscambo13, v26.09.05.
 - [ElegantFin Jellyfin 12 Modern companion](https://github.com/mihaif7/elegantfin-jf12) by mihaif7, v26.10.07.
