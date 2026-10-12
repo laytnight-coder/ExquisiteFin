@@ -2,6 +2,30 @@
 
 All notable ExquisiteFin changes are documented here.
 
+## [0.6.0] - 2026-10-12
+
+### Changed
+
+- Replaced the three upstream theme stylesheet imports with one locally bundled `Theme/ExquisiteFin.css` distribution file.
+- Bundled the required ElegantFin v26.09.05 rules and Jellyfin 12 Modern v26.10.07 compatibility layer while preserving their attribution headers.
+- Kept ExquisiteFin's existing teal palette, library/card geometry, Continue Watching size, card actions, centered detail synopsis/links, top-pinned backdrop, and Genres pill styling.
+- Added `Theme/ExquisiteFin-MediaBar.css` as a separate optional adapter combining ElegantFin's Media Bar support and the Modern companion's Media Bar-specific fixes.
+- Added attributed upstream source files under `Theme/source/` and a reproducible `scripts/build_theme.py` build/validation script.
+
+### Trimmed
+
+- Removed Media Bar plugin-specific rules from the core bundle and moved them to the optional adapter.
+- Removed plugin-only Jellyfin Enhanced and Episodes Ratings Grid sections from the core Modern layer, plus the KefinTweaks-specific selector.
+- Removed inactive, commented-out low-end-TV experiments and unused commented add-on import examples from the generated core.
+- Kept the Modern palette bridge even where it shares `:root` selectors with ElegantFin, because it maps base theme tokens to Jellyfin 12's MUI palette rather than duplicating identical rules.
+
+### Notes
+
+- The core no longer imports ElegantFin or the Jellyfin 12 Modern companion from their upstream CDNs.
+- Inter and Material Symbols font assets remain loaded from Google Fonts/font hosting to preserve the current appearance.
+- CSS structure and bundle dependencies were checked during the build. A live Jellyfin smoke test is still recommended after installing v0.6.0.
+- The source CSS is vendored at explicit upstream versions and will not update automatically; review upstream changes before refreshing it.
+
 ## [0.5.3] - 2026-10-12
 
 ### Changed
