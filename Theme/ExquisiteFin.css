@@ -5283,6 +5283,9 @@ body:has(.MuiAppBar-root) .homeSectionsContainer div:not(.sectionTitleContainer-
     --selectorBackgroundColor: var(--exquisite-selector);
     --selectorBackgroundColorAlpha: hsla(210, 22%, 18%, 0.5);
 
+    /* Movie details panel height (desktop). */
+    --exquisite-detail-panel-height: 130px;
+
     /* Keep movie detail backdrops anchored to the top of the image. */
     --backdropTrimFromTop: 0%;
 }
@@ -5528,8 +5531,7 @@ body:has(.MuiAppBar-root) .homeSectionsContainer div:not(.sectionTitleContainer-
 
 /* Keep movie detail backdrop artwork anchored at the top. */
 #itemDetailPage .backdropImage {
-    background-position: center top !important;
-    background-position-y: 0% !important;
+    background-position: center 0% !important;
 }
 
 /*
@@ -5551,8 +5553,7 @@ body:has(.MuiAppBar-root) .homeSectionsContainer div:not(.sectionTitleContainer-
         width: max-content !important;
         max-width: min(90vw, 60rem) !important;
         margin: 0 !important;
-        padding: 0.38rem 1.2rem !important;
-        padding-right: 2.4rem !important;
+        padding: 0.38rem 2.4rem 0.38rem 1.2rem !important;
         box-sizing: border-box !important;
         overflow: visible !important;
 
@@ -5610,14 +5611,39 @@ body:has(.MuiAppBar-root) .homeSectionsContainer div:not(.sectionTitleContainer-
     }
 }
 
-/* =========================================================
-   ExquisiteFin — Compact Movie Details Metadata
-   Reduces the unused fourth row left by the repositioned Genres
-   ========================================================= */
+/* ================================================================
+   ExquisiteFin — Movie Details Metadata Panels
+   Moves Genres into the hero area and keeps the three remaining
+   metadata rows evenly distributed beside the track selectors.
+   ================================================================ */
 
 @media (min-width: 901px) {
-    #itemDetailPage .itemDetailsGroup {
-        height: 118.5px !important;
+    /* Match the left metadata panel and right track panel heights. */
+    #itemDetailPage .itemDetailsGroup,
+    #itemDetailPage .trackSelections {
+        height: var(--exquisite-detail-panel-height) !important;
+        min-height: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Remove excess vertical padding from the track-selection panel. */
+    #itemDetailPage .trackSelections {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    /* Director, Writers and Studios share the panel equally. */
+    #itemDetailPage .itemDetailsGroup > div:nth-child(3),
+    #itemDetailPage .itemDetailsGroup > div:nth-child(4),
+    #itemDetailPage .itemDetailsGroup > div:nth-child(5) {
+        height: calc(var(--exquisite-detail-panel-height) / 3) !important;
+        min-height: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Studios is the final normal-flow metadata row. */
+    #itemDetailPage .itemDetailsGroup > div:nth-child(5) {
+        border-bottom: 0 !important;
     }
 }
 
@@ -5640,9 +5666,6 @@ a:focus-visible,
     outline: var(--exquisite-control-border-width) solid var(--exquisite-accent) !important;
     outline-offset: 2px;
 }
-
-/* ...all existing ExquisiteFin CSS remains exactly as-is... */
-
 
 /* ================================================================
    6. JELLYFIN 12 MODERN HEADER NAVIGATION
@@ -5689,8 +5712,8 @@ body.jellyfin-v12 a.MuiButton-root img {
 }
 
 /* =========================================================
-   ExquisiteFin — Independent Age Rating Colours
-   Supports UK + US ratings
+   7. AGE RATING COLOURS
+   Independent UK + US rating colours for movie details
    ========================================================= */
 
 /* Base rating badge */
@@ -5706,7 +5729,6 @@ body.jellyfin-v12 a.MuiButton-root img {
     box-shadow: none !important;
 }
 
-
 /* ---------------------------------------------------------
    U / G — General audience
    --------------------------------------------------------- */
@@ -5720,7 +5742,6 @@ body.jellyfin-v12 a.MuiButton-root img {
     border-color: #5eaa65 !important;
 }
 
-
 /* ---------------------------------------------------------
    PG — Parental guidance
    --------------------------------------------------------- */
@@ -5732,7 +5753,6 @@ body.jellyfin-v12 a.MuiButton-root img {
     background: #806300 !important;
     border-color: #c6a52b !important;
 }
-
 
 /* ---------------------------------------------------------
    12 / 12A / PG-13
@@ -5750,7 +5770,6 @@ body.jellyfin-v12 a.MuiButton-root img {
     border-color: #d19a35 !important;
 }
 
-
 /* ---------------------------------------------------------
    15 / R
    --------------------------------------------------------- */
@@ -5763,7 +5782,6 @@ body.jellyfin-v12 a.MuiButton-root img {
     background: #984000 !important;
     border-color: #e47a32 !important;
 }
-
 
 /* ---------------------------------------------------------
    18 / NC-17
@@ -5778,7 +5796,6 @@ body.jellyfin-v12 a.MuiButton-root img {
     border-color: #bd5555 !important;
 }
 
-
 /* ---------------------------------------------------------
    Unrated / Not Rated
    --------------------------------------------------------- */
@@ -5790,3 +5807,4 @@ body.jellyfin-v12 a.MuiButton-root img {
     background: #454c54 !important;
     border-color: #808b96 !important;
 }
+
