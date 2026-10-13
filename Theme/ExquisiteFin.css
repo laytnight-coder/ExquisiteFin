@@ -510,14 +510,6 @@ select {
     transition: transform 125ms;
 }
 
-@supports (aspect-ratio: 1 / 1) {
-    #castCollapsible .cardScalable,
-    #guestCastContent .cardScalable {
-        aspect-ratio: 1 / 1;
-        border-radius: 50%;
-    }
-}
-
 #castCollapsible .cardContent.cardImageContainer,
 #guestCastContent .cardContent.cardImageContainer {
     background-position-y: 33%;
